@@ -1,11 +1,9 @@
 import {FC, useEffect} from 'react'
 import {Outlet, useLocation} from 'react-router-dom'
-import {Sidebar} from './components/sidebar/Sidebar'
 import {Footer} from './components/Footer'
 import {HeaderWrapper} from './components/header/HeaderWrapper'
 import {ScrollTop} from './components/ScrollTop'
 import {PageDataProvider, useLayout} from './core'
-import {ActivityDrawer} from '../partials'
 import {
     DrawerComponent,
     MenuComponent,
@@ -52,12 +50,9 @@ const MasterLayout: FC<WithChildren> = () => {
                             </div>
                         </div>
                     </div>
-
-                    <Sidebar/>
                 </div>
             </div>
 
-           
 
             <Footer/>
             <ScrollTop/>
