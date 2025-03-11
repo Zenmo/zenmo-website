@@ -1,0 +1,84 @@
+.cd-words-wrapper {
+  display: inline-block;
+  position: relative;
+  text-align: left;
+  font-size: 70px;
+}
+
+.cd-words-wrapper b {
+  display: inline-block;
+  position: absolute;
+  white-space: nowrap;
+  left: 0;
+  top: 0;
+}
+
+.blc {
+  font-size: 70px;
+}
+
+.cd-words-wrapper b.is-visible {
+  position: relative;
+}
+
+.cd-headline.clip span {
+  display: inline-block;
+  padding: .2em 0;
+}
+
+.cd-headline.clip .cd-words-wrapper {
+  overflow: hidden;
+  vertical-align: top;
+}
+
+.cd-headline.clip b {
+  opacity: 0;
+}
+
+.cd-headline b.is-visible {
+  opacity: 1;
+  font-weight: 900;
+}
+
+.caption.v-middle {
+}
+
+.card-body {
+}
+
+.fit-cover {
+}
+
+@media (min-width: 1200px) {
+  div {
+  }
+}
+
+.team-member {
+  margin-bottom: 50;
+  text-align: center;
+}
+
+@media (min-width: 1200px) {
+  img {
+  }
+}
+
+.team-member {
+}
+
+.team-member img {
+  width: 225px;
+  height: 225px;
+  border: 7px solid #fff;
+}
+
+.card-body img {
+  width: 225px;
+  height: 225px;
+  border: 7px solid #fff;
+}
+
+a {
+}
+
