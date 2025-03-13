@@ -1,0 +1,15 @@
+
+services:
+    zenmo_website:
+        image: ${TAG}
+        networks:
+            traefik_zenmo_website:
+        labels:
+            - "traefik.enable=true"
+            - "traefik.http.routers.zenmo_website.rule=Host(`new.zenmo.com`) || Host(`nieuw.zenmo.com`)"
+            - "traefik.http.routers.zenmo_website.entrypoints=HttpsEntrypoint"
+            - "traefik.http.routers.zenmo_website.tls.certResolver=HetznerDnsChallenge"
+
+networks:
+    traefik_zenmo_website:
+        external: true
