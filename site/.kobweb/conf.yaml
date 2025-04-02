@@ -1,0 +1,14 @@
+site:
+  title: "Zenmo Web"
+
+server:
+  files:
+    dev:
+      contentRoot: "build/processedResources/js/main/public"
+      script: "build/kotlin-webpack/js/developmentExecutable/zenmo.js"
+      api: "build/libs/zenmo.jar"
+    prod:
+      script: "build/kotlin-webpack/js/productionExecutable/zenmo.js"
+      siteRoot: ".kobweb/site"
+
+  port: 8080
