@@ -11,6 +11,7 @@ import com.varabyte.kobweb.compose.ui.graphics.Colors
 import com.varabyte.kobweb.compose.ui.modifiers.*
 import com.varabyte.kobweb.compose.ui.toAttrs
 import com.varabyte.kobweb.core.Page
+//import com.varabyte.kobweb.core.Text
 import com.varabyte.kobweb.silk.components.text.SpanText
 import com.varabyte.kobweb.silk.style.CssStyle
 import com.varabyte.kobweb.silk.style.base
@@ -25,6 +26,11 @@ import org.jetbrains.compose.web.css.cssRem
 import org.jetbrains.compose.web.css.px
 import org.jetbrains.compose.web.css.vh
 import org.jetbrains.compose.web.dom.Div
+import org.jetbrains.compose.web.dom.Span
+import org.jetbrains.compose.web.dom.*
+import org.jetbrains.compose.web.attributes.*
+import org.jetbrains.compose.web.css.*
+// test
 
 // Container that has a tagline and grid on desktop, and just the tagline on mobile
 val HeroContainerStyle = CssStyle {
@@ -69,15 +75,22 @@ fun HomePage() {
             verticalArrangement = Arrangement.Center
         ) {
             Div(HeadlineTextStyle.toAttrs()) {
+                P {
+                    Text("Test van Erikd")
+                }
                 SpanText("Hello ")
                 SpanText(
-                    "ZEnMo \\(*.*)/",
+                    "ZEnMo \\(*.*)/ & all the people",
                     Modifier
                         .color(sitePalette.brand.accent)
                         // Use a shadow so this light-colored word is more visible in light mode
                         .textShadow(0.px, 0.px, blurRadius = 0.5.cssRem, color = Colors.Gray)
                 )
             }
+            P {
+                Text("Iris' paragraph")
+            }
+            Img(src = "/img/WIN_20240907_17_10_12_Pro.jpg") {}
         }
     }
 }
