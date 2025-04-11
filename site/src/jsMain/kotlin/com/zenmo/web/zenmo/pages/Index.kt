@@ -26,10 +26,12 @@ import org.jetbrains.compose.web.css.cssRem
 import org.jetbrains.compose.web.css.px
 import org.jetbrains.compose.web.css.vh
 import org.jetbrains.compose.web.dom.Div
+import org.jetbrains.compose.web.dom.P
 import org.jetbrains.compose.web.dom.Span
-import org.jetbrains.compose.web.dom.*
 import org.jetbrains.compose.web.attributes.*
 import org.jetbrains.compose.web.css.*
+import org.w3c.dom.Text
+
 // test
 
 // Container that has a tagline and grid on desktop, and just the tagline on mobile
@@ -75,22 +77,17 @@ fun HomePage() {
             verticalArrangement = Arrangement.Center
         ) {
             Div(HeadlineTextStyle.toAttrs()) {
-                P {
-                    Text("Test van Erikd")
-                }
-                SpanText("Hello ")
-                SpanText(
-                    "ZEnMo \\(*.*)/ & all the people",
-                    Modifier
-                        .color(sitePalette.brand.accent)
-                        // Use a shadow so this light-colored word is more visible in light mode
-                        .textShadow(0.px, 0.px, blurRadius = 0.5.cssRem, color = Colors.Gray)
-                )
+                SpanText("Wij zijn Zenmo simulations")
             }
-            P {
-                Text("Iris' paragraph")
+            Div() {
+                P(attrs = {}) {Text("Just Text")}
+
+                SpanText("Zenmo maakt simulatiemodellen met een visuele interface, waarmee je zelf de effecten van verschillende verduurzamingsscenario's in jouw gebied kan bekijken.")
+                SpanText("Zenmo is een verbindende schakel tussen bedrijven, netbeheerders, overheden en kennisinstellingen. Onze missie is het kosteneffectief versnellen van de transitie van fossiele naar duurzame energie met een focus op slimme decentrale bottom-up oplossingen voor netcongestie met ondermeer batterijen.")
+                SpanText("[Logo HOLON => logo LUX]Wij zijn de makers van LUX energy twin.")
+                SpanText("LUX biedt bedrijven en gebieden snel en effectief inzicht in oplossingen voor netcongestie met behulp van ondermeer batterijen. LUX is open source software die oorspronkelijk is ontwikkeld door Zenmo en de TU Eindhoven en die tevens een doorontwikkeling is vanuit het HOLON project.[link]")
+                             
             }
-            Img(src = "/img/WIN_20240907_17_10_12_Pro.jpg") {}
         }
     }
 }

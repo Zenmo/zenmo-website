@@ -36,7 +36,7 @@ fun Footer(modifier: Modifier = Modifier) {
         verticalAlignment = Alignment.CenterVertically,
     ) {
         Div(SubheadlineTextStyle.toAttrs()) {
-            Text(value = "©2018 ZEnMo Simulations BV")
+            Text(value = "©2018-2025 ZEnMo Simulations BV")
         }
         Div(SubheadlineTextStyle.toAttrs()) {
             Link(
