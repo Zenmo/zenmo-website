@@ -32,7 +32,7 @@ import com.varabyte.kobweb.silk.style.breakpoint.displayUntil
 import com.varabyte.kobweb.silk.style.toModifier
 import com.varabyte.kobweb.silk.theme.colors.ColorMode
 import com.zenmo.web.zenmo.components.widgets.IconButton
-import com.zenmo.web.zenmo.toSitePalette
+import com.zenmo.web.zenmo.theme.toSitePalette
 import org.jetbrains.compose.web.css.*
 
 val NavHeaderStyle = CssStyle.base {
