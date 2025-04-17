@@ -72,7 +72,7 @@ object Fonts {
         display = SiteFont(
             fontFamily = PublicRes.FontFamilies.MONTSERRAT_MEDIUM,
             fontWeight = FontWeight.Medium,
-            fontSize = 2.25.cssRem,
+            fontSize = 3.cssRem,
         ),
         subDisplay = SiteFont(
             fontFamily = PublicRes.FontFamilies.POPPINS_REGULAR,

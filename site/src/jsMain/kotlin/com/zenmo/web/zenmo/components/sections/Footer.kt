@@ -5,17 +5,19 @@ import com.varabyte.kobweb.compose.foundation.layout.Arrangement
 import com.varabyte.kobweb.compose.foundation.layout.Row
 import com.varabyte.kobweb.compose.ui.Alignment
 import com.varabyte.kobweb.compose.ui.Modifier
-import com.varabyte.kobweb.compose.ui.modifiers.*
+import com.varabyte.kobweb.compose.ui.modifiers.backgroundColor
+import com.varabyte.kobweb.compose.ui.modifiers.padding
+import com.varabyte.kobweb.compose.ui.toAttrs
 import com.varabyte.kobweb.silk.components.navigation.Link
-import com.varabyte.kobweb.silk.components.navigation.UncoloredLinkVariant
 import com.varabyte.kobweb.silk.style.CssStyle
 import com.varabyte.kobweb.silk.style.base
-import com.varabyte.kobweb.silk.style.toAttrs
 import com.varabyte.kobweb.silk.style.toModifier
-import com.varabyte.kobweb.silk.style.vars.color.ColorVar
-import com.varabyte.kobweb.silk.theme.colors.ColorMode
-import com.zenmo.web.zenmo.SubheadlineTextStyle
-import com.zenmo.web.zenmo.toSitePalette
+import com.zenmo.web.zenmo.components.widgets.LangText
+import com.zenmo.web.zenmo.theme.font.LabelLargeTextStyle
+import com.zenmo.web.zenmo.theme.font.TextStyle
+import com.zenmo.web.zenmo.theme.font.TextStylePrimaryColor
+import com.zenmo.web.zenmo.theme.toSitePalette
+import com.zenmo.web.zenmo.utils.PublicRes
 import org.jetbrains.compose.web.css.cssRem
 import org.jetbrains.compose.web.css.percent
 import org.jetbrains.compose.web.dom.Div
@@ -29,21 +31,20 @@ val FooterStyle = CssStyle.base {
 
 @Composable
 fun Footer(modifier: Modifier = Modifier) {
-    val sitePalette = ColorMode.current.toSitePalette()
     Row(
         FooterStyle.toModifier().then(modifier),
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically,
     ) {
-        Div(SubheadlineTextStyle.toAttrs()) {
-            Text(value = "©2018-2025 ZEnMo Simulations BV")
+        Div(TextStyle.toModifier(LabelLargeTextStyle).toAttrs()) {
+            Text(value = PublicRes.StringConstants.COPY_RIGHT)
         }
-        Div(SubheadlineTextStyle.toAttrs()) {
-            Link(
-                "https://zenmo.com/",
-                "Disclaimer",
-                Modifier.setVariable(ColorVar, sitePalette.brand.primary),
-                variant = UncoloredLinkVariant
+        
+        Link(PublicRes.StringConstants.DISCLAIMER_URL) {
+            LangText(
+                en = "Disclaimer",
+                nl = "Disclaimer",
+                modifier = TextStyle.toModifier(LabelLargeTextStyle, TextStylePrimaryColor)
             )
         }
     }
