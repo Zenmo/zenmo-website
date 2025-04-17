@@ -1,6 +1,7 @@
 package com.zenmo.web.zenmo
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.LaunchedEffect
 import com.varabyte.kobweb.compose.css.ScrollBehavior
 import com.varabyte.kobweb.compose.ui.modifiers.minHeight
@@ -13,10 +14,9 @@ import com.varabyte.kobweb.silk.init.InitSilkContext
 import com.varabyte.kobweb.silk.style.common.SmoothColorStyle
 import com.varabyte.kobweb.silk.style.toModifier
 import com.varabyte.kobweb.silk.theme.colors.ColorMode
-import com.varabyte.kobweb.silk.theme.colors.loadFromLocalStorage
 import com.varabyte.kobweb.silk.theme.colors.saveToLocalStorage
-import com.varabyte.kobweb.silk.theme.colors.systemPreference
-import kotlinx.browser.localStorage
+import com.zenmo.web.zenmo.core.services.localization.LocalLanguage
+import com.zenmo.web.zenmo.core.services.localization.defaultLanguageLocal
 import org.jetbrains.compose.web.css.vh
 
 private const val COLOR_MODE_KEY = "zenmo:colorMode"
@@ -40,7 +40,9 @@ fun AppEntry(content: @Composable () -> Unit) {
                 .minHeight(100.vh)
                 .scrollBehavior(ScrollBehavior.Smooth)
         ) {
-            content()
+            CompositionLocalProvider(LocalLanguage provides defaultLanguageLocal) {
+                content()
+            }
         }
     }
 }
