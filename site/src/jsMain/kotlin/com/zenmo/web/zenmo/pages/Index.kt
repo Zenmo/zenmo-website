@@ -76,17 +76,23 @@ fun HomePage() {
             Div {
                 P(attrs = {}) {
                     LangText(
-                        en = "Just Text",
-                        nl = "Gewoon tekst",
+                        nl = "Zenmo maakt simulatiemodellen met een visuele interface, waarmee je zelf de effecten van verschillende verduurzamingsscenario's in jouw gebied kan bekijken.",
+                        en = "Zenmo creates simulation models with a visual interface, allowing you to view the effects of different sustainability scenarios in your area."
                     )
                 }
                 LangText(
-                    nl = "Zenmo maakt simulatiemodellen met een visuele interface, waarmee je zelf de effecten van verschillende verduurzamingsscenario's in jouw gebied kan bekijken.",
-                    en = "Zenmo creates simulation models with a visual interface, allowing you to view the effects of different sustainability scenarios in your area."
-                )
-                LangText(
-                    nl = "Zenmo is een verbindende schakel tussen bedrijven, netbeheerders, overheden en kennisinstellingen. Onze missie is het kosteneffectief versnellen van de transitie van fossiele naar duurzame energie met een focus op slimme decentrale bottom-up oplossingen voor netcongestie met ondermeer batterijen.",
-                    en = "Zenmo is a connecting link between companies, grid operators, governments and knowledge institutions. Our mission is to cost-effectively accelerate the transition from fossil to sustainable energy with a focus on smart decentralized bottom-up solutions for grid congestion, including batteries."
+                    nl =
+                        """
+                        Zenmo is een verbindende schakel tussen bedrijven, netbeheerders, overheden en kennisinstellingen. 
+                        Onze missie is het kosteneffectief versnellen van de transitie van fossiele naar duurzame energie 
+                        met een focus op slimme decentrale bottom-up oplossingen voor netcongestie met ondermeer batterijen.
+                        """.trimIndent(),
+                    en =
+                        """
+                        Zenmo is a connecting link between companies, grid operators, governments and knowledge institutions. 
+                        Our mission is to cost-effectively accelerate the transition from fossil to sustainable energy 
+                        with a focus on smart decentralized bottom-up solutions for grid congestion, including batteries.
+                        """.trimIndent(),
                 )
                 LangText(
                     nl = "[Logo HOLON => logo LUX]Wij zijn de makers van LUX energy twin.",
