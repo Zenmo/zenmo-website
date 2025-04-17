@@ -2,11 +2,13 @@ package com.zenmo.web.zenmo.theme
 
 import com.varabyte.kobweb.compose.css.ScrollBehavior
 import com.varabyte.kobweb.compose.css.TextAlign
+import com.varabyte.kobweb.compose.css.TextDecorationLine
 import com.varabyte.kobweb.compose.ui.Modifier
 import com.varabyte.kobweb.compose.ui.graphics.Colors
 import com.varabyte.kobweb.compose.ui.modifiers.*
 import com.varabyte.kobweb.silk.components.forms.ButtonStyle
 import com.varabyte.kobweb.silk.components.forms.ButtonVars
+import com.varabyte.kobweb.silk.components.navigation.LinkStyle
 import com.varabyte.kobweb.silk.init.InitSilk
 import com.varabyte.kobweb.silk.init.InitSilkContext
 import com.varabyte.kobweb.silk.init.registerStyleBase
@@ -16,6 +18,7 @@ import com.varabyte.kobweb.silk.style.base
 import com.varabyte.kobweb.silk.style.breakpoint.BreakpointSizes
 import com.varabyte.kobweb.silk.theme.colors.palette.color
 import com.varabyte.kobweb.silk.theme.colors.palette.toPalette
+import com.varabyte.kobweb.silk.theme.modifyStyle
 import com.zenmo.web.zenmo.utils.PublicRes
 import org.jetbrains.compose.web.css.*
 
@@ -48,6 +51,20 @@ fun initSiteStyles(ctx: InitSilkContext) {
             lg = 81.25.cssRem, // 1300 px
             xl = 100.cssRem, // 1600 px
         )
+        modifyStyle(ButtonStyle) {
+            base {
+                Modifier.borderRadius(30.px)
+                    .color(SitePalettes.light.brand.onPrimary)
+            }
+        }
+
+        modifyStyle(LinkStyle) {
+            base {
+                Modifier
+                    .textDecorationLine(TextDecorationLine.None)
+            }
+        }
+
     }
 }
 
