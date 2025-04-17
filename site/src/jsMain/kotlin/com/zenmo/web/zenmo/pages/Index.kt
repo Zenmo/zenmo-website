@@ -10,7 +10,6 @@ import com.varabyte.kobweb.compose.ui.graphics.Color
 import com.varabyte.kobweb.compose.ui.modifiers.*
 import com.varabyte.kobweb.compose.ui.toAttrs
 import com.varabyte.kobweb.core.Page
-import com.varabyte.kobweb.silk.components.text.SpanText
 import com.varabyte.kobweb.silk.style.CssStyle
 import com.varabyte.kobweb.silk.style.base
 import com.varabyte.kobweb.silk.style.breakpoint.Breakpoint
@@ -83,20 +82,19 @@ fun HomePage() {
                 }
                 LangText(
                     nl = "Zenmo maakt simulatiemodellen met een visuele interface, waarmee je zelf de effecten van verschillende verduurzamingsscenario's in jouw gebied kan bekijken.",
-                    en = "Zenmo creates simulation models with a visual interface, allowing you to view the effects of various sustainability scenarios in your area."
+                    en = "Zenmo creates simulation models with a visual interface, allowing you to view the effects of different sustainability scenarios in your area."
                 )
                 LangText(
                     nl = "Zenmo is een verbindende schakel tussen bedrijven, netbeheerders, overheden en kennisinstellingen. Onze missie is het kosteneffectief versnellen van de transitie van fossiele naar duurzame energie met een focus op slimme decentrale bottom-up oplossingen voor netcongestie met ondermeer batterijen.",
-                    en = "Zenmo is a connecting link between companies, grid operators, governments and knowledge institutions. Our mission is to cost-effectively accelerate the transition from fossil to sustainable energy with a focus on smart decentralized bottom-up solutions for grid congestion with batteries."
-                )
-                SpanText("[Logo HOLON => logo LUX]Wij zijn de makers van LUX energy twin.")
-                LangText(
-                    nl = "LUX is een open source software die bedrijven en gebieden snel en effectief inzicht biedt in oplossingen voor netcongestie met ondermeer batterijen. LUX is open source software die oorspronkelijk is ontwikkeld door Zenmo en de TU Eindhoven en die tevens een doorontwikkeling is vanuit het HOLON project.",
-                    en = "LUX is an open source software that provides companies and areas with quick and effective insight into solutions for grid congestion, including batteries. LUX is open source software originally developed by Zenmo and the TU Eindhoven and is also a further development from the HOLON project."
+                    en = "Zenmo is a connecting link between companies, grid operators, governments and knowledge institutions. Our mission is to cost-effectively accelerate the transition from fossil to sustainable energy with a focus on smart decentralized bottom-up solutions for grid congestion, including batteries."
                 )
                 LangText(
-                    nl = "LUX is een open source software die bedrijven en gebieden snel en effectief inzicht biedt in oplossingen voor netcongestie met ondermeer batterijen. LUX is open source software die oorspronkelijk is ontwikkeld door Zenmo en de TU Eindhoven en die tevens een doorontwikkeling is vanuit het HOLON project.",
-                    en = "LUX is an open source software that provides companies and areas with quick and effective insight into solutions for grid congestion, including batteries. LUX is open source software originally developed by Zenmo and the TU Eindhoven and is also a further development from the HOLON project."
+                    nl = "[Logo HOLON => logo LUX]Wij zijn de makers van LUX energy twin.",
+                    en = "[Logo HOLON => logo LUX]We are the creators of LUX energy twin."
+                )
+                LangText(
+                    nl = "LUX biedt bedrijven en gebieden snel en effectief inzicht in oplossingen voor netcongestie met behulp van ondermeer batterijen. LUX is open source software die oorspronkelijk is ontwikkeld door Zenmo en de TU Eindhoven en die tevens een doorontwikkeling is vanuit het HOLON project.[link]",
+                    en = "LUX provides companies and areas with quick and effective insight into solutions for grid congestion using, among other things, batteries. LUX is open source software originally developed by Zenmo and TU Eindhoven and is also a further development of the HOLON project.[link]"
                 )
             }
         }
