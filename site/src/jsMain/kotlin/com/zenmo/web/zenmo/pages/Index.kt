@@ -7,11 +7,9 @@ import com.varabyte.kobweb.compose.foundation.layout.Column
 import com.varabyte.kobweb.compose.ui.Alignment
 import com.varabyte.kobweb.compose.ui.Modifier
 import com.varabyte.kobweb.compose.ui.graphics.Color
-import com.varabyte.kobweb.compose.ui.graphics.Colors
 import com.varabyte.kobweb.compose.ui.modifiers.*
 import com.varabyte.kobweb.compose.ui.toAttrs
 import com.varabyte.kobweb.core.Page
-
 import com.varabyte.kobweb.silk.components.text.SpanText
 import com.varabyte.kobweb.silk.style.CssStyle
 import com.varabyte.kobweb.silk.style.base
@@ -21,16 +19,12 @@ import com.varabyte.kobweb.silk.style.toModifier
 import com.varabyte.kobweb.silk.theme.colors.ColorMode
 import com.zenmo.web.zenmo.HeadlineTextStyle
 import com.zenmo.web.zenmo.components.layouts.PageLayout
+import com.zenmo.web.zenmo.components.widgets.LangText
 import com.zenmo.web.zenmo.toSitePalette
 import org.jetbrains.compose.web.css.cssRem
-import org.jetbrains.compose.web.css.px
 import org.jetbrains.compose.web.css.vh
 import org.jetbrains.compose.web.dom.Div
 import org.jetbrains.compose.web.dom.P
-import org.jetbrains.compose.web.dom.Span
-import org.jetbrains.compose.web.attributes.*
-import org.jetbrains.compose.web.css.*
-import org.w3c.dom.Text
 
 // Container that has a tagline and grid on desktop, and just the tagline on mobile
 val HeroContainerStyle = CssStyle {
@@ -75,15 +69,35 @@ fun HomePage() {
             verticalArrangement = Arrangement.Center
         ) {
             Div(HeadlineTextStyle.toAttrs()) {
-                SpanText("Wij zijn Zenmo simulations")
+                LangText(
+                    nl = "Wij zijn Zenmo simulations",
+                    en = "We are Zenmo simulations",
+                )
             }
             Div {
-                P(attrs = {}) {Text("Just Text")}
-
-                SpanText("Zenmo maakt simulatiemodellen met een visuele interface, waarmee je zelf de effecten van verschillende verduurzamingsscenario's in jouw gebied kan bekijken.")
-                SpanText("Zenmo is een verbindende schakel tussen bedrijven, netbeheerders, overheden en kennisinstellingen. Onze missie is het kosteneffectief versnellen van de transitie van fossiele naar duurzame energie met een focus op slimme decentrale bottom-up oplossingen voor netcongestie met ondermeer batterijen.")
+                P(attrs = {}) {
+                    LangText(
+                        en = "Just Text",
+                        nl = "Gewoon tekst",
+                    )
+                }
+                LangText(
+                    nl = "Zenmo maakt simulatiemodellen met een visuele interface, waarmee je zelf de effecten van verschillende verduurzamingsscenario's in jouw gebied kan bekijken.",
+                    en = "Zenmo creates simulation models with a visual interface, allowing you to view the effects of various sustainability scenarios in your area."
+                )
+                LangText(
+                    nl = "Zenmo is een verbindende schakel tussen bedrijven, netbeheerders, overheden en kennisinstellingen. Onze missie is het kosteneffectief versnellen van de transitie van fossiele naar duurzame energie met een focus op slimme decentrale bottom-up oplossingen voor netcongestie met ondermeer batterijen.",
+                    en = "Zenmo is a connecting link between companies, grid operators, governments and knowledge institutions. Our mission is to cost-effectively accelerate the transition from fossil to sustainable energy with a focus on smart decentralized bottom-up solutions for grid congestion with batteries."
+                )
                 SpanText("[Logo HOLON => logo LUX]Wij zijn de makers van LUX energy twin.")
-                SpanText("LUX biedt bedrijven en gebieden snel en effectief inzicht in oplossingen voor netcongestie met behulp van ondermeer batterijen. LUX is open source software die oorspronkelijk is ontwikkeld door Zenmo en de TU Eindhoven en die tevens een doorontwikkeling is vanuit het HOLON project.[link]")
+                LangText(
+                    nl = "LUX is een open source software die bedrijven en gebieden snel en effectief inzicht biedt in oplossingen voor netcongestie met ondermeer batterijen. LUX is open source software die oorspronkelijk is ontwikkeld door Zenmo en de TU Eindhoven en die tevens een doorontwikkeling is vanuit het HOLON project.",
+                    en = "LUX is an open source software that provides companies and areas with quick and effective insight into solutions for grid congestion, including batteries. LUX is open source software originally developed by Zenmo and the TU Eindhoven and is also a further development from the HOLON project."
+                )
+                LangText(
+                    nl = "LUX is een open source software die bedrijven en gebieden snel en effectief inzicht biedt in oplossingen voor netcongestie met ondermeer batterijen. LUX is open source software die oorspronkelijk is ontwikkeld door Zenmo en de TU Eindhoven en die tevens een doorontwikkeling is vanuit het HOLON project.",
+                    en = "LUX is an open source software that provides companies and areas with quick and effective insight into solutions for grid congestion, including batteries. LUX is open source software originally developed by Zenmo and the TU Eindhoven and is also a further development from the HOLON project."
+                )
             }
         }
     }
