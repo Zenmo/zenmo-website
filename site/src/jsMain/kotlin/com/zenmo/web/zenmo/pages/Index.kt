@@ -20,6 +20,7 @@ import com.varabyte.kobweb.silk.style.toModifier
 import com.varabyte.kobweb.silk.theme.colors.ColorMode
 import com.zenmo.web.zenmo.HeadlineTextStyle
 import com.zenmo.web.zenmo.components.layouts.PageLayout
+import com.zenmo.web.zenmo.components.widgets.LangText
 import com.zenmo.web.zenmo.toSitePalette
 import org.jetbrains.compose.web.css.cssRem
 import org.jetbrains.compose.web.css.px
@@ -69,10 +70,13 @@ fun HomePage() {
             verticalArrangement = Arrangement.Center
         ) {
             Div(HeadlineTextStyle.toAttrs()) {
-                SpanText("Hello ")
+                LangText(
+                    en = "Hello ",
+                    nl = "Hallo ",
+                )
                 SpanText(
-                    "ZEnMo \\(*.*)/",
-                    Modifier
+                    "Zenmo \\(*.*)/",
+                    modifier = Modifier
                         .color(sitePalette.brand.accent)
                         // Use a shadow so this light-colored word is more visible in light mode
                         .textShadow(0.px, 0.px, blurRadius = 0.5.cssRem, color = Colors.Gray)
