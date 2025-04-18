@@ -1,0 +1,19 @@
+@font-face {
+    font-family: 'PoppinsRegular';
+    src: url('poppins_regular.ttf');
+}
+
+@font-face {
+    font-family: 'PoppinsMedium';
+    src: url('poppins_medium.ttf');
+}
+
+@font-face {
+    font-family: 'MontserratRegular';
+    src: url('montserrat_regular.ttf')
+}
+
+@font-face {
+    font-family: 'MontserratMedium';
+    src: url('montserrat_medium.ttf');
+}
