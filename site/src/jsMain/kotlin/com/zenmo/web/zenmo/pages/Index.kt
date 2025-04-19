@@ -13,13 +13,13 @@ import com.varabyte.kobweb.core.Page
 import com.varabyte.kobweb.silk.style.CssStyle
 import com.varabyte.kobweb.silk.style.base
 import com.varabyte.kobweb.silk.style.breakpoint.Breakpoint
-import com.varabyte.kobweb.silk.style.toAttrs
 import com.varabyte.kobweb.silk.style.toModifier
 import com.varabyte.kobweb.silk.theme.colors.ColorMode
-import com.zenmo.web.zenmo.HeadlineTextStyle
 import com.zenmo.web.zenmo.components.layouts.PageLayout
 import com.zenmo.web.zenmo.components.widgets.LangText
-import com.zenmo.web.zenmo.toSitePalette
+import com.zenmo.web.zenmo.theme.font.DisplayTextStyle
+import com.zenmo.web.zenmo.theme.font.TextStyle
+import com.zenmo.web.zenmo.theme.toSitePalette
 import org.jetbrains.compose.web.css.cssRem
 import org.jetbrains.compose.web.css.vh
 import org.jetbrains.compose.web.dom.Div
@@ -67,7 +67,7 @@ fun HomePage() {
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center
         ) {
-            Div(HeadlineTextStyle.toAttrs()) {
+            Div(TextStyle.toModifier(DisplayTextStyle).toAttrs()) {
                 LangText(
                     nl = "Wij zijn Zenmo simulations",
                     en = "We are Zenmo simulations",

@@ -1,22 +1,25 @@
-package com.zenmo.web.zenmo
+package com.zenmo.web.zenmo.theme
 
 import com.varabyte.kobweb.compose.css.ScrollBehavior
 import com.varabyte.kobweb.compose.css.TextAlign
+import com.varabyte.kobweb.compose.css.TextDecorationLine
 import com.varabyte.kobweb.compose.ui.Modifier
 import com.varabyte.kobweb.compose.ui.graphics.Colors
 import com.varabyte.kobweb.compose.ui.modifiers.*
 import com.varabyte.kobweb.silk.components.forms.ButtonStyle
 import com.varabyte.kobweb.silk.components.forms.ButtonVars
-import com.varabyte.kobweb.silk.components.layout.HorizontalDividerStyle
+import com.varabyte.kobweb.silk.components.navigation.LinkStyle
 import com.varabyte.kobweb.silk.init.InitSilk
 import com.varabyte.kobweb.silk.init.InitSilkContext
 import com.varabyte.kobweb.silk.init.registerStyleBase
 import com.varabyte.kobweb.silk.style.CssStyle
 import com.varabyte.kobweb.silk.style.addVariantBase
 import com.varabyte.kobweb.silk.style.base
+import com.varabyte.kobweb.silk.style.breakpoint.BreakpointSizes
 import com.varabyte.kobweb.silk.theme.colors.palette.color
 import com.varabyte.kobweb.silk.theme.colors.palette.toPalette
-import com.varabyte.kobweb.silk.theme.modifyStyleBase
+import com.varabyte.kobweb.silk.theme.modifyStyle
+import com.zenmo.web.zenmo.utils.PublicRes
 import org.jetbrains.compose.web.css.*
 
 @InitSilk
@@ -30,19 +33,38 @@ fun initSiteStyles(ctx: InitSilkContext) {
         }
     }
 
-    ctx.stylesheet.registerStyleBase("body") {
-        Modifier
-            .fontFamily(
-                "-apple-system", "BlinkMacSystemFont", "Segoe UI", "Roboto", "Oxygen", "Ubuntu",
-                "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", "sans-serif", "Montserrat", "Poppins"
+    ctx.stylesheet.apply {
+        registerStyleBase("body") {
+            Modifier.fontFamily(
+                PublicRes.FontFamilies.POPPINS_REGULAR,
+                PublicRes.FontFamilies.POPPINS_MEDIUM,
+                PublicRes.FontFamilies.MONTSERRAT_REGULAR,
+                PublicRes.FontFamilies.MONTSERRAT_MEDIUM,
             )
-            .fontSize(18.px)
-            .lineHeight(1.5)
+        }
     }
 
-    // Silk dividers only extend 90% by default; we want full width dividers in our site
-    ctx.theme.modifyStyleBase(HorizontalDividerStyle) {
-        Modifier.fillMaxWidth()
+    ctx.theme.apply {
+        breakpoints = BreakpointSizes(
+            sm = 30.cssRem, // 480 px,
+            md = 48.cssRem, // 768 px
+            lg = 81.25.cssRem, // 1300 px
+            xl = 100.cssRem, // 1600 px
+        )
+        modifyStyle(ButtonStyle) {
+            base {
+                Modifier.borderRadius(30.px)
+                    .color(SitePalette.light.onPrimary)
+            }
+        }
+
+        modifyStyle(LinkStyle) {
+            base {
+                Modifier
+                    .textDecorationLine(TextDecorationLine.None)
+            }
+        }
+
     }
 }
 

@@ -32,7 +32,7 @@ import com.varabyte.kobweb.silk.style.breakpoint.displayUntil
 import com.varabyte.kobweb.silk.style.toModifier
 import com.varabyte.kobweb.silk.theme.colors.ColorMode
 import com.zenmo.web.zenmo.components.widgets.IconButton
-import com.zenmo.web.zenmo.toSitePalette
+import com.zenmo.web.zenmo.theme.toSitePalette
 import org.jetbrains.compose.web.css.*
 
 val NavHeaderStyle = CssStyle.base {
@@ -158,7 +158,7 @@ private fun SideMenu(menuState: SideMenuState, close: () -> Unit, onAnimationEnd
                     // things without moving their finger / cursor much.
                     .padding(top = 1.cssRem, leftRight = 1.cssRem)
                     .gap(1.5.cssRem)
-                    .backgroundColor(ColorMode.current.toSitePalette().nearBackground)
+                    .backgroundColor(ColorMode.current.toSitePalette().surfaceContainerLow)
                     .animation(
                         SideMenuSlideInAnim.toAnimation(
                             duration = 200.ms,

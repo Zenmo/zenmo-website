@@ -10,12 +10,12 @@ import com.varabyte.kobweb.silk.style.CssStyle
 import com.varabyte.kobweb.silk.style.toAttrs
 import com.varabyte.kobweb.silk.theme.colors.palette.color
 import com.varabyte.kobweb.silk.theme.colors.palette.toPalette
+import com.zenmo.web.zenmo.theme.toSitePalette
 import org.jetbrains.compose.web.css.DisplayStyle
 import org.jetbrains.compose.web.css.LineStyle
 import org.jetbrains.compose.web.css.cssRem
 import org.jetbrains.compose.web.css.px
 import org.jetbrains.compose.web.dom.Div
-import com.zenmo.web.zenmo.toSitePalette
 
 val MarkdownStyle = CssStyle {
     base { Modifier.fillMaxSize() }
@@ -72,7 +72,7 @@ val MarkdownStyle = CssStyle {
         Modifier
             .display(DisplayStyle.Block)
             .fillMaxWidth()
-            .backgroundColor(colorMode.toSitePalette().nearBackground)
+            .backgroundColor(colorMode.toSitePalette().surfaceContainerLow)
             .border(1.px, LineStyle.Solid, colorMode.toPalette().color)
             .borderRadius(0.25.cssRem)
             .padding(0.5.cssRem)
