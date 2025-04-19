@@ -1,40 +1,47 @@
 package com.zenmo.web.zenmo.components.widgets
 
 import DropdownContainerStyle
-import DropdownItemStyle
 import MenuItemParentStyle
 import androidx.compose.runtime.Composable
 import com.varabyte.kobweb.compose.foundation.layout.Box
 import com.varabyte.kobweb.compose.foundation.layout.Column
-import com.varabyte.kobweb.compose.ui.modifiers.minWidth
-import com.varabyte.kobweb.silk.components.navigation.Link
-import com.varabyte.kobweb.silk.components.navigation.UncoloredLinkVariant
-import com.varabyte.kobweb.silk.components.navigation.UndecoratedLinkVariant
+import com.varabyte.kobweb.compose.ui.Alignment
+import com.varabyte.kobweb.compose.ui.Modifier
+import com.varabyte.kobweb.compose.ui.modifiers.fillMaxSize
 import com.varabyte.kobweb.silk.style.toModifier
-import com.zenmo.web.zenmo.core.data.StringRes
-import com.zenmo.web.zenmo.core.services.localization.stringResource
-import com.zenmo.web.zenmo.styles.NavLinkStyles
-import org.jetbrains.compose.web.css.cssRem
+import com.zenmo.web.zenmo.components.sections.nav_header.components.NavBarLink
+import com.zenmo.web.zenmo.components.sections.nav_header.components.isPathActive
+import com.zenmo.web.zenmo.models.navigation.MenuLanguage
+import com.zenmo.web.zenmo.models.navigation.asNavLinkPath
 
 @Composable
-fun MenuItemWithSubs(text: StringRes, subItems: List<Pair<String, StringRes>>) {
+fun MenuItemWithSubs(titleText: MenuLanguage, subItems: List<MenuLanguage>) {
+    val isMenuActive = subItems.any { isPathActive(href = it.en.asNavLinkPath(titleText.en)) }
     Box(
         modifier = MenuItemParentStyle.toModifier()
-            .then(NavLinkStyles.toModifier())
     ) {
-        NavLink("", text)
+        NavBarLink(
+            href = subItems.firstOrNull()?.en?.asNavLinkPath(titleText.en) ?: "/",
+            en = titleText.en,
+            nl = titleText.nl,
+            isActive = isMenuActive
+        )
 
         Column(
             modifier = DropdownContainerStyle.toModifier()
-                .minWidth(10.cssRem)
         ) {
-            subItems.forEach { (path, subText) ->
-                Link(
-                    path,
-                    stringResource(subText),
-                    modifier = DropdownItemStyle.toModifier(),
-                    variant = UndecoratedLinkVariant.then(UncoloredLinkVariant)
-                )
+            subItems.forEach { menu ->
+                Box(
+                    modifier = Modifier.fillMaxSize(),
+                    contentAlignment = Alignment.Center
+                ) {
+                    NavBarLink(
+                        href = menu.en.asNavLinkPath(titleText.en),
+                        en = menu.en,
+                        nl = menu.nl,
+                        isActive = isPathActive(href = menu.en.asNavLinkPath(titleText.en)),
+                    )
+                }
             }
         }
     }
