@@ -31,7 +31,7 @@ val PageContentStyle = CssStyle {
 
 @Composable
 private fun SvgCobweb(modifier: Modifier) {
-    val color = ColorMode.current.toSitePalette().brand.onBackground
+    val color = ColorMode.current.toSitePalette().onBackground
 
     // On mobile, the SVG would cause scrolling, so clamp its max width
     Svg(attrs = modifier.maxWidth(100.percent).toAttrs {

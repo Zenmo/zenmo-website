@@ -72,7 +72,7 @@ val MarkdownStyle = CssStyle {
         Modifier
             .display(DisplayStyle.Block)
             .fillMaxWidth()
-            .backgroundColor(colorMode.toSitePalette().nearBackground)
+            .backgroundColor(colorMode.toSitePalette().surfaceContainerLow)
             .border(1.px, LineStyle.Solid, colorMode.toPalette().color)
             .borderRadius(0.25.cssRem)
             .padding(0.5.cssRem)

@@ -7,7 +7,7 @@ import com.varabyte.kobweb.silk.style.ComponentKind
 import com.varabyte.kobweb.silk.style.CssStyle
 import com.varabyte.kobweb.silk.style.addVariant
 import com.varabyte.kobweb.silk.style.breakpoint.Breakpoint
-import com.zenmo.web.zenmo.theme.SitePalettes
+import com.zenmo.web.zenmo.theme.SitePalette
 
 sealed interface TextComponentKind : ComponentKind
 
@@ -20,19 +20,19 @@ val TextStyle = CssStyle<TextComponentKind> {
 
 val TextStylePrimaryColor = TextStyle.addVariant {
     base {
-        Modifier.color(SitePalettes.light.brand.onBackground)
+        Modifier.color(SitePalette.light.onBackground)
     }
 }
 
 val TextStyleSecondaryColor = TextStyle.addVariant {
     base {
-        Modifier.color(SitePalettes.light.brand.secondary)
+        Modifier.color(SitePalette.light.secondary)
     }
 }
 
 val TextStyleBrandColor = TextStyle.addVariant {
     base {
-        Modifier.color(SitePalettes.light.brand.primary)
+        Modifier.color(SitePalette.light.primary)
     }
 }
 

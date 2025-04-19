@@ -54,7 +54,7 @@ fun initSiteStyles(ctx: InitSilkContext) {
         modifyStyle(ButtonStyle) {
             base {
                 Modifier.borderRadius(30.px)
-                    .color(SitePalettes.light.brand.onPrimary)
+                    .color(SitePalette.light.onPrimary)
             }
         }
 
