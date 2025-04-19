@@ -41,12 +41,13 @@ fun Footer(modifier: Modifier = Modifier) {
         Div(TextStyle.toModifier(LabelLargeTextStyle).toAttrs()) {
             Text(value = COPY_RIGHT)
         }
-
-        Link(DISCLAIMER_URL) {
+        Link(
+            path = DISCLAIMER_URL,
+            modifier = TextStyle.toModifier(LabelLargeTextStyle, TextStylePrimaryColor)
+        ) {
             LangText(
                 en = "Disclaimer",
                 nl = "Disclaimer",
-                modifier = TextStyle.toModifier(LabelLargeTextStyle, TextStylePrimaryColor)
             )
         }
     }
