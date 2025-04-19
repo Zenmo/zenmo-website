@@ -97,22 +97,22 @@ object Fonts {
         bodySmall = SiteFont(
             fontFamily = PublicRes.FontFamilies.POPPINS_REGULAR,
             fontWeight = FontWeight.Normal,
-            fontSize = 0.875.cssRem,
+            fontSize = 1.cssRem,
         ),
         labelLarge = SiteFont(
             fontFamily = PublicRes.FontFamilies.MONTSERRAT_MEDIUM,
             fontWeight = FontWeight.Medium,
-            fontSize = 0.875.cssRem,
+            fontSize = 0.9.cssRem,
         ),
         labelMedium = SiteFont(
             fontFamily = PublicRes.FontFamilies.MONTSERRAT_MEDIUM,
             fontWeight = FontWeight.Medium,
-            fontSize = 0.75.cssRem,
+            fontSize = 0.875.cssRem,
         ),
         labelSmall = SiteFont(
             fontFamily = PublicRes.FontFamilies.MONTSERRAT_MEDIUM,
             fontWeight = FontWeight.Medium,
-            fontSize = 0.675.cssRem,
+            fontSize = 0.875.cssRem,
         ),
     )
 
@@ -122,10 +122,10 @@ object Fonts {
         title = superLargeFonts.title.copy(fontSize = 1.35.cssRem),
         bodyLarge = superLargeFonts.bodyLarge.copy(fontSize = 1.15.cssRem),
         bodyMedium = superLargeFonts.bodyMedium.copy(fontSize = 1.cssRem),
-        bodySmall = superLargeFonts.bodySmall.copy(fontSize = 0.775.cssRem),
-        labelLarge = superLargeFonts.labelLarge.copy(fontSize = 0.8.cssRem),
-        labelMedium = superLargeFonts.labelMedium.copy(fontSize = 0.7.cssRem),
-        labelSmall = superLargeFonts.labelSmall.copy(fontSize = 0.65.cssRem),
+        bodySmall = superLargeFonts.bodySmall.copy(fontSize = 0.9.cssRem),
+        labelLarge = superLargeFonts.labelLarge,
+        labelMedium = superLargeFonts.labelMedium,
+        labelSmall = superLargeFonts.labelSmall,
     )
 
     private val mediumFonts = SiteFonts(
@@ -134,10 +134,10 @@ object Fonts {
         title = superLargeFonts.title.copy(fontSize = 1.35.cssRem),
         bodyLarge = superLargeFonts.bodyLarge.copy(fontSize = 1.cssRem),
         bodyMedium = superLargeFonts.bodyMedium.copy(fontSize = 0.9.cssRem),
-        bodySmall = superLargeFonts.bodySmall.copy(fontSize = 0.8.cssRem),
-        labelLarge = superLargeFonts.labelLarge.copy(fontSize = 0.8.cssRem),
-        labelMedium = superLargeFonts.labelMedium.copy(fontSize = 0.7.cssRem),
-        labelSmall = superLargeFonts.labelSmall.copy(fontSize = 0.65.cssRem),
+        bodySmall = superLargeFonts.bodySmall,
+        labelLarge = superLargeFonts.labelLarge,
+        labelMedium = superLargeFonts.labelMedium,
+        labelSmall = superLargeFonts.labelSmall,
     )
 
     private val smallFonts = SiteFonts(
@@ -146,9 +146,9 @@ object Fonts {
         title = superLargeFonts.title.copy(fontSize = 1.35.cssRem),
         bodyLarge = superLargeFonts.bodyLarge.copy(fontSize = 1.cssRem),
         bodyMedium = superLargeFonts.bodyMedium.copy(fontSize = 0.9.cssRem),
-        bodySmall = superLargeFonts.bodySmall.copy(fontSize = 0.8.cssRem),
-        labelLarge = superLargeFonts.labelLarge.copy(fontSize = 0.8.cssRem),
-        labelMedium = superLargeFonts.labelMedium.copy(fontSize = 0.7.cssRem),
-        labelSmall = superLargeFonts.labelSmall.copy(fontSize = 0.65.cssRem),
+        bodySmall = superLargeFonts.bodySmall.copy(fontSize = 0.9.cssRem),
+        labelLarge = superLargeFonts.labelLarge,
+        labelMedium = superLargeFonts.labelMedium,
+        labelSmall = superLargeFonts.labelSmall,
     )
 }
