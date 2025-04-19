@@ -17,15 +17,17 @@ import com.zenmo.web.zenmo.theme.font.LabelLargeTextStyle
 import com.zenmo.web.zenmo.theme.font.TextStyle
 import com.zenmo.web.zenmo.theme.font.TextStylePrimaryColor
 import com.zenmo.web.zenmo.theme.toSitePalette
-import com.zenmo.web.zenmo.utils.PublicRes
 import org.jetbrains.compose.web.css.cssRem
 import org.jetbrains.compose.web.css.percent
 import org.jetbrains.compose.web.dom.Div
 import org.jetbrains.compose.web.dom.Text
 
+const val COPY_RIGHT = "©2018-2025 ZEnMo Simulations BV"
+const val DISCLAIMER_URL = "#"
+
 val FooterStyle = CssStyle.base {
     Modifier
-        .backgroundColor(colorMode.toSitePalette().nearBackground)
+        .backgroundColor(colorMode.toSitePalette().surfaceContainerLow)
         .padding(topBottom = 1.5.cssRem, leftRight = 10.percent)
 }
 
@@ -37,10 +39,10 @@ fun Footer(modifier: Modifier = Modifier) {
         verticalAlignment = Alignment.CenterVertically,
     ) {
         Div(TextStyle.toModifier(LabelLargeTextStyle).toAttrs()) {
-            Text(value = PublicRes.StringConstants.COPY_RIGHT)
+            Text(value = COPY_RIGHT)
         }
-        
-        Link(PublicRes.StringConstants.DISCLAIMER_URL) {
+
+        Link(DISCLAIMER_URL) {
             LangText(
                 en = "Disclaimer",
                 nl = "Disclaimer",
