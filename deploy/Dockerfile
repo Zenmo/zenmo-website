@@ -1,25 +1,25 @@
 # syntax=docker/dockerfile:1.7-labs
-# for COPY --exclude support
 
-# Use Node.js to build
-FROM node:23 AS node
-RUN mkdir -p /app/frontend
-WORKDIR /app/frontend
+# Use JDK to build the Kobweb project
+FROM eclipse-temurin:21 AS builder
+WORKDIR /app/site
 
-# First put only dependencies in the image so they are cached in a docker layer
-COPY package.json yarn.lock ./
-RUN --mount=type=cache,target=/usr/local/share/.cache/yarn yarn install
+COPY gradlew gradlew.bat settings.gradle.kts ./
+COPY gradle ./gradle
 
-COPY --exclude=dist --exclude=node_modules ./ ./
-RUN yarn run build
+RUN chmod +x ./gradlew
 
+RUN /gradlew dependencies || true
+
+COPY site ./
+
+RUN ./gradlew kobwebExport
 
 # Use Caddy to serve static files
 FROM caddy:2.8.4
-
 WORKDIR /srv
 
-COPY --from=node /app/frontend/dist /srv
+COPY --from=builder /site/build/ /srv
 
 EXPOSE 80
 

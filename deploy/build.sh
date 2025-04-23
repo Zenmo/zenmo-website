@@ -7,5 +7,4 @@ docker build \
     --file deploy/Dockerfile \
     --tag $TAG \
     --progress=plain \
-    --push \
     .
