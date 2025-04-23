@@ -10,7 +10,6 @@ import com.varabyte.kobweb.compose.ui.Alignment
 import com.varabyte.kobweb.compose.ui.Modifier
 import com.varabyte.kobweb.compose.ui.modifiers.*
 import com.varabyte.kobweb.compose.ui.toAttrs
-import com.varabyte.kobweb.silk.components.layout.HorizontalDivider
 import com.varabyte.kobweb.silk.style.CssStyle
 import com.varabyte.kobweb.silk.style.breakpoint.Breakpoint
 import com.varabyte.kobweb.silk.style.toAttrs
@@ -66,7 +65,7 @@ private fun SvgCobweb(modifier: Modifier) {
 @Composable
 fun PageLayout(title: String, content: @Composable ColumnScope.() -> Unit) {
     LaunchedEffect(title) {
-        document.title = "ZEnMo - $title"
+        document.title = "Zenmo - $title"
     }
 
     Box(
@@ -93,7 +92,6 @@ fun PageLayout(title: String, content: @Composable ColumnScope.() -> Unit) {
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
             NavHeader()
-            HorizontalDivider()
             Div(PageContentStyle.toAttrs()) {
                 content()
             }
