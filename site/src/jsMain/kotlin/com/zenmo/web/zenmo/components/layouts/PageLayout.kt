@@ -15,7 +15,7 @@ import com.varabyte.kobweb.silk.style.breakpoint.Breakpoint
 import com.varabyte.kobweb.silk.style.toAttrs
 import com.varabyte.kobweb.silk.theme.colors.ColorMode
 import com.zenmo.web.zenmo.components.sections.Footer
-import com.zenmo.web.zenmo.components.sections.NavHeader
+import com.zenmo.web.zenmo.components.sections.nav_header.NavHeader
 import com.zenmo.web.zenmo.theme.toSitePalette
 import kotlinx.browser.document
 import org.jetbrains.compose.web.css.cssRem
