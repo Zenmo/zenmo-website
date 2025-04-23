@@ -28,7 +28,7 @@ sealed class MenuItem {
 
     companion object {
         val menuItems = listOf(
-            Simple(path = "/", title = MenuLanguage(en = "Home", nl = "Language")),
+            Simple(path = "/", title = MenuLanguage(en = "Home", nl = "Thuis")),
             Simple(
                 title = MenuLanguage(
                     en = "What we do",
