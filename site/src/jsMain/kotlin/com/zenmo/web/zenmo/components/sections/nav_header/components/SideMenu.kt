@@ -115,13 +115,21 @@ fun SideMenu(
                     horizontalAlignment = Alignment.End
                 ) {
                     MenuItem.menuItems.forEach { item ->
-                        SideMenuNavLink(
-                            href = item.getPath,
-                            en = item.title.en,
-                            nl = item.title.nl,
-                            isActive = isPathActive(href = item.getPath),
-                            onClick = { close() }
-                        )
+                        when (item) {
+                            is MenuItem.Simple -> {
+                                SideMenuNavLink(
+                                    href = item.getPath,
+                                    en = item.title.en,
+                                    nl = item.title.nl,
+                                    isActive = isPathActive(href = item.getPath),
+                                    onClick = { close() }
+                                )
+                            }
+
+                            is MenuItem.WithSubs -> {
+                                /*todo in subsequent PR*/
+                            }
+                        }
                     }
                 }
             }
