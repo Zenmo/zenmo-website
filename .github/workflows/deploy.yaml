@@ -4,6 +4,7 @@ on:
         branches:
             - main
             - deploy
+            - docker-build-switch
 
 jobs:
     build:
