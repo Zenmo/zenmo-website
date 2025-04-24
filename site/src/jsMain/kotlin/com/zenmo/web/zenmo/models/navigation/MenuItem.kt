@@ -41,9 +41,7 @@ sealed class MenuItem {
                     nl = "Wie we zijn"
                 )
             ),
-
-            /*TODO pending menu with subs finalization*/
-            /*WithSubs(
+            WithSubs(
                 title = MenuLanguage(en = "About", nl = "Over"),
                 subItems = listOf(
                     MenuLanguage(en = "About Zenmo", nl = "Over Zenmo"),
@@ -51,7 +49,7 @@ sealed class MenuItem {
                     MenuLanguage(en = "Our Team", nl = "Ons Team"),
                     MenuLanguage(en = "History", nl = "Geschiedenis"),
                 )
-            ),*/
+            ),
             Simple(
                 title = MenuLanguage(en = "Contact", nl = "Contact")
             )
