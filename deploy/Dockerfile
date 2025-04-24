@@ -4,16 +4,17 @@
 FROM eclipse-temurin:21 AS builder
 WORKDIR /app/site
 
-COPY gradlew gradlew.bat settings.gradle.kts ./
-COPY gradle ./gradle
+RUN ls -al
+RUN pwd
+
+COPY . ./
+
 
 RUN chmod +x ./gradlew
-
-RUN /gradlew dependencies || true
-
-COPY site ./
-
-RUN ./gradlew kobwebExport
+RUN --mount=type=cache,target=/root/.gradle \
+    --mount=type=cache,target=//root/.cache  \
+    --mount=type=cache,target=/app/site/.gradle \
+    ./gradlew kobwebExport
 
 # Use Caddy to serve static files
 FROM caddy:2.8.4
