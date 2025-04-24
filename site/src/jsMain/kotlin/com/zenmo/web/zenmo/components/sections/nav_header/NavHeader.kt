@@ -26,6 +26,7 @@ import com.zenmo.web.zenmo.components.sections.nav_header.components.SideMenu
 import com.zenmo.web.zenmo.components.sections.nav_header.components.SideMenuState
 import com.zenmo.web.zenmo.components.sections.nav_header.components.SiteLogo
 import com.zenmo.web.zenmo.components.widgets.button.IconButton
+import com.zenmo.web.zenmo.theme.SitePalette
 import com.zenmo.web.zenmo.theme.styles.IconStyle
 import org.jetbrains.compose.web.css.*
 import org.jetbrains.compose.web.dom.Header
@@ -61,6 +62,7 @@ private fun HamburgerButton(onClick: () -> Unit) {
     ) {
         HamburgerIcon(
             modifier = IconStyle.toModifier()
+                .color(SitePalette.light.onPrimary)
         )
     }
 }
