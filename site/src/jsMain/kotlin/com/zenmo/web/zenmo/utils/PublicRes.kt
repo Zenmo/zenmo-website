@@ -6,5 +6,7 @@ object PublicRes {
         const val POPPINS_MEDIUM = "PoppinsMedium"
         const val MONTSERRAT_REGULAR = "MontserratRegular"
         const val MONTSERRAT_MEDIUM = "MontserratMedium"
+        const val HOLON_REGULAR = "HolonLine"
+        const val HOLON_BOLD = "HolonBlock"
     }
 }
