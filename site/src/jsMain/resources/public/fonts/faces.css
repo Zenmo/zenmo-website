@@ -17,3 +17,13 @@
     font-family: 'MontserratMedium';
     src: url('montserrat_medium.ttf');
 }
+
+@font-face {
+    font-family: 'HolonLine';
+    src: url('holon_line.otf');
+}
+
+@font-face {
+    font-family: 'HolonBlock';
+    src: url('holon_block.otf');
+}
