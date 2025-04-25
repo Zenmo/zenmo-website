@@ -38,4 +38,4 @@ COPY --from=builder /app/site/.kobweb/site /srv
 
 EXPOSE 80
 
-CMD caddy file-server
+CMD ["caddy", "run", "--config", "/etc/caddy/Caddyfile"]
