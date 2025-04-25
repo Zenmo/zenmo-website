@@ -25,6 +25,7 @@ gradle.settingsEvaluated {
     dependencyResolutionManagement.repositories { kobwebSnapshots() }
 }
 
-rootProject.name = "zenmo"
+rootProject.name = "zenmo-website"
 
 include(":site")
+include(":remotedev")
