@@ -47,7 +47,7 @@ val SiteLogoStyle = CssStyle<SiteLogoKind> {
 fun SiteLogo() {
     Link("/") {
         Img(
-            src = ("/logos/logo.png"),
+            src = ("/logos/logo2.png"),
             attrs = SiteLogoStyle.toModifier().toAttrs()
         )
     }

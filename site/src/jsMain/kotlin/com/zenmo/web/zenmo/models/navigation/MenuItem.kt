@@ -24,7 +24,7 @@ sealed class MenuItem {
      * The [title] is the main title of the menu item,
      * and [subItems] is a list of menu items.
      * */
-    data class WithSubs(val title: MenuLanguage, val subItems: List<MenuLanguage>) : MenuItem()
+    data class WithSubs(val path: String = "", val title: MenuLanguage, val subItems: List<MenuLanguage>) : MenuItem()
 
     companion object {
         val menuItems = listOf(
@@ -37,16 +37,15 @@ sealed class MenuItem {
             ),
             Simple(
                 title = MenuLanguage(
-                    en = "Who we are",
-                    nl = "Wie we zijn"
+                    en = "Customers",
+                    nl = "Klanten"
                 )
             ),
             WithSubs(
-                title = MenuLanguage(en = "About", nl = "Over"),
+                title = MenuLanguage(en = "About us", nl = "Over ons"),
                 subItems = listOf(
-                    MenuLanguage(en = "About Zenmo", nl = "Over Zenmo"),
-                    MenuLanguage(en = "About Lux", nl = "Over Lux"),
                     MenuLanguage(en = "Our Team", nl = "Ons Team"),
+                    MenuLanguage(en = "Jobs", nl = "Banen"),
                     MenuLanguage(en = "History", nl = "Geschiedenis"),
                 )
             ),
