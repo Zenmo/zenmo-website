@@ -35,8 +35,12 @@ kotlin {
 //        commonMain.dependencies {
 //          // Add shared dependencies between JS and JVM here if building a fullstack app
 //        }
+        all {
+            languageSettings.optIn("kotlin.uuid.ExperimentalUuidApi")
+        }
 
         jsMain.dependencies {
+            implementation("org.jetbrains.kotlin-wrappers:kotlin-js:2025.4.16")
             implementation(libs.compose.runtime)
             implementation(libs.compose.html.core)
             implementation(libs.kobweb.core)
