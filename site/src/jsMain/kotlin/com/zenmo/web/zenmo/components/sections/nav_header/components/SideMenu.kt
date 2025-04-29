@@ -1,21 +1,16 @@
 package com.zenmo.web.zenmo.components.sections.nav_header.components
 
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.key
 import com.varabyte.kobweb.compose.css.Cursor
+import com.varabyte.kobweb.compose.css.FontWeight
 import com.varabyte.kobweb.compose.css.TextDecorationLine
-import com.varabyte.kobweb.compose.css.functions.clamp
-import com.varabyte.kobweb.compose.foundation.layout.Arrangement
-import com.varabyte.kobweb.compose.foundation.layout.Box
 import com.varabyte.kobweb.compose.foundation.layout.Column
-import com.varabyte.kobweb.compose.foundation.layout.Row
 import com.varabyte.kobweb.compose.ui.Alignment
 import com.varabyte.kobweb.compose.ui.Modifier
 import com.varabyte.kobweb.compose.ui.graphics.Colors
 import com.varabyte.kobweb.compose.ui.modifiers.*
-import com.varabyte.kobweb.compose.ui.thenIf
 import com.varabyte.kobweb.silk.components.icons.CloseIcon
-import com.varabyte.kobweb.silk.components.icons.mdi.MdiExpandMore
-import com.varabyte.kobweb.silk.components.navigation.Link
 import com.varabyte.kobweb.silk.components.navigation.LinkStyle
 import com.varabyte.kobweb.silk.components.overlay.Overlay
 import com.varabyte.kobweb.silk.components.overlay.OverlayVars
@@ -26,15 +21,12 @@ import com.varabyte.kobweb.silk.style.animation.toAnimation
 import com.varabyte.kobweb.silk.style.breakpoint.Breakpoint
 import com.varabyte.kobweb.silk.style.selectors.active
 import com.varabyte.kobweb.silk.style.selectors.hover
-import com.varabyte.kobweb.silk.style.thenIf
 import com.varabyte.kobweb.silk.style.toModifier
 import com.varabyte.kobweb.silk.theme.colors.palette.overlay
 import com.varabyte.kobweb.silk.theme.colors.palette.toPalette
 import com.varabyte.kobweb.silk.theme.colors.shifted
-import com.zenmo.web.zenmo.components.widgets.LangText
 import com.zenmo.web.zenmo.components.widgets.button.IconButton
 import com.zenmo.web.zenmo.models.navigation.MenuItem
-import com.zenmo.web.zenmo.models.navigation.MenuLanguage
 import com.zenmo.web.zenmo.models.navigation.asNavLinkPath
 import com.zenmo.web.zenmo.theme.SitePalette
 import com.zenmo.web.zenmo.theme.styles.IconStyle
@@ -46,7 +38,7 @@ val SideMenuStyle = CssStyle {
     base {
         Modifier
             .fillMaxHeight()
-            .width(clamp(8.cssRem, 33.percent, 10.cssRem))
+            .width(33.percent)
             .padding(top = 1.cssRem, leftRight = 1.cssRem)
             .gap(1.5.cssRem)
             .backgroundColor(colorPalette.overlay)
@@ -121,8 +113,10 @@ fun SideMenu(
 
                 }
                 Column(
-                    modifier = Modifier.gap(1.5.cssRem),
-                    horizontalAlignment = Alignment.End
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .gap(1.5.cssRem),
+                    horizontalAlignment = Alignment.Start
                 ) {
                     MenuItem.menuItems.forEach { item ->
                         when (item) {
@@ -172,35 +166,14 @@ val SideMenuLinkVariant = LinkStyle.addVariant {
 val ActiveSideMenuLinkVariant = LinkStyle.addVariant {
     base {
         Modifier.color(SitePalette.light.primary)
-    }
-}
-
-// TODO show some love to this side menu things
-@Composable
-private fun SideMenuNavLink(
-    href: String,
-    en: String,
-    nl: String,
-    isActive: Boolean,
-    onClick: () -> Unit,
-) {
-    Link(
-        path = href,
-        variant = SideMenuLinkVariant.thenIf(isActive, ActiveSideMenuLinkVariant),
-        modifier = Modifier.onClick { onClick() }
-    ) {
-        Box(
-            modifier = Modifier.fillMaxSize(),
-            contentAlignment = Alignment.Center
-        ) {
-            LangText(en = en, nl = nl)
-        }
+            .fontWeight(FontWeight.Bold)
     }
 }
 
 val ExpandableSideMenuItemStyle = CssStyle {
     base {
         Modifier
+            .fillMaxWidth()
             .cursor(Cursor.Pointer)
             .textDecorationLine(TextDecorationLine.None)
     }
@@ -222,53 +195,3 @@ val ActiveExpandableSideMenuItemStyle = CssStyle {
     }
 }
 
-
-@Composable
-fun ExpandableSideMenuItem(
-    title: MenuLanguage,
-    subItems: List<MenuLanguage>,
-    isAnySubItemActive: Boolean,
-    onClick: () -> Unit
-) {
-    var isExpanded by remember { mutableStateOf(isAnySubItemActive) }
-
-    Column(
-        modifier = Modifier
-            .fillMaxWidth(),
-        horizontalAlignment = Alignment.End
-    ) {
-        Row(
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.spacedBy(8.px),
-            modifier = ExpandableSideMenuItemStyle.toModifier()
-                .thenIf(isExpanded, ActiveExpandableSideMenuItemStyle.toModifier())
-                .onClick {
-                    isExpanded = !isExpanded
-                }
-        ) {
-            LangText(en = title.en, nl = title.nl)
-            MdiExpandMore(
-                modifier = IconStyle.toModifier()
-                    .then(ExpandableSideMenuItemStyle.toModifier())
-                    .rotate(if (isExpanded) 180.deg else 0.deg)
-            )
-        }
-        if (isExpanded) {
-            Column(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .gap(0.55.cssRem)
-            ) {
-                subItems.forEach { subItem ->
-                    SideMenuNavLink(
-                        href = subItem.en.asNavLinkPath(title.en),
-                        en = subItem.en,
-                        nl = subItem.nl,
-                        isActive = isPathActive(href = subItem.en.asNavLinkPath(title.en)),
-                        onClick = onClick
-                    )
-                }
-            }
-        }
-    }
-}
