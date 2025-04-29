@@ -26,6 +26,8 @@ jobs:
                     java-version: '21'
                     distribution: 'temurin'
             -
+                run: chmod +x ./gradlew
+            -
                 name: shadowJar
                 run: ./gradlew :remotedev:shadowJar
             -
