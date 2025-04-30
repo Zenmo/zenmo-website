@@ -3,12 +3,11 @@ on:
   push:
     branches:
       - main
-      - deploy
-      - docker-build-switch
+      - fix-deploy-yaml
   pull_request:
     types: [ opened, synchronize, reopened ]
 
-  jobs:
+jobs:
     compile:
       runs-on: ubuntu-latest
       steps:
@@ -31,6 +30,7 @@ on:
               echo "Kobweb compilation failed!"
               exit 1
             fi
+
     build:
         if: github.event_name != 'pull_request'
         runs-on: ubuntu-latest
