@@ -3,16 +3,27 @@ package com.zenmo.web.zenmo.components.widgets
 import DropdownContainerStyle
 import MenuItemParentStyle
 import androidx.compose.runtime.Composable
+import com.varabyte.kobweb.compose.css.Cursor
 import com.varabyte.kobweb.compose.foundation.layout.Box
 import com.varabyte.kobweb.compose.foundation.layout.Column
 import com.varabyte.kobweb.compose.ui.Alignment
 import com.varabyte.kobweb.compose.ui.Modifier
+import com.varabyte.kobweb.compose.ui.modifiers.cursor
 import com.varabyte.kobweb.compose.ui.modifiers.fillMaxSize
+import com.varabyte.kobweb.silk.style.CssStyle
+import com.varabyte.kobweb.silk.style.selectors.hover
 import com.varabyte.kobweb.silk.style.toModifier
 import com.zenmo.web.zenmo.components.sections.nav_header.components.NavBarLink
 import com.zenmo.web.zenmo.components.sections.nav_header.components.isPathActive
 import com.zenmo.web.zenmo.models.navigation.MenuLanguage
 import com.zenmo.web.zenmo.models.navigation.asNavLinkPath
+
+
+val MainMenuItemHoverStyle = CssStyle {
+    hover {
+        Modifier.cursor(cursor = Cursor.Auto)
+    }
+}
 
 @Composable
 fun MenuItemWithSubs(titleText: MenuLanguage, subItems: List<MenuLanguage>) {
@@ -21,10 +32,11 @@ fun MenuItemWithSubs(titleText: MenuLanguage, subItems: List<MenuLanguage>) {
         modifier = MenuItemParentStyle.toModifier()
     ) {
         NavBarLink(
-            href = subItems.firstOrNull()?.en?.asNavLinkPath(titleText.en) ?: "/",
+            href = "/",
             en = titleText.en,
             nl = titleText.nl,
-            isActive = isMenuActive
+            isActive = isMenuActive,
+            modifier = MainMenuItemHoverStyle.toModifier()
         )
 
         Column(

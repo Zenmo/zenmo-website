@@ -85,18 +85,18 @@ fun HomePage() {
                         """
                         Zenmo is een verbindende schakel tussen bedrijven, netbeheerders, overheden en kennisinstellingen. 
                         Onze missie is het kosteneffectief versnellen van de transitie van fossiele naar duurzame energie 
-                        met een focus op slimme decentrale bottom-up oplossingen voor netcongestie met ondermeer batterijen.
+                        met een focus op slimme decentrale bottom-up oplossingen voor netcongestie met ondermeer batterijen. 
                         """.trimIndent(),
                     en =
                         """
                         Zenmo is a connecting link between companies, grid operators, governments and knowledge institutions. 
                         Our mission is to cost-effectively accelerate the transition from fossil to sustainable energy 
-                        with a focus on smart decentralized bottom-up solutions for grid congestion, including batteries.
+                        with a focus on smart decentralized bottom-up solutions for grid congestion, including batteries.  
                         """.trimIndent(),
                 )
                 LangText(
-                    nl = "[Logo HOLON => logo LUX]Wij zijn de makers van LUX energy twin.",
-                    en = "[Logo HOLON => logo LUX]We are the creators of LUX energy twin."
+                    nl = "[Logo HOLON => logo LUX]Wij zijn de makers van LUX energy twin. ",
+                    en = "[Logo HOLON => logo LUX]We are the creators of LUX energy twin. "
                 )
                 LangText(
                     nl = "LUX biedt bedrijven en gebieden snel en effectief inzicht in oplossingen voor netcongestie met behulp van ondermeer batterijen. LUX is open source software die oorspronkelijk is ontwikkeld door Zenmo en de TU Eindhoven en die tevens een doorontwikkeling is vanuit het HOLON project.[link]",

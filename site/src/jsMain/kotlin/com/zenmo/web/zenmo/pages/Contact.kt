@@ -18,15 +18,15 @@ import org.jetbrains.compose.web.dom.Text
 
 @Page
 @Composable
-fun AboutPage() {
-    PageLayout("About") {
+fun ContactPage() {
+    PageLayout("Contact") {
         Column(
             modifier = HeroContainerStyle.toModifier(),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center
         ) {
             Div(TextStyle.toModifier(DisplayTextStyle).toAttrs()) {
-                SpanText("Coming soon")
+                SpanText("Here, I will build a nice form.")
             }
 
             val ctx = rememberPageContext()

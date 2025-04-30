@@ -8,6 +8,7 @@ import com.varabyte.kobweb.silk.style.CssStyle
 import com.varabyte.kobweb.silk.style.addVariant
 import com.varabyte.kobweb.silk.style.breakpoint.Breakpoint
 import com.zenmo.web.zenmo.theme.SitePalette
+import com.zenmo.web.zenmo.utils.PublicRes
 
 sealed interface TextComponentKind : ComponentKind
 
@@ -106,6 +107,19 @@ val LabelLargeTextStyle = TextStyle.addVariant {
         val fontsXL = Fonts[Breakpoint.XL]
         Modifier.font { siteFont(fontsXL.labelLarge) }
     }
+}
+
+val HolonBlockHeaderTextStyle = TextStyle.addVariant {
+    fun applyHolonBlockFont(breakpoint: Breakpoint): Modifier {
+        val fonts = Fonts[breakpoint]
+        return Modifier.font { siteFont(fonts.display.copy(fontFamily = PublicRes.FontFamilies.HOLON_BLOCK)) }
+    }
+
+    Breakpoint.ZERO { applyHolonBlockFont(Breakpoint.ZERO) }
+    Breakpoint.SM { applyHolonBlockFont(Breakpoint.SM) }
+    Breakpoint.MD { applyHolonBlockFont(Breakpoint.MD) }
+    Breakpoint.LG { applyHolonBlockFont(Breakpoint.LG) }
+    Breakpoint.XL { applyHolonBlockFont(Breakpoint.XL) }
 }
 
 

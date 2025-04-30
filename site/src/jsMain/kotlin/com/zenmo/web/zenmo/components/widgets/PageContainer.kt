@@ -42,6 +42,7 @@ val SectionContainerStyle = CssStyle {
     }
 }
 
+
 /**
  * [PageContainer] should be used when you need:
  * - a container that automatically adapts to different breakpoints
@@ -51,6 +52,7 @@ val SectionContainerStyle = CssStyle {
  * - Main page sections in the website
  * - Content blocks that need a responsive behavior
  */
+
 @Composable
 fun PageContainer(
     modifier: Modifier = Modifier,
