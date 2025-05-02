@@ -3,28 +3,16 @@ package com.zenmo.web.zenmo.components.widgets.anylogic
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
-import com.varabyte.kobweb.compose.css.CSSLengthOrPercentageNumericValue
-import com.varabyte.kobweb.compose.css.aspectRatio
-import com.varabyte.kobweb.compose.css.functions.calc
-import com.varabyte.kobweb.compose.css.height
-import com.varabyte.kobweb.compose.css.margin
+import com.varabyte.kobweb.compose.ui.Modifier
+import com.varabyte.kobweb.compose.ui.modifiers.*
+import com.varabyte.kobweb.compose.ui.toAttrs
+import com.varabyte.kobweb.silk.style.CssStyle
+import com.varabyte.kobweb.silk.style.toModifier
 import kotlinx.coroutines.await
-import org.jetbrains.compose.web.css.CSSUnit
 import org.jetbrains.compose.web.css.Position
-import org.jetbrains.compose.web.css.maxHeight
 import org.jetbrains.compose.web.css.percent
-import org.jetbrains.compose.web.css.position
 import org.jetbrains.compose.web.css.vh
-import org.jetbrains.compose.web.css.cssRem
-import org.jetbrains.compose.web.css.height
-import org.jetbrains.compose.web.css.keywords.auto
-import org.jetbrains.compose.web.css.maxWidth
-import org.jetbrains.compose.web.css.minus
-import org.jetbrains.compose.web.css.px
-import org.jetbrains.compose.web.css.width
-import org.jetbrains.compose.web.dom.AttrBuilderContext
 import org.jetbrains.compose.web.dom.Div
-import org.w3c.dom.HTMLDivElement
 import kotlin.js.Promise
 import kotlin.uuid.Uuid
 
@@ -33,15 +21,31 @@ import kotlin.uuid.Uuid
  */
 val anyLogicPublicApiKey = Uuid.parse("17e0722f-25c4-4549-85c3-d36509f5c710")
 
+val AnyLogicEmbedStyle = CssStyle {
+    base {
+        Modifier
+            // AnyLogic elements use absolute positioning.
+            // This makes those elements relative to this parent.
+            .position(Position.Relative)
+            // Make sure it fits on the screen.
+            // Reserve space for site header.
+            .maxHeight(80.vh)
+            .width(100.percent)
+            // 8:5 Approaches the default aspect ratio in AnyLogic.
+            // It is possible to create a model for a different aspect ratio.
+            .aspectRatio(8, 5)
+    }
+}
+
 /**
  * Embed a simulation from AnyLogic Cloud
  */
 @Composable
 fun AnyLogicEmbed(
+    modifier: Modifier = Modifier,
     modelId: Uuid,
     apiKey: Uuid = anyLogicPublicApiKey,
     cloudUrl: String = "https://anylogic.zenmo.com",
-    attrs: AttrBuilderContext<HTMLDivElement>? = null,
 ) {
     val containerId = remember { "anylogic-embed-${randomString(4u)}" }
 
@@ -54,17 +58,12 @@ fun AnyLogicEmbed(
             client.startAnimation(inputs, containerId).await()
     }
 
-    Div(attrs = {
-        id(containerId)
-        style {
-            // AnyLogic elements use absolute positioning.
-            // This makes those elements relative to this parent.
-            position(Position.Relative)
-            aspectRatio(8, 5)
-            maxHeight(80.vh) // reserve space for site header
-        }
-        attrs?.invoke(this)
-    })
+    Div(
+        attrs = AnyLogicEmbedStyle
+            .toModifier().then(modifier).toAttrs {
+                id(containerId)
+            }
+    )
 }
 
 /**
