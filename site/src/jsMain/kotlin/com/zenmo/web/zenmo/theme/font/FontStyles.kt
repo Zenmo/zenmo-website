@@ -123,7 +123,25 @@ val HolonBlockHeaderTextStyle = TextStyle.addVariant {
 }
 
 
-/*todo add style variants for
-*  1.TitleTextStyle
-*  2. LabelMediumTextStyle
-*  3. BodyMediumTextStyle & BodySmall maybe  */
+val TitleTextStyle = TextStyle.addVariant {
+    Breakpoint.ZERO {
+        val fontsSM = Fonts[Breakpoint.SM]
+        Modifier.font { siteFont(fontsSM.title) }
+    }
+    Breakpoint.SM {
+        val fontsSM = Fonts[Breakpoint.SM]
+        Modifier.font { siteFont(fontsSM.title) }
+    }
+    Breakpoint.MD {
+        val fontsMD = Fonts[Breakpoint.MD]
+        Modifier.font { siteFont(fontsMD.title) }
+    }
+    Breakpoint.LG {
+        val fontsLG = Fonts[Breakpoint.LG]
+        Modifier.font { siteFont(fontsLG.title) }
+    }
+    Breakpoint.XL {
+        val fontsXL = Fonts[Breakpoint.XL]
+        Modifier.font { siteFont(fontsXL.title) }
+    }
+}
