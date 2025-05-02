@@ -6,11 +6,10 @@ import com.varabyte.kobweb.compose.foundation.layout.Column
 import com.varabyte.kobweb.compose.foundation.layout.ColumnScope
 import com.varabyte.kobweb.compose.ui.Alignment
 import com.varabyte.kobweb.compose.ui.Modifier
-import com.varabyte.kobweb.compose.ui.modifiers.height
-import com.varabyte.kobweb.compose.ui.modifiers.maxWidth
-import com.varabyte.kobweb.compose.ui.modifiers.padding
-import com.varabyte.kobweb.compose.ui.modifiers.width
+import com.varabyte.kobweb.compose.ui.modifiers.*
+import com.varabyte.kobweb.silk.style.ComponentKind
 import com.varabyte.kobweb.silk.style.CssStyle
+import com.varabyte.kobweb.silk.style.CssStyleVariant
 import com.varabyte.kobweb.silk.style.breakpoint.Breakpoint
 import com.varabyte.kobweb.silk.style.toModifier
 import org.jetbrains.compose.web.css.cssRem
@@ -18,12 +17,17 @@ import org.jetbrains.compose.web.css.keywords.auto
 import org.jetbrains.compose.web.css.percent
 import org.jetbrains.compose.web.css.px
 
-val SectionContainerStyle = CssStyle {
+sealed interface SectionComponentKind : ComponentKind
+
+const val PAGE_SECTION_CONTAINER_CLASSNAME = "page-section-container"
+
+val PageSectionContainerStyle = CssStyle<SectionComponentKind> {
     base {
         Modifier
             .width(100.percent)
             .height(auto)
             .maxWidth(130.cssRem)
+            .classNames(PAGE_SECTION_CONTAINER_CLASSNAME)
     }
     Breakpoint.ZERO {
         Modifier.padding(leftRight = 16.px)
@@ -56,12 +60,18 @@ val SectionContainerStyle = CssStyle {
 @Composable
 fun PageContainer(
     modifier: Modifier = Modifier,
+    pageSectionId: String? = null,
     horizontalAlignment: Alignment.Horizontal = Alignment.CenterHorizontally,
     verticalArrangement: Arrangement.Vertical = Arrangement.Top,
-    content: @Composable ColumnScope.() -> Unit = {}
+    variant: CssStyleVariant<SectionComponentKind>? = null,
+    content: @Composable ColumnScope.() -> Unit = {},
 ) {
+    val finalModifier = PageSectionContainerStyle.toModifier(variant)
+        .then(modifier)
+        .let { if (pageSectionId != null) it.id(pageSectionId) else it }
+
     Column(
-        modifier = SectionContainerStyle.toModifier().then(modifier),
+        modifier = finalModifier,
         horizontalAlignment = horizontalAlignment,
         verticalArrangement = verticalArrangement,
         content = content
