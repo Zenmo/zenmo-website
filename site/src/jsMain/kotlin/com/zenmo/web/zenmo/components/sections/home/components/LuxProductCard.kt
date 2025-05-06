@@ -50,12 +50,12 @@ val ProductCardStyle = CssStyle(
             .backgroundColor(colors.overlay.shifted(colorMode, 0.1f))
     }
 
-    cssRule("> div > #arrowForward") {
+    cssRule("> div > .arrowForward") {
         Modifier
             .padding(left = 0.15.cssRem)
     }
 
-    cssRule(":hover > div > #arrowForward") {
+    cssRule(":hover > div > .arrowForward") {
         Modifier
             .padding(left = 0.55.cssRem)
             .transition(
@@ -93,7 +93,7 @@ fun LuxProductCard(
             Text(luxProduct.productTitle)
             MdiArrowRightAlt(
                 modifier = Modifier
-                    .id("arrowForward")
+                    .classNames("arrowForward")
                     .display(DisplayStyle.InlineBlock)
             )
         }
