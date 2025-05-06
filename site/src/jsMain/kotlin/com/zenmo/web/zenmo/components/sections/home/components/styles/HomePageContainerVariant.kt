@@ -11,13 +11,13 @@ import com.varabyte.kobweb.compose.ui.modifiers.margin
 import com.varabyte.kobweb.compose.ui.modifiers.minHeight
 import com.varabyte.kobweb.silk.style.addVariant
 import com.varabyte.kobweb.silk.style.breakpoint.Breakpoint
-import com.zenmo.web.zenmo.components.widgets.PageSectionContainerStyle
+import com.zenmo.web.zenmo.components.widgets.SectionContainerStyle
 import com.zenmo.web.zenmo.theme.toSitePalette
 import org.jetbrains.compose.web.css.cssRem
 import org.jetbrains.compose.web.css.percent
 import org.jetbrains.compose.web.css.vh
 
-val HomePageContainerVariant = PageSectionContainerStyle.addVariant {
+val HomePageContainerVariant = SectionContainerStyle.addVariant {
     val colorPalette = colorMode.toSitePalette()
     base {
         Modifier
