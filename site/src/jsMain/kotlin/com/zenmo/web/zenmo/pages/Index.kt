@@ -1,7 +1,6 @@
 package com.zenmo.web.zenmo.pages
 
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
 import com.varabyte.kobweb.compose.css.TextAlign
 import com.varabyte.kobweb.compose.foundation.layout.Arrangement
 import com.varabyte.kobweb.compose.foundation.layout.Box
@@ -32,8 +31,7 @@ import com.zenmo.web.zenmo.components.sections.home.components.styles.HomePageCo
 import com.zenmo.web.zenmo.components.sections.home.components.styles.HomePageSectionGridStyle
 import com.zenmo.web.zenmo.components.sections.home.components.styles.HomePageVisualStyle
 import com.zenmo.web.zenmo.components.widgets.LangText
-import com.zenmo.web.zenmo.components.widgets.PAGE_SECTION_CONTAINER_CLASSNAME
-import com.zenmo.web.zenmo.components.widgets.PageContainer
+import com.zenmo.web.zenmo.components.widgets.SectionContainer
 import com.zenmo.web.zenmo.components.widgets.button.PrimaryButton
 import com.zenmo.web.zenmo.theme.SitePalette
 import com.zenmo.web.zenmo.theme.font.BodyLargeTextStyle
@@ -42,7 +40,6 @@ import com.zenmo.web.zenmo.theme.font.TextStyle
 import com.zenmo.web.zenmo.theme.font.TextStyleSecondaryColor
 import com.zenmo.web.zenmo.theme.styles.IconStyle
 import kotlinx.browser.document
-import kotlinx.browser.window
 import org.jetbrains.compose.web.css.cssRem
 import org.jetbrains.compose.web.css.percent
 import org.jetbrains.compose.web.css.px
@@ -50,7 +47,6 @@ import org.jetbrains.compose.web.css.vh
 import org.jetbrains.compose.web.dom.Div
 import org.jetbrains.compose.web.dom.P
 import org.jetbrains.compose.web.dom.Text
-import org.w3c.dom.asList
 
 val HeroContainerStyle = CssStyle {
     base { Modifier.fillMaxWidth().gap(2.cssRem) }
@@ -61,14 +57,13 @@ val HeroContainerStyle = CssStyle {
 @Page
 @Composable
 fun HomePage() {
-    val section = remember { document.getElementsByClassName(PAGE_SECTION_CONTAINER_CLASSNAME).asList() }
     PageLayout("Home") {
         Column(
             modifier = Modifier.fillMaxWidth(),
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
             val breakpoint = rememberBreakpoint()
-            PageContainer(
+            SectionContainer(
                 modifier = Modifier.gap(0.5.cssRem),
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.Center,
@@ -77,14 +72,6 @@ fun HomePage() {
                 Div(attrs = HomePageSectionGridStyle.toAttrs()) {
                     AboutZenmoTextContent(
                         breakpoint = breakpoint,
-                        onLuxCreatorsButtonClicked = {
-                            window.scrollTo(
-                                0.0,
-                                section.firstOrNull { it.id == LUX_OVERVIEW_SECTION_ID }
-                                    ?.getBoundingClientRect()?.top
-                                    ?: 0.0
-                            )
-                        }
                     )
                     VisualContent()
                 }
@@ -99,7 +86,6 @@ fun HomePage() {
 @Composable
 private fun AboutZenmoTextContent(
     breakpoint: Breakpoint,
-    onLuxCreatorsButtonClicked: () -> Unit,
 ) {
     Column(
         modifier = Modifier
@@ -147,7 +133,8 @@ private fun AboutZenmoTextContent(
                 MdiArrowRightAlt()
             },
             onClick = {
-                onLuxCreatorsButtonClicked()
+                val element = document.getElementById(LUX_OVERVIEW_SECTION_ID)
+                element?.scrollIntoView()
             }
         )
     }

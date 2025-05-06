@@ -3,6 +3,7 @@ package com.zenmo.web.zenmo.components.sections.home
 import androidx.compose.runtime.Composable
 import com.varabyte.kobweb.compose.css.Cursor
 import com.varabyte.kobweb.compose.css.TextAlign
+import com.varabyte.kobweb.compose.css.TextDecorationLine
 import com.varabyte.kobweb.compose.foundation.layout.Arrangement
 import com.varabyte.kobweb.compose.foundation.layout.Column
 import com.varabyte.kobweb.compose.ui.Alignment
@@ -13,18 +14,19 @@ import com.varabyte.kobweb.silk.components.layout.SimpleGrid
 import com.varabyte.kobweb.silk.components.layout.numColumns
 import com.varabyte.kobweb.silk.style.CssStyle
 import com.varabyte.kobweb.silk.style.breakpoint.Breakpoint
+import com.varabyte.kobweb.silk.style.toAttrs
 import com.varabyte.kobweb.silk.style.toModifier
 import com.varabyte.kobweb.silk.theme.breakpoint.rememberBreakpoint
 import com.zenmo.web.zenmo.components.sections.home.components.LuxProductCard
 import com.zenmo.web.zenmo.components.sections.home.components.LuxProducts
 import com.zenmo.web.zenmo.components.widgets.LangText
-import com.zenmo.web.zenmo.components.widgets.PageContainer
+import com.zenmo.web.zenmo.components.widgets.SectionContainer
 import com.zenmo.web.zenmo.components.widgets.button.PrimaryButton
 import com.zenmo.web.zenmo.theme.font.*
 import com.zenmo.web.zenmo.theme.styles.OutlinePrimaryButtonStyle
 import org.jetbrains.compose.web.css.cssRem
 import org.jetbrains.compose.web.css.percent
-import org.jetbrains.compose.web.dom.Div
+import org.jetbrains.compose.web.dom.A
 import org.jetbrains.compose.web.dom.P
 import org.jetbrains.compose.web.dom.Span
 
@@ -40,11 +42,10 @@ val LuxProductsGridStyle = CssStyle {
 @Composable
 fun LuxInfoSection() {
     val breakpoint = rememberBreakpoint()
-    PageContainer(
-        modifier = Modifier,
+    SectionContainer(
+        modifier = Modifier.id(LUX_OVERVIEW_SECTION_ID),
         verticalArrangement = Arrangement.Top,
         horizontalAlignment = Alignment.CenterHorizontally,
-        pageSectionId = LUX_OVERVIEW_SECTION_ID
     ) {
         TextContent(breakpoint)
         Column(
@@ -52,13 +53,13 @@ fun LuxInfoSection() {
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
             LuxProductsTextHeader()
-            LuxProductCasrds()
+            LuxProductCards()
         }
     }
 }
 
 @Composable
-private fun LuxProductCasrds() {
+private fun LuxProductCards() {
     SimpleGrid(
         numColumns(base = 1, md = 2, lg = 2, xl = 2),
         modifier = Modifier.gap(1.cssRem).fillMaxWidth().margin(bottom = 5.cssRem),
@@ -75,6 +76,19 @@ private fun LuxProductCasrds() {
     }
 }
 
+val AnchorLinkStyle = CssStyle(
+    extraModifier = {
+        TextStyle.toModifier(
+            DisplayTextStyle, TextStylePrimaryColor,
+        )
+    }
+) {
+    base {
+        Modifier
+            .textDecorationLine(TextDecorationLine.None)
+            .cursor(Cursor.Default)
+    }
+}
 
 @Composable
 private fun TextContent(
@@ -85,10 +99,9 @@ private fun TextContent(
         verticalArrangement = Arrangement.spacedBy(1.cssRem),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Div(
-            attrs = TextStyle.toModifier(
-                DisplayTextStyle, TextStylePrimaryColor
-            ).toAttrs()
+        A(
+            attrs = AnchorLinkStyle.toAttrs(),
+            href = "#$LUX_OVERVIEW_SECTION_ID"
         ) {
             LangText(
                 en = "LUX Overview",
