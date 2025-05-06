@@ -1,7 +1,6 @@
 package com.zenmo.web.zenmo.components.sections.home.components
 
 data class LuxProduct(
-    val productId: String,
     val productTitle: String,
     val enDescription: String,
     val nlDescription: String,
@@ -10,7 +9,6 @@ data class LuxProduct(
 
 val LuxProducts = listOf(
     LuxProduct(
-        productId = "1",
         productTitle = "LUX Company",
         enDescription =
             """
@@ -26,7 +24,6 @@ val LuxProducts = listOf(
                 """.trimIndent(),
     ),
     LuxProduct(
-        productId = "2",
         productTitle = "LUX Energy Hub",
         enDescription =
             """
@@ -41,7 +38,6 @@ val LuxProducts = listOf(
                 """.trimIndent(),
     ),
     LuxProduct(
-        productId = "3",
         productTitle = "LUX Residential Area",
         enDescription =
             """
@@ -55,7 +51,6 @@ val LuxProducts = listOf(
                 """.trimIndent()
     ),
     LuxProduct(
-        productId = "4",
         productTitle = "LUX Municipality, RES, and Province",
         enDescription =
             """
