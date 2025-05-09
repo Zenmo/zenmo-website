@@ -71,8 +71,8 @@ object Fonts {
     private val superLargeFonts = SiteFonts(
         display = SiteFont(
             fontFamily = PublicRes.FontFamilies.MONTSERRAT_MEDIUM,
-            fontWeight = FontWeight.Medium,
-            fontSize = 3.cssRem,
+            fontWeight = FontWeight.ExtraBold,
+            fontSize = 3.7.cssRem,
         ),
         subDisplay = SiteFont(
             fontFamily = PublicRes.FontFamilies.POPPINS_REGULAR,
@@ -117,7 +117,7 @@ object Fonts {
     )
 
     private val largeFonts = SiteFonts(
-        display = superLargeFonts.display.copy(fontSize = 2.1.cssRem),
+        display = superLargeFonts.display.copy(fontSize = 3.cssRem),
         subDisplay = superLargeFonts.subDisplay.copy(fontSize = 1.35.cssRem),
         title = superLargeFonts.title.copy(fontSize = 1.35.cssRem),
         bodyLarge = superLargeFonts.bodyLarge.copy(fontSize = 1.15.cssRem),
@@ -129,7 +129,7 @@ object Fonts {
     )
 
     private val mediumFonts = SiteFonts(
-        display = superLargeFonts.display.copy(fontSize = 1.95.cssRem),
+        display = superLargeFonts.display.copy(fontSize = 2.cssRem),
         subDisplay = superLargeFonts.subDisplay.copy(fontSize = 1.2.cssRem),
         title = superLargeFonts.title.copy(fontSize = 1.35.cssRem),
         bodyLarge = superLargeFonts.bodyLarge.copy(fontSize = 1.cssRem),

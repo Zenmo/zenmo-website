@@ -13,7 +13,7 @@ data class SitePalette(
     val primary: Color = Color.rgb(0xb6084e),
     val onPrimary: Color = Color.rgb(0xFFFFFF),
     val primaryContainer: Color = Color.rgb(0xD92E65),
-    val secondary: Color = Color.rgb(0x3C83EF),
+    val secondary: Color = Color.rgb(0x3d2c2f),
     val surfaceContainerLow: Color = Color.rgb(0xFFF0F1),
     val surface: Color = Color.rgb(0xFFF8F7),
     val onBackground: Color = Color.rgb(0x26181A)

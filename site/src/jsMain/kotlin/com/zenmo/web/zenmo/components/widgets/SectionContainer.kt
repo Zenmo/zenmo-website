@@ -10,7 +10,9 @@ import com.varabyte.kobweb.compose.ui.modifiers.height
 import com.varabyte.kobweb.compose.ui.modifiers.maxWidth
 import com.varabyte.kobweb.compose.ui.modifiers.padding
 import com.varabyte.kobweb.compose.ui.modifiers.width
+import com.varabyte.kobweb.silk.style.ComponentKind
 import com.varabyte.kobweb.silk.style.CssStyle
+import com.varabyte.kobweb.silk.style.CssStyleVariant
 import com.varabyte.kobweb.silk.style.breakpoint.Breakpoint
 import com.varabyte.kobweb.silk.style.toModifier
 import org.jetbrains.compose.web.css.cssRem
@@ -18,7 +20,10 @@ import org.jetbrains.compose.web.css.keywords.auto
 import org.jetbrains.compose.web.css.percent
 import org.jetbrains.compose.web.css.px
 
-val SectionContainerStyle = CssStyle {
+sealed interface SectionComponentKind : ComponentKind
+
+
+val SectionContainerStyle = CssStyle<SectionComponentKind> {
     base {
         Modifier
             .width(100.percent)
@@ -44,7 +49,7 @@ val SectionContainerStyle = CssStyle {
 
 
 /**
- * [PageContainer] should be used when you need:
+ * [SectionContainer] should be used when you need:
  * - a container that automatically adapts to different breakpoints
  * - a standardized container for responsive page sections with consistent padding
  *
@@ -54,14 +59,16 @@ val SectionContainerStyle = CssStyle {
  */
 
 @Composable
-fun PageContainer(
+fun SectionContainer(
     modifier: Modifier = Modifier,
     horizontalAlignment: Alignment.Horizontal = Alignment.CenterHorizontally,
     verticalArrangement: Arrangement.Vertical = Arrangement.Top,
-    content: @Composable ColumnScope.() -> Unit = {}
+    variant: CssStyleVariant<SectionComponentKind>? = null,
+    content: @Composable ColumnScope.() -> Unit = {},
 ) {
     Column(
-        modifier = SectionContainerStyle.toModifier().then(modifier),
+        modifier = SectionContainerStyle.toModifier(variant)
+            .then(modifier),
         horizontalAlignment = horizontalAlignment,
         verticalArrangement = verticalArrangement,
         content = content
