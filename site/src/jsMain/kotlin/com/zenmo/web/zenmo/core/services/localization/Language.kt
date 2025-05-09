@@ -15,11 +15,20 @@ sealed class Language {
     }
 
     companion object {
-        const val LANGUAGE_MODE_KEY = "zenmo:site-lang"
 
         fun toggleLanguage(current: Language): Language = when (current) {
             English -> Dutch
             Dutch -> English
+        }
+
+        fun fromCodeToLanguage(code: String): Language = when {
+            code.startsWith("en", ignoreCase = true) -> English
+            else -> Dutch
+        }
+
+        fun toCodeFromLanguage(language: Language): String = when (language) {
+            English -> "en"
+            Dutch -> "nl"
         }
     }
 }

@@ -19,7 +19,7 @@ fun main() {
     try {
         runCommand(listOf("git", "pull", "--rebase"))
     } catch (e: Exception) {
-        println("Rolling back changes...")
+        println("Error doing rebase. Rolling back changes...")
         runCommand(listOf("git", "rebase", "--abort"))
         throw e
     } finally {
@@ -33,6 +33,8 @@ fun main() {
 }
 
 fun runCommand(command: List<String>) {
+    println("Running $command")
+
     val process = ProcessBuilder(command)
         .redirectErrorStream(true)
         .start()
