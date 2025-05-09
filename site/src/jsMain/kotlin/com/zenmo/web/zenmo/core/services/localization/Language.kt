@@ -1,5 +1,8 @@
 package com.zenmo.web.zenmo.core.services.localization
 
+import androidx.compose.runtime.compositionLocalOf
+
+
 sealed class Language {
     abstract fun translate(en: String?, nl: String?): String
 
@@ -11,7 +14,23 @@ sealed class Language {
         override fun translate(en: String?, nl: String?): String = en ?: nl ?: ""
     }
 
-    /*todo we can have a companion object here
-    *  to override the language for testing purposes
-    * */
+    companion object {
+
+        fun toggleLanguage(current: Language): Language = when (current) {
+            English -> Dutch
+            Dutch -> English
+        }
+
+        fun fromCodeToLanguage(code: String): Language = when {
+            code.startsWith("en", ignoreCase = true) -> English
+            else -> Dutch
+        }
+
+        fun toCodeFromLanguage(language: Language): String = when (language) {
+            English -> "en"
+            Dutch -> "nl"
+        }
+    }
 }
+
+val LocalLanguage = compositionLocalOf<Language> { error("Unknown Language") }
