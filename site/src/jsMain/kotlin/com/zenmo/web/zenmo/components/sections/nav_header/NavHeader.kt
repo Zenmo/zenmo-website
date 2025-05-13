@@ -5,6 +5,7 @@ import com.varabyte.kobweb.compose.css.JustifyContent
 import com.varabyte.kobweb.compose.css.functions.blur
 import com.varabyte.kobweb.compose.css.functions.saturate
 import com.varabyte.kobweb.compose.foundation.layout.Arrangement
+import com.varabyte.kobweb.compose.foundation.layout.Box
 import com.varabyte.kobweb.compose.foundation.layout.Row
 import com.varabyte.kobweb.compose.ui.Alignment
 import com.varabyte.kobweb.compose.ui.Modifier
@@ -21,10 +22,7 @@ import com.varabyte.kobweb.silk.style.toModifier
 import com.varabyte.kobweb.silk.theme.colors.palette.background
 import com.varabyte.kobweb.silk.theme.colors.palette.overlay
 import com.varabyte.kobweb.silk.theme.colors.palette.toPalette
-import com.zenmo.web.zenmo.components.sections.nav_header.components.NavBar
-import com.zenmo.web.zenmo.components.sections.nav_header.components.SideMenu
-import com.zenmo.web.zenmo.components.sections.nav_header.components.SideMenuState
-import com.zenmo.web.zenmo.components.sections.nav_header.components.SiteLogo
+import com.zenmo.web.zenmo.components.sections.nav_header.components.*
 import com.zenmo.web.zenmo.components.widgets.button.IconButton
 import com.zenmo.web.zenmo.theme.SitePalette
 import com.zenmo.web.zenmo.theme.styles.IconStyle
@@ -73,26 +71,45 @@ fun NavHeader() {
     Header(
         attrs = NavHeaderStyle.toModifier().toAttrs()
     ) {
-        SiteLogo()
 
         Row(
             modifier = Modifier
+                .fillMaxWidth()
                 .displayIfAtLeast(Breakpoint.MD),
             verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.SpaceBetween
         ) {
-            NavBar()
+            SiteLogo()
+            Box(
+                modifier = Modifier
+                    .flex(1), contentAlignment = Alignment.Center
+            ) {
+                NavBar()
+            }
+            LanguageSwitchButton()
         }
 
 
         Row(
             Modifier
+                .fillMaxWidth()
                 .displayUntil(Breakpoint.MD),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
             var menuState by remember { mutableStateOf(SideMenuState.CLOSED) }
 
-            HamburgerButton(onClick = { menuState = SideMenuState.OPEN })
+            Box(modifier = Modifier.flex(1), contentAlignment = Alignment.CenterStart) {
+                LanguageSwitchButton()
+            }
+
+            Box(modifier = Modifier.flex(1), contentAlignment = Alignment.Center) {
+                SiteLogo()
+            }
+
+            Box(modifier = Modifier.flex(1), contentAlignment = Alignment.CenterEnd) {
+                HamburgerButton(onClick = { menuState = SideMenuState.OPEN })
+            }
 
             if (menuState != SideMenuState.CLOSED) {
                 SideMenu(

@@ -23,7 +23,7 @@ val HomePageSectionGridStyle = CssStyle {
         Modifier.flexDirection(FlexDirection.ColumnReverse)
     }
     Breakpoint.MD {
-        Modifier.flexDirection(FlexDirection.ColumnReverse)
+        Modifier.flexDirection(FlexDirection.Row)
     }
     Breakpoint.LG {
         Modifier.flexDirection(FlexDirection.Row)
