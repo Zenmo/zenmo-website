@@ -91,11 +91,11 @@ private fun AboutZenmoTextContent(
         modifier = Modifier
             .flex(1),
         verticalArrangement = Arrangement.Center,
-        horizontalAlignment = if (breakpoint >= Breakpoint.LG) Alignment.Start else Alignment.CenterHorizontally
+        horizontalAlignment = if (breakpoint >= Breakpoint.MD) Alignment.Start else Alignment.CenterHorizontally
     ) {
         Div(
             TextStyle.toModifier(HolonBlockHeaderTextStyle)
-                .textAlign(if (breakpoint > Breakpoint.MD) TextAlign.Start else TextAlign.Center)
+                .textAlign(if (breakpoint > Breakpoint.SM) TextAlign.Start else TextAlign.Center)
                 .maxWidth(if (breakpoint >= Breakpoint.SM) 80.percent else 100.percent)
                 .toAttrs()
         ) {
@@ -107,7 +107,7 @@ private fun AboutZenmoTextContent(
         Div(
             TextStyle.toModifier(BodyLargeTextStyle, TextStyleSecondaryColor)
                 .margin(top = 1.cssRem, right = 1.cssRem)
-                .textAlign(if (breakpoint > Breakpoint.MD) TextAlign.Start else TextAlign.Center)
+                .textAlign(if (breakpoint > Breakpoint.SM) TextAlign.Start else TextAlign.Center)
                 .toAttrs(),
         ) {
             LangText(
@@ -169,7 +169,7 @@ private fun ExtraZenmoTextContent(
             verticalAlignment = Alignment.CenterVertically,
         ) {
             Box(
-                modifier = Modifier.displayIfAtLeast(Breakpoint.LG).padding(right = 1.cssRem),
+                modifier = Modifier.displayIfAtLeast(Breakpoint.MD).padding(right = 1.cssRem),
                 contentAlignment = Alignment.Center
             ) {
                 MdiTipsAndUpdates(

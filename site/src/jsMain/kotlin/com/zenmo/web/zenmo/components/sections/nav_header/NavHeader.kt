@@ -75,7 +75,7 @@ fun NavHeader() {
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .displayIfAtLeast(Breakpoint.LG),
+                .displayIfAtLeast(Breakpoint.MD),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
@@ -93,7 +93,7 @@ fun NavHeader() {
         Row(
             Modifier
                 .fillMaxWidth()
-                .displayUntil(Breakpoint.LG),
+                .displayUntil(Breakpoint.MD),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceBetween
         ) {

@@ -27,42 +27,18 @@ val HomePageContainerVariant = SectionContainerStyle.addVariant {
         Modifier
             .height(75.vh)
             .minHeight(38.cssRem)
-            .backgroundImage(
-                radialGradient(RadialGradient.Shape.Circle, CSSPosition(x = 50.percent, y = 25.percent)) {
-                    add(colorPalette.primary.toRgb().copyf(alpha = 0.15f))
-                    add(Colors.Transparent, 35.percent)
-                }
-            )
     }
     Breakpoint.SM {
         Modifier
             .minHeight(40.6.cssRem)
-            .backgroundImage(
-                radialGradient(RadialGradient.Shape.Circle, CSSPosition(x = 50.percent, y = 30.percent)) {
-                    add(colorPalette.primary.toRgb().copyf(alpha = 0.095f))
-                    add(Colors.Transparent, 40.percent)
-                }
-            )
     }
     Breakpoint.MD {
         Modifier
             .height(78.vh)
-            .backgroundImage(
-                radialGradient(RadialGradient.Shape.Circle, CSSPosition(x = 50.percent, y = 30.percent)) {
-                    add(colorPalette.primary.toRgb().copyf(alpha = 0.095f))
-                    add(Colors.Transparent, 40.percent)
-                }
-            )
     }
     Breakpoint.LG {
         Modifier
             .height(75.vh)
-            .backgroundImage(
-                radialGradient(RadialGradient.Shape.Circle, CSSPosition(x = 71.5.percent, y = 50.percent)) {
-                    add(colorPalette.primary.toRgb().copyf(alpha = 0.095f))
-                    add(Colors.Transparent, 35.percent)
-                }
-            )
     }
     Breakpoint.XL {
         Modifier
