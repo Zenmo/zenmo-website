@@ -5,10 +5,10 @@ server:
   files:
     dev:
       contentRoot: "build/processedResources/js/main/public"
-      script: "build/kotlin-webpack/js/developmentExecutable/zenmo.js"
+      script: "build/rollup/zenmo-site.mjs"
       api: "build/libs/zenmo.jar"
     prod:
-      script: "build/kotlin-webpack/js/productionExecutable/zenmo.js"
+      script: "build/rollup/zenmo-site.mjs"
       siteRoot: ".kobweb/site"
 
   port: 8080
