@@ -1,11 +1,16 @@
+import com.github.gradle.node.npm.task.NpmTask
 import com.varabyte.kobweb.gradle.application.util.configAsKobwebApplication
 import kotlinx.html.link
+import org.gradle.api.internal.tasks.DefaultTaskContainer.TaskCreatingProvider
+import org.jetbrains.kotlin.gradle.dsl.JsModuleKind
 
 plugins {
     alias(libs.plugins.kotlin.multiplatform)
     alias(libs.plugins.compose.compiler)
     alias(libs.plugins.kobweb.application)
     alias(libs.plugins.kobwebx.markdown)
+    id("com.dorongold.task-tree") version "4.0.1"
+    id("com.github.node-gradle.node") version "7.1.0"
 }
 
 group = "com.zenmo.web.zenmo"
@@ -18,6 +23,7 @@ kobweb {
             head.add {
                 link(rel = "stylesheet", href = "/fonts/faces.css")
             }
+            scriptAttributes.put("type", "module")
         }
         globals.put(
             "version",
@@ -27,9 +33,28 @@ kobweb {
 }
 
 kotlin {
+    compilerOptions {
+        compilerOptions.freeCompilerArgs.add("-Xir-per-file")
+        compilerOptions.freeCompilerArgs.add("-Xir-minimized-member-names=false")
+    }
+
     // This example is frontend only. However, for a fullstack app, you can uncomment the includeServer parameter
     // and the `jvmMain` source set below.
-    configAsKobwebApplication("zenmo" /*, includeServer = true*/)
+    configAsKobwebApplication("zenmo-site" /*, includeServer = true*/)
+
+    js {
+        browser()
+        // Use binaries.library() instead of binaries.exectable()
+        // We will use Rollup to bundle instead of the default Webpack
+        binaries.library()
+        useEsModules()
+        compilations.all {
+            compileTaskProvider.configure {
+                compilerOptions.target = "es2015"
+                compilerOptions.moduleKind = JsModuleKind.MODULE_ES
+            }
+        }
+    }
 
     sourceSets {
         all {
@@ -50,6 +75,51 @@ kotlin {
             dependencies {
                 implementation(kotlin("test"))
             }
+        }
+    }
+}
+
+node {
+    nodeProjectDir = file("$projectDir/rollup")
+}
+
+tasks.register<NpmTask>("npmRollup") {
+    args = listOf("run", "rollup")
+    dependsOn("npmInstall", "jsBrowserProductionLibraryDistribution")
+}
+
+tasks.named<DefaultTask>("assemble") {
+    dependsOn("npmRollup")
+}
+
+val webpackTasksToRemove = setOf(
+    "jsBrowserDevelopmentWebpack",
+    "jsBrowserProductionWebpack",
+    "jsBrowserWebpack",
+    // this depends on jsBrowserProductionWebpack
+    // but I'm unable to remove that dependency.
+    // It seems a special kind of copy task.
+    "jsBrowserDistribution",
+)
+
+webpackTasksToRemove.forEach {
+    tasks.named(it) {
+        enabled = false
+    }
+}
+
+project.afterEvaluate {
+    // replace Webpack tasks with Rollup task
+    tasks.forEach { task ->
+        val newDependsOn = task.dependsOn.filterNot {
+            return@filterNot (it is TaskCreatingProvider<*> && it.type == org.jetbrains.kotlin.gradle.targets.js.webpack.KotlinWebpack::class.java)
+                    || (it is TaskProvider<*> && it.name in webpackTasksToRemove)
+                    || (it is String && it in webpackTasksToRemove)
+        }
+
+        if (task.dependsOn.size != newDependsOn.size) {
+            task.setDependsOn(newDependsOn)
+            task.dependsOn("npmRollup")
         }
     }
 }
