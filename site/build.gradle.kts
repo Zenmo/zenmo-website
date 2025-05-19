@@ -19,9 +19,15 @@ kobweb {
                 link(rel = "stylesheet", href = "/fonts/faces.css")
             }
         }
-        globals.put(
-            "version",
-            project.version.toString()
+
+        globals.putAll(
+            mapOf(
+                "version" to project.version.toString(),
+                "ZENMO_DEV_DOMAIN" to "localhost:8080",
+                "LUX_DEV_DOMAIN" to "localhost:8081",
+                "ZENMO_TEST_DOMAIN" to "https://nieuw.zenmo.com",
+                "LUX_TEST_DOMAIN" to "https://nieuw.lux.com", // just improvising here
+            ),
         )
     }
 }
