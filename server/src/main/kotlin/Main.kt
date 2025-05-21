@@ -18,5 +18,7 @@ fun startServer() {
     val app: HttpHandler = DebuggingFilters.PrintRequest()
         .then(routes)
 
-    val server = app.asServer(Undertow(9000)).start()
+    val port = 9000
+    val server = app.asServer(Undertow(port)).start()
+    println("Listening on port $port")
 }

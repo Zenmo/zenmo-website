@@ -21,6 +21,7 @@ fun OAuthHandler(
 ): RoutingHttpHandler {
     // the callback uri which is configured in our OAuth provider
     val callbackUri = Uri.of("$baseUrl/oauth/callback")
+    val persistence = InMemorySessionOAuthPersistence()
 
     // custom OAuth2 provider configuration
     val oauthProvider = OAuthProvider(
@@ -32,12 +33,15 @@ fun OAuthHandler(
         ),
         JavaHttpClient(),
         callbackUri,
-        listOf("profile", "email"),
-        InMemorySessionOAuthPersistence(),
+        listOf("profile", "email", "openid"),
+        persistence,
     )
+
+    val userInfoController = UserInfoController(persistence::retrieveIdToken)
 
     return routes(
         callbackUri.path bind Method.GET to oauthProvider.callback,
-        "/login" bind Method.GET to oauthProvider.authFilter.then { Response(OK).body("logged in!") }
+        "/login" bind Method.GET to oauthProvider.authFilter.then { Response(OK).body("logged in!") },
+        "/user-info".bind(Method.GET) to userInfoController::handler,
     )
 }
