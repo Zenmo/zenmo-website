@@ -2,7 +2,6 @@ package com.zenmo.server
 
 import org.http4k.client.JavaHttpClient
 import org.http4k.core.Credentials
-import org.http4k.core.HttpHandler
 import org.http4k.core.Method
 import org.http4k.core.Response
 import org.http4k.core.Status.Companion.OK
@@ -11,7 +10,6 @@ import org.http4k.core.then
 import org.http4k.routing.RoutingHttpHandler
 import org.http4k.routing.bind
 import org.http4k.routing.routes
-import org.http4k.security.InsecureCookieBasedOAuthPersistence
 import org.http4k.security.OAuthProvider
 import org.http4k.security.OAuthProviderConfig
 
@@ -35,7 +33,7 @@ fun OAuthHandler(
         JavaHttpClient(),
         callbackUri,
         listOf("profile", "email"),
-        InsecureCookieBasedOAuthPersistence("oauth")
+        InMemorySessionOAuthPersistence(),
     )
 
     return routes(
