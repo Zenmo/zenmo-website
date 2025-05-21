@@ -13,10 +13,8 @@ fun main() {
 }
 
 fun startServer() {
-    val config = Config()
-    val routes = OAuthHandler(config.baseUrl, config.clientId, config.clientSecret)
     val app: HttpHandler = DebuggingFilters.PrintRequest()
-        .then(routes)
+        .then { Response(OK).body("Hello world") }
 
     val server = app.asServer(Undertow(9000)).start()
 }
