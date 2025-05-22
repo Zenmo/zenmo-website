@@ -32,6 +32,7 @@ external interface Model {
     val id: String
     val name: String
     val description: String
+
     @OptIn(ExperimentalJsCollectionsApi::class)
     val modelVersions: JsArray<String> // UUID's
     val published: Boolean

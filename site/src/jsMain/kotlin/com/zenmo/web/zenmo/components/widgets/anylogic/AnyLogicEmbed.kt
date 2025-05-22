@@ -4,7 +4,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
 import com.varabyte.kobweb.compose.ui.Modifier
-import com.varabyte.kobweb.compose.ui.modifiers.*
+import com.varabyte.kobweb.compose.ui.modifiers.aspectRatio
+import com.varabyte.kobweb.compose.ui.modifiers.maxHeight
+import com.varabyte.kobweb.compose.ui.modifiers.position
+import com.varabyte.kobweb.compose.ui.modifiers.width
 import com.varabyte.kobweb.compose.ui.toAttrs
 import com.varabyte.kobweb.silk.style.CssStyle
 import com.varabyte.kobweb.silk.style.toModifier
@@ -50,12 +53,12 @@ fun AnyLogicEmbed(
     val containerId = remember { "anylogic-embed-${randomString(4u)}" }
 
     LaunchedEffect(modelId) {
-            dynamicImport<Unit>("https://anylogic.zenmo.com/assets/js-client-8.5.0/cloud-client.js")
-            val client = CloudClient.create(apiKey.toHexDashString(), cloudUrl)
-            val model = client.getModelById(modelId.toHexDashString()).await()
-            val modelVersion = client.getLatestModelVersion(model).await()
-            val inputs = client.createDefaultInputs(modelVersion)
-            client.startAnimation(inputs, containerId).await()
+        dynamicImport<Unit>("https://anylogic.zenmo.com/assets/js-client-8.5.0/cloud-client.js")
+        val client = CloudClient.create(apiKey.toHexDashString(), cloudUrl)
+        val model = client.getModelById(modelId.toHexDashString()).await()
+        val modelVersion = client.getLatestModelVersion(model).await()
+        val inputs = client.createDefaultInputs(modelVersion)
+        client.startAnimation(inputs, containerId).await()
     }
 
     Div(
@@ -79,7 +82,7 @@ suspend fun <T> dynamicImport(library: String): T {
 
 fun randomString(length: UInt): String {
     val chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
-    
+
     return buildString {
         repeat(length.toInt()) {
             append(chars.random())

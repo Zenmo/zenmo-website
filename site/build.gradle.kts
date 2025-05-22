@@ -25,9 +25,14 @@ kobweb {
             }
             scriptAttributes.put("type", "module")
         }
-        globals.put(
-            "version",
-            project.version.toString()
+
+        globals.putAll(
+            mapOf(
+                "version" to project.version.toString(),
+                "LOCAL_DEV_ENV" to System.getenv("LOCAL_DEV_ENV"),
+                "LUX_DOMAIN" to System.getenv("LUX_DOMAIN"),
+                "ZENMO_DOMAIN" to System.getenv("ZENMO_DOMAIN"),
+            )
         )
     }
 }

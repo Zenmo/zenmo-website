@@ -8,8 +8,8 @@ import com.varabyte.kobweb.compose.foundation.layout.ColumnScope
 import com.varabyte.kobweb.compose.ui.Alignment
 import com.varabyte.kobweb.compose.ui.Modifier
 import com.varabyte.kobweb.compose.ui.modifiers.*
-import com.zenmo.web.zenmo.components.sections.Footer
-import com.zenmo.web.zenmo.components.sections.nav_header.NavHeader
+import com.zenmo.web.zenmo.domains.zenmo.sections.Footer
+import com.zenmo.web.zenmo.domains.zenmo.sections.nav_header.NavHeader
 import kotlinx.browser.document
 import org.jetbrains.compose.web.css.fr
 import org.jetbrains.compose.web.css.percent

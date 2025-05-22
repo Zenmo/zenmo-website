@@ -34,7 +34,6 @@ fun AppEntry(content: @Composable () -> Unit) {
         LaunchedEffect(colorMode) {
             colorMode.saveToLocalStorage(COLOR_MODE_KEY)
         }
-
         Surface(
             SmoothColorStyle.toModifier()
                 .minHeight(100.vh)
@@ -46,3 +45,4 @@ fun AppEntry(content: @Composable () -> Unit) {
         }
     }
 }
+
