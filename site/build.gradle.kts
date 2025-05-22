@@ -29,15 +29,10 @@ kobweb {
         globals.putAll(
             mapOf(
                 "version" to project.version.toString(),
-                "LOCAL_DEV_ENV" to "localhost:8080",
-                "LUX_DOMAIN" to "https://lux.energy",
-                "ZENMO_DOMAIN" to "https://zenmo.com",
-
-                /** TODO: Add
-                 * - LUX subdomains
-                 * - test & remote dev domains
-                 * */
-            ),
+                "LOCAL_DEV_ENV" to System.getenv("LOCAL_DEV_ENV"),
+                "LUX_DOMAIN" to System.getenv("LUX_DOMAIN"),
+                "ZENMO_DOMAIN" to System.getenv("ZENMO_DOMAIN"),
+            )
         )
     }
 }
