@@ -4,7 +4,6 @@ import androidx.compose.runtime.Composable
 import com.varabyte.kobweb.navigation.*
 import com.varabyte.kobweb.silk.defer.DeferringHost
 import com.zenmo.web.zenmo.components.widgets.CatchAllPage
-import com.zenmo.web.zenmo.components.widgets.devComponentDemoRouter
 import com.zenmo.web.zenmo.domains.zenmo.pages.aboutUs.OurTeamPage
 import kotlinx.browser.window
 
@@ -17,7 +16,6 @@ fun ZenmoRoutingComponent() {
         ctx.router.register("/customers") { CustomersPage() }
         ctx.router.register("/about-us/our-team") { OurTeamPage() }
         ctx.router.register("/what-we-do") { WhatPage() }
-        devComponentDemoRouter(ctx)
         ctx.router.register("/{...catch-all}") { CatchAllPage() }
     }
 

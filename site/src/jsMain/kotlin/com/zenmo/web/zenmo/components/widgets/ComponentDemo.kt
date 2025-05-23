@@ -4,10 +4,7 @@ import androidx.compose.runtime.Composable
 import com.varabyte.kobweb.compose.ui.Modifier
 import com.varabyte.kobweb.compose.ui.modifiers.maxWidth
 import com.varabyte.kobweb.core.Page
-import com.varabyte.kobweb.core.init.InitKobwebContext
 import com.zenmo.web.zenmo.components.widgets.anylogic.AnyLogicEmbed
-import com.zenmo.web.zenmo.pages.SiteGlobals
-import kotlinx.browser.window
 import org.jetbrains.compose.web.css.cssRem
 import org.jetbrains.compose.web.dom.H2
 import org.jetbrains.compose.web.dom.H3
@@ -48,12 +45,5 @@ fun ComponentDemoPage() {
                 """.trimIndent()
             )
         }
-    }
-}
-
-fun devComponentDemoRouter(ctx: InitKobwebContext) {
-    //TODO: allow for remote dev domain and test domain maybe?
-    if (window.location.host == SiteGlobals.LOCAL_DEV_ENV) {
-        ctx.router.register("/component-demo") { ComponentDemoPage() }
     }
 }
