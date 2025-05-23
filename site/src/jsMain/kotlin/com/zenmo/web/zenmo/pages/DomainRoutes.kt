@@ -5,6 +5,8 @@ import com.varabyte.kobweb.core.AppGlobals
 import com.varabyte.kobweb.core.Page
 import com.zenmo.web.zenmo.components.widgets.UnknownDomain
 import com.zenmo.web.zenmo.domains.lux.pages.LuxRoutingComponent
+import com.zenmo.web.zenmo.domains.lux.subdomains.LuxSubdomainRoutingComponent
+import com.zenmo.web.zenmo.domains.lux.subdomains.LuxSubdomains
 import com.zenmo.web.zenmo.domains.zenmo.pages.ZenmoRoutingComponent
 import kotlinx.browser.window
 
@@ -21,6 +23,12 @@ fun DomainRoutes() {
         SiteGlobals.LOCAL_DEV_ENV -> ZenmoRoutingComponent()
         SiteGlobals.LUX_DOMAIN -> LuxRoutingComponent()
         SiteGlobals.ZENMO_DOMAIN -> ZenmoRoutingComponent()
+        in LuxSubdomains.entries.map { "${it.subdomain}.lux.energy" } ->
+            LuxSubdomainRoutingComponent(domain.substringBefore(".lux.energy"))
+
+        in LuxSubdomains.entries.map { "${it.subdomain}.preview.lux.energy" } ->
+            LuxSubdomainRoutingComponent(domain.substringBefore(".preview.lux.energy"))
+
         else -> UnknownDomain(domain)
     }
 }
