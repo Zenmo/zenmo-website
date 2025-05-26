@@ -49,6 +49,12 @@ class InMemorySessionOAuthPersistence(
         return sessionToIdToken[sessionId]
     }
 
+    fun clearSession(request: Request) {
+        val sessionId = request.cookie(clientAuthCookie)?.value
+        sessionToIdToken.remove(sessionId)
+        sessionToAccessToken.remove(sessionId)
+    }
+
     override fun assignCsrf(redirect: Response, csrf: CrossSiteRequestForgeryToken) = redirect.cookie(expiring(csrfName, csrf.value))
 
     override fun assignNonce(redirect: Response, nonce: Nonce): Response = redirect
