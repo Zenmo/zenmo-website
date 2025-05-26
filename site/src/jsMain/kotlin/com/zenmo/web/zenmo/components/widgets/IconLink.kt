@@ -13,6 +13,7 @@ import com.varabyte.kobweb.compose.ui.modifiers.justifyContent
 import com.varabyte.kobweb.compose.ui.modifiers.padding
 import com.varabyte.kobweb.compose.ui.modifiers.textDecorationLine
 import com.varabyte.kobweb.compose.ui.modifiers.width
+import com.varabyte.kobweb.navigation.OpenLinkStrategy
 import com.varabyte.kobweb.silk.components.navigation.Link
 import com.varabyte.kobweb.silk.components.navigation.LinkStyle
 import com.varabyte.kobweb.silk.style.addVariant
@@ -37,6 +38,7 @@ fun IconLink(
         path = href,
         modifier = modifier,
         variant = IconLinkVariant,
+        openExternalLinksStrategy = OpenLinkStrategy.IN_PLACE,
     ) {
         content()
     }
