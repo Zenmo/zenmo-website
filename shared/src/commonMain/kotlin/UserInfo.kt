@@ -25,12 +25,17 @@ data class UserInfo(
         val nameLetters = initialLetters(name)
         if (nameLetters.isNotEmpty()) return nameLetters
 
-        return initialLetters(preferred_username)
+        return initialLetters(preferred_username.replaceAfter("@", ""))
     }
 }
 
+/**
+ * Get the first letter of every word
+ */
 private fun initialLetters(str: String?): String {
     if (str == null) return ""
 
-    return str.split("-", " ", "_").joinToString("")
+    return str.split("-", " ", "_")
+        .map { it[0] }
+        .joinToString("")
 }

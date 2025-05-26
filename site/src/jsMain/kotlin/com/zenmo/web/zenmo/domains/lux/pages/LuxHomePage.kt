@@ -8,7 +8,7 @@ import com.varabyte.kobweb.compose.ui.Modifier
 import com.varabyte.kobweb.compose.ui.modifiers.fillMaxSize
 import com.varabyte.kobweb.silk.components.navigation.Link
 import com.zenmo.web.zenmo.components.widgets.LangText
-import com.zenmo.web.zenmo.components.widgets.UserMenuWidget
+import com.zenmo.web.zenmo.components.widgets.user.UserMenuWidget
 import org.jetbrains.compose.web.dom.H1
 
 @Composable
