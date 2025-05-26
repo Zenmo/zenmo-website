@@ -68,6 +68,7 @@ kotlin {
         }
 
         jsMain.dependencies {
+            implementation(project(":shared"))
             implementation("org.jetbrains.kotlin-wrappers:kotlin-web:2025.5.8")
             implementation("org.jetbrains.kotlin-wrappers:kotlin-js:2025.5.8")
             implementation(libs.compose.runtime)
