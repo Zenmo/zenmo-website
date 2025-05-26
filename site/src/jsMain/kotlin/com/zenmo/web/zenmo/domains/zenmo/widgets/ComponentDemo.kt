@@ -1,4 +1,4 @@
-package com.zenmo.web.zenmo.components.widgets
+package com.zenmo.web.zenmo.domains.zenmo.widgets
 
 import androidx.compose.runtime.Composable
 import com.varabyte.kobweb.compose.css.FontWeight
@@ -14,6 +14,7 @@ import com.varabyte.kobweb.silk.components.icons.mdi.MdiTipsAndUpdates
 import com.varabyte.kobweb.silk.style.CssStyle
 import com.varabyte.kobweb.silk.style.toAttrs
 import com.varabyte.kobweb.silk.style.toModifier
+import com.zenmo.web.zenmo.components.widgets.LangText
 import com.zenmo.web.zenmo.theme.SitePalette
 import com.zenmo.web.zenmo.theme.font.LabelLargeTextStyle
 import com.zenmo.web.zenmo.theme.font.TextStyle

@@ -1,4 +1,4 @@
-package com.zenmo.web.zenmo.components.sections.component_demo
+package com.zenmo.web.zenmo.domains.zenmo.sections.component_demo
 
 import androidx.compose.runtime.Composable
 import com.varabyte.kobweb.compose.css.TextAlign
@@ -9,9 +9,9 @@ import com.varabyte.kobweb.compose.ui.modifiers.fillMaxWidth
 import com.varabyte.kobweb.compose.ui.modifiers.textAlign
 import com.varabyte.kobweb.compose.ui.toAttrs
 import com.varabyte.kobweb.silk.style.toModifier
-import com.zenmo.web.zenmo.components.widgets.ComponentDemo
-import com.zenmo.web.zenmo.components.widgets.DemoContentWrapperStyle
 import com.zenmo.web.zenmo.components.widgets.LangText
+import com.zenmo.web.zenmo.domains.zenmo.widgets.ComponentDemo
+import com.zenmo.web.zenmo.domains.zenmo.widgets.DemoContentWrapperStyle
 import org.jetbrains.compose.web.dom.P
 import org.jetbrains.compose.web.dom.Span
 

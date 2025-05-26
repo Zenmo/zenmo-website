@@ -1,10 +1,10 @@
-package com.zenmo.web.zenmo.components.sections.component_demo
+package com.zenmo.web.zenmo.domains.zenmo.sections.component_demo
 
 import androidx.compose.runtime.Composable
 import com.varabyte.kobweb.compose.ui.Modifier
 import com.varabyte.kobweb.compose.ui.modifiers.maxWidth
-import com.zenmo.web.zenmo.components.widgets.ComponentDemo
-import com.zenmo.web.zenmo.components.widgets.anylogic.AnyLogicEmbed
+import com.zenmo.web.zenmo.domains.zenmo.widgets.ComponentDemo
+import com.zenmo.web.zenmo.domains.zenmo.widgets.anylogic.AnyLogicEmbed
 import org.jetbrains.compose.web.css.cssRem
 import kotlin.uuid.Uuid
 
