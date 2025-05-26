@@ -1,4 +1,4 @@
-package com.zenmo.web.zenmo.components.sections.component_demo
+package com.zenmo.web.zenmo.domains.zenmo.sections.component_demo
 
 import androidx.compose.runtime.Composable
 import com.varabyte.kobweb.compose.css.TextAlign
@@ -9,27 +9,27 @@ import com.varabyte.kobweb.compose.ui.modifiers.fillMaxWidth
 import com.varabyte.kobweb.compose.ui.modifiers.textAlign
 import com.varabyte.kobweb.compose.ui.toAttrs
 import com.varabyte.kobweb.silk.style.toModifier
-import com.zenmo.web.zenmo.components.widgets.ComponentDemo
-import com.zenmo.web.zenmo.components.widgets.DemoContentWrapperStyle
 import com.zenmo.web.zenmo.components.widgets.LangText
-import org.jetbrains.compose.web.dom.P
+import com.zenmo.web.zenmo.domains.zenmo.widgets.ComponentDemo
+import com.zenmo.web.zenmo.domains.zenmo.widgets.DemoContentWrapperStyle
+import org.jetbrains.compose.web.dom.H3
 import org.jetbrains.compose.web.dom.Span
 
 @Composable
-fun TextParagraphsDemo() {
+fun SubHeadingsDemo() {
     ComponentDemo(
-        enTitle = "Text Paragraphs",
+        enTitle = "Sub Headings",
         nlTitle = "Sub koppen",
-        enDescription = "Use this pattern for standard text content.  Paragraphs provide the main body of text on a page.",
-        nlDescription = "Gebruik dit patroon voor standaard tekstinhoud.  Paragrafen vormen de hoofdtekst op een pagina.",
+        enDescription = "You typically use this when you want to display a subheading on a page.",
+        nlDescription = "Je gebruikt dit meestal wanneer je een subkop op een pagina wilt tonen.",
         codeExample = """
                     import com.zenmo.web.zenmo.components.widgets.LangText
-                    import com.varabyte.kobweb.silk.components.text.P
+                    import org.jetbrains.compose.web.dom.H3
                     
-                    P {
+                    H3{
                         LangText(
-                            en = "The quick brown fox jumps over the lazy dog. The quick brown fox jumps over the lazy dog.",
-                            nl = "De snelle bruine vos springt over de luie hond. De snelle bruine vos springt over de luie hond.",
+                             en = "Explore",
+                            nl = "Verken",
                         )
                     }
                 """.trimIndent()
@@ -48,16 +48,14 @@ fun TextParagraphsDemo() {
                     nl = "Dit resulteert in het volgende:",
                 )
             }
-            Span(
+            H3(
                 DemoContentWrapperStyle.toModifier()
                     .toAttrs()
             ) {
-                P {
-                    LangText(
-                        en = "The quick brown fox jumps over the lazy dog. The quick brown fox jumps over the lazy dog.",
-                        nl = "De snelle bruine vos springt over de luie hond. De snelle bruine vos springt over de luie hond.",
-                    )
-                }
+                LangText(
+                    en = "Explore",
+                    nl = "Verken",
+                )
             }
         }
     }

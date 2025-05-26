@@ -1,4 +1,4 @@
-package com.zenmo.web.zenmo.components.widgets.anylogic
+package com.zenmo.web.zenmo.domains.zenmo.widgets.anylogic
 
 import js.array.JsArray
 import js.core.JsAny
