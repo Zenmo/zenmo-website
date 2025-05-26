@@ -1,6 +1,7 @@
 package com.zenmo.server
 
 import com.nimbusds.jwt.SignedJWT
+import energy.lux.site.shared.UserInfo
 import kotlinx.serialization.KSerializer
 import org.http4k.security.openid.IdToken
 import kotlinx.serialization.Serializable
@@ -34,7 +35,16 @@ data class IdTokenPayload @OptIn(ExperimentalTime::class) constructor(
     val iat: Instant,
     @Serializable(with = UnixTimeSerializer::class)
     val exp: Instant,
-)
+) {
+    fun toUserInfo() = UserInfo(
+        sub = sub,
+        preferred_username = preferred_username,
+        name = name,
+        given_name = given_name,
+        family_name = family_name,
+        email = email,
+    )
+}
 
 private val jsonDecoder = Json {
     ignoreUnknownKeys = true

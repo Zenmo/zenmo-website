@@ -5,10 +5,9 @@ plugins {
 }
 
 dependencies {
-//    implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.6.2")
-
-    implementation("org.jetbrains.kotlinx:kotlinx-serialization-core:1.8.1")
-    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.8.1")
+    implementation(project(":shared"))
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-core:${libs.versions.kotlinx.serialization.get()}")
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:${libs.versions.kotlinx.serialization.get()}")
 
     // to decode and validate Keycloak access tokens with user info.
     implementation("com.nimbusds:nimbus-jose-jwt:9.39.2")

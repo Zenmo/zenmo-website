@@ -19,8 +19,7 @@ class UserInfoController(
         if (idTokenString == null) {
             return Response(UNAUTHORIZED).body("Not logged in")
         }
-        val idTokenPayload = decodeIdToken(idTokenString)
-        return Response(OK).json(idTokenPayload)
+        val userInfo = decodeIdToken(idTokenString).toUserInfo()
+        return Response(OK).json(userInfo)
     }
 }
-

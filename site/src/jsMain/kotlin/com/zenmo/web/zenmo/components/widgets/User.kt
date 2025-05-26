@@ -15,6 +15,7 @@ import com.varabyte.kobweb.silk.components.icons.mdi.MdiLogin
 import com.varabyte.kobweb.silk.components.icons.mdi.MdiLogout
 import com.zenmo.web.zenmo.core.services.auth.UserService
 import com.zenmo.web.zenmo.domains.zenmo.widgets.button.IconButton
+import energy.lux.site.shared.UserInfo
 import kotlinx.coroutines.launch
 import org.jetbrains.compose.web.css.Position
 import org.jetbrains.compose.web.css.px
@@ -27,17 +28,23 @@ import org.jetbrains.compose.web.css.px
 @Composable
 fun UserMenuWidget() {
     val userService = UserService()
-    var isLoggedIn by remember { mutableStateOf<Boolean?>(null) }
+    var userInfo by remember { mutableStateOf<UserInfo?>(null) }
+    var pending by remember { mutableStateOf(true) }
 
     LaunchedEffect(Unit) {
-        isLoggedIn = userService.isLoggedIn()
+        userInfo = userService.userInfo()
     }
 
-    when (isLoggedIn) {
-        false -> LoginButton(userService)
-        true -> LogoutButton(userService, onLogout = { isLoggedIn = false })
-        else -> Unit
+    if (pending) {
+        return
     }
+
+    if (userInfo == null) {
+        LoginButton(userService)
+        return
+    }
+
+    LogoutButton(userService, onLogout = { userInfo = null })
 }
 
 @Composable

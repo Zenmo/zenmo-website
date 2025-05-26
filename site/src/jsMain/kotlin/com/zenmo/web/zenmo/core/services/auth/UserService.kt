@@ -1,6 +1,7 @@
 package com.zenmo.web.zenmo.core.services.auth
 
 import com.varabyte.kobweb.core.AppGlobals
+import energy.lux.site.shared.UserInfo
 import kotlinx.browser.window
 import web.http.RequestCredentials
 import web.http.RequestInit
@@ -28,15 +29,15 @@ class UserService(
         }
     }
 
-    suspend fun isLoggedIn(): Boolean {
+    suspend fun userInfo(): UserInfo? {
         val url = URL(backendUrl)
         url.pathname = "/user-info"
         val response = fetch(url, RequestInit(
             credentials = RequestCredentials.include,
         ))
         return when (response.status) {
-            200.toShort() -> true
-            401.toShort() -> false
+            200.toShort() -> UserInfo.fromJson(response.body.toString())
+            401.toShort() -> null
             else -> throw Exception("Unhandled status code ${response.status}")
         }
     }
