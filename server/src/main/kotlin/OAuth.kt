@@ -41,7 +41,13 @@ fun OAuthHandler(
 
     return routes(
         callbackUri.path bind Method.GET to oauthProvider.callback,
-        "/login" bind Method.GET to oauthProvider.authFilter.then { Response(OK).body("logged in!") },
+        "/login" bind Method.GET to oauthProvider.authFilter.then {
+            Response(OK).body("logged in")
+        },
+        "/logout" bind Method.GET to { request ->
+            persistence.clearSession(request)
+            Response(OK).body("logged out")
+        },
         "/user-info".bind(Method.GET) to userInfoController::handler,
     )
 }
