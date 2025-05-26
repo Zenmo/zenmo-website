@@ -68,7 +68,8 @@ kotlin {
         }
 
         jsMain.dependencies {
-            implementation("org.jetbrains.kotlin-wrappers:kotlin-js:2025.4.16")
+            implementation("org.jetbrains.kotlin-wrappers:kotlin-web:2025.5.8")
+            implementation("org.jetbrains.kotlin-wrappers:kotlin-js:2025.5.8")
             implementation(libs.compose.runtime)
             implementation(libs.compose.html.core)
             implementation(libs.kobweb.core)
