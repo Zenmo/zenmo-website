@@ -7,6 +7,8 @@ import org.http4k.core.Uri
 import org.http4k.core.cookie.Cookie
 import org.http4k.core.cookie.cookie
 import org.http4k.core.cookie.invalidateCookie
+import org.http4k.core.findSingle
+import org.http4k.core.queries
 import org.http4k.security.AccessToken
 import org.http4k.security.CrossSiteRequestForgeryToken
 import org.http4k.security.Nonce
@@ -59,7 +61,10 @@ class InMemorySessionOAuthPersistence(
 
     override fun assignNonce(redirect: Response, nonce: Nonce): Response = redirect
 
-    override fun assignOriginalUri(redirect: Response, originalUri: Uri): Response = redirect.cookie(expiring(originalUriName, originalUri.toString()))
+    override fun assignOriginalUri(redirect: Response, originalUri: Uri): Response {
+        val redirectUri = originalUri.queries().findSingle("redirect_to") ?: originalUri.toString()
+        return redirect.cookie(expiring(originalUriName, redirectUri))
+    }
 
     override fun assignPkce(redirect: Response, pkce: PkceChallengeAndVerifier) = redirect
 

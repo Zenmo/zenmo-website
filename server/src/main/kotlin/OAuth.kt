@@ -5,6 +5,7 @@ import org.http4k.core.Credentials
 import org.http4k.core.Method
 import org.http4k.core.Response
 import org.http4k.core.Status.Companion.OK
+import org.http4k.core.Status.Companion.SEE_OTHER
 import org.http4k.core.Uri
 import org.http4k.core.then
 import org.http4k.routing.RoutingHttpHandler
@@ -42,7 +43,12 @@ fun OAuthHandler(
     return routes(
         callbackUri.path bind Method.GET to oauthProvider.callback,
         "/login" bind Method.GET to oauthProvider.authFilter.then {
-            Response(OK).body("logged in")
+            val redirectTo = it.query("redirect_to")
+            if (redirectTo != null) {
+                Response(SEE_OTHER).header("Location", redirectTo)
+            } else {
+                Response(OK).body("logged in")
+            }
         },
         "/logout" bind Method.GET to { request ->
             persistence.clearSession(request)
