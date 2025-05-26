@@ -36,7 +36,7 @@ class UserService(
             credentials = RequestCredentials.include,
         ))
         return when (response.status) {
-            200.toShort() -> UserInfo.fromJson(response.body.toString())
+            200.toShort() -> UserInfo.fromJson(response.text())
             401.toShort() -> null
             else -> throw Exception("Unhandled status code ${response.status}")
         }

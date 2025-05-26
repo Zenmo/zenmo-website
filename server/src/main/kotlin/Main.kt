@@ -13,7 +13,8 @@ fun main() {
 fun startServer() {
     val config = Config()
     val routes = OAuthHandler(config.baseUrl, config.clientId, config.clientSecret)
-    val app: HttpHandler = DebuggingFilters.PrintRequest()
+    
+    val app: HttpHandler = DebuggingFilters.PrintRequestAndResponse()
         .then(corsFilter)
         .then(routes)
 
