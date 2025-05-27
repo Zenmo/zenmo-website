@@ -1,0 +1,20 @@
+package com.zenmo.server
+
+import org.http4k.core.Filter
+import org.http4k.core.Method
+import org.http4k.filter.CorsPolicy
+import org.http4k.filter.OriginPolicy
+import org.http4k.filter.Pattern
+import org.http4k.filter.ServerFilters
+import java.lang.System.getenv
+
+val corsPolicy = CorsPolicy(
+    // value for development: .*lux\.local:8080
+    // value for production: https://.*lux\.energy
+    OriginPolicy.Pattern(Regex(getenv("CORS_ORIGIN_PATTERN"))),
+    listOf("content-type"),
+    Method.entries,
+    true
+)
+
+val corsFilter: Filter = ServerFilters.Cors(corsPolicy)

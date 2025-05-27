@@ -6,6 +6,7 @@ import org.jetbrains.kotlin.gradle.dsl.JsModuleKind
 
 plugins {
     alias(libs.plugins.kotlin.multiplatform)
+    kotlin("plugin.serialization")
     alias(libs.plugins.compose.compiler)
     alias(libs.plugins.kobweb.application)
     alias(libs.plugins.kobwebx.markdown)
@@ -29,6 +30,7 @@ kobweb {
         globals.putAll(
             mapOf(
                 "version" to project.version.toString(),
+                "BACKEND_URL" to System.getenv("BACKEND_URL"),
                 "LUX_DOMAIN" to System.getenv("LUX_DOMAIN"),
                 "ZENMO_DOMAIN" to System.getenv("ZENMO_DOMAIN"),
             )
@@ -66,7 +68,9 @@ kotlin {
         }
 
         jsMain.dependencies {
-            implementation("org.jetbrains.kotlin-wrappers:kotlin-js:2025.4.16")
+            implementation(project(":shared"))
+            implementation("org.jetbrains.kotlin-wrappers:kotlin-web:2025.5.8")
+            implementation("org.jetbrains.kotlin-wrappers:kotlin-js:2025.5.8")
             implementation(libs.compose.runtime)
             implementation(libs.compose.html.core)
             implementation(libs.kobweb.core)

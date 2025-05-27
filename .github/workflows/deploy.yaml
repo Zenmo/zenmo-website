@@ -11,6 +11,7 @@ jobs:
     compile:
         runs-on: ubuntu-latest
         env:
+            BACKEND_URL: "http://localhost:9000"
             LUX_DOMAIN: "lux.energy"
             ZENMO_DOMAIN: "zenmo.com"
         steps:

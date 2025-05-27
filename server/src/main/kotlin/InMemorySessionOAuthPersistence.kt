@@ -7,6 +7,8 @@ import org.http4k.core.Uri
 import org.http4k.core.cookie.Cookie
 import org.http4k.core.cookie.cookie
 import org.http4k.core.cookie.invalidateCookie
+import org.http4k.core.findSingle
+import org.http4k.core.queries
 import org.http4k.security.AccessToken
 import org.http4k.security.CrossSiteRequestForgeryToken
 import org.http4k.security.Nonce
@@ -29,7 +31,8 @@ class InMemorySessionOAuthPersistence(
     private val csrfName = "securityServerCsrf"
     private val originalUriName = "securityServerUri"
     private val clientAuthCookie = "securityServerAuth"
-    private val cookieSwappableTokens = mutableMapOf<String, AccessToken>()
+    private val sessionToAccessToken = mutableMapOf<String, AccessToken>()
+    private val sessionToIdToken = mutableMapOf<String, IdToken>()
 
     override fun retrieveCsrf(request: Request) = request.cookie(csrfName)?.value?.let(::CrossSiteRequestForgeryToken)
 
@@ -43,23 +46,42 @@ class InMemorySessionOAuthPersistence(
         ?: tryCookieToken(request))
         ?.takeIf(tokenChecker::check)
 
+    fun retrieveIdToken(request: Request): IdToken? {
+        val sessionId = request.cookie(clientAuthCookie)?.value
+        return sessionToIdToken[sessionId]
+    }
+
+    fun clearSession(request: Request) {
+        val sessionId = request.cookie(clientAuthCookie)?.value
+        sessionToIdToken.remove(sessionId)
+        sessionToAccessToken.remove(sessionId)
+    }
+
     override fun assignCsrf(redirect: Response, csrf: CrossSiteRequestForgeryToken) = redirect.cookie(expiring(csrfName, csrf.value))
 
     override fun assignNonce(redirect: Response, nonce: Nonce): Response = redirect
 
-    override fun assignOriginalUri(redirect: Response, originalUri: Uri): Response = redirect.cookie(expiring(originalUriName, originalUri.toString()))
+    override fun assignOriginalUri(redirect: Response, originalUri: Uri): Response {
+        val redirectUri = originalUri.queries().findSingle("redirect_to") ?: originalUri.toString()
+        return redirect.cookie(expiring(originalUriName, redirectUri))
+    }
 
     override fun assignPkce(redirect: Response, pkce: PkceChallengeAndVerifier) = redirect
 
-    override fun assignToken(request: Request, redirect: Response, accessToken: AccessToken, idToken: IdToken?) =
-        generateSessionId().let {
-            cookieSwappableTokens[it] = accessToken
-            redirect
-                .cookie(expiring(clientAuthCookie, it))
-                // removing cookies doesn't seem to work
-                .invalidateCookie(csrfName)
-                .invalidateCookie(originalUriName)
+    override fun assignToken(request: Request, redirect: Response, accessToken: AccessToken, idToken: IdToken?): Response {
+        val sessionId = generateSessionId()
+        sessionToAccessToken[sessionId] = accessToken
+        if (idToken == null) {
+            throw RuntimeException("Got no ID token from Keycloak")
         }
+        sessionToIdToken[sessionId] = idToken
+
+        return redirect
+            .cookie(expiring(clientAuthCookie, sessionId))
+            // removing cookies doesn't seem to work
+            .invalidateCookie(csrfName)
+            .invalidateCookie(originalUriName)
+    }
 
     override fun authFailureResponse(reason: OAuthCallbackError) = Response(FORBIDDEN)
         .invalidateCookie(csrfName)
@@ -67,7 +89,7 @@ class InMemorySessionOAuthPersistence(
         .invalidateCookie(clientAuthCookie)
 
     private fun tryCookieToken(request: Request) =
-        request.cookie(clientAuthCookie)?.value?.let { cookieSwappableTokens[it] }
+        request.cookie(clientAuthCookie)?.value?.let { sessionToAccessToken[it] }
 
     private fun tryBearerToken(request: Request) = request.header("Authorization")
         ?.removePrefix("Bearer ")

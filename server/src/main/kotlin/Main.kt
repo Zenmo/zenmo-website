@@ -1,8 +1,6 @@
 package com.zenmo.server
 
 import org.http4k.core.HttpHandler
-import org.http4k.core.Response
-import org.http4k.core.Status.Companion.OK
 import org.http4k.core.then
 import org.http4k.filter.DebuggingFilters
 import org.http4k.server.Undertow
@@ -15,8 +13,12 @@ fun main() {
 fun startServer() {
     val config = Config()
     val routes = OAuthHandler(config.baseUrl, config.clientId, config.clientSecret)
-    val app: HttpHandler = DebuggingFilters.PrintRequest()
+    
+    val app: HttpHandler = DebuggingFilters.PrintRequestAndResponse()
+        .then(corsFilter)
         .then(routes)
 
-    val server = app.asServer(Undertow(9000)).start()
+    val port = 9000
+    val server = app.asServer(Undertow(port)).start()
+    println("Listening on port $port")
 }
