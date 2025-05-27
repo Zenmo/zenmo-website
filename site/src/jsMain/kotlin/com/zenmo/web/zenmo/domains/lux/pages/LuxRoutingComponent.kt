@@ -7,6 +7,7 @@ import com.varabyte.kobweb.navigation.UpdateHistoryMode
 import com.varabyte.kobweb.navigation.remove
 import com.varabyte.kobweb.silk.defer.DeferringHost
 import com.zenmo.web.zenmo.components.widgets.CatchAllPage
+import com.zenmo.web.zenmo.domains.lux.widgets.ComponentDemoPage
 import com.zenmo.web.zenmo.domains.zenmo.pages.register
 import kotlinx.browser.window
 
@@ -16,6 +17,9 @@ fun LuxRoutingComponent() {
     com.varabyte.kobweb.core.init.initKobweb(router) { ctx ->
         ctx.router.register("/") { LuxHomePage() }
         ctx.router.register(en = "/about", nl = "/over-ons") { AboutPage() }
+        if (window.location.host != "lux.energy") {
+            ctx.router.register("/component-demo") { ComponentDemoPage() }
+        }
         ctx.router.register("/{...catch-all}") { CatchAllPage() }
     }
 
