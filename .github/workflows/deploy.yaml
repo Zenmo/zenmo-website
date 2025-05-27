@@ -3,7 +3,7 @@ on:
     push:
         branches:
             - main
-            - compile-with-gradle-cache
+            - dockerfile-args
     pull_request:
         types: [ opened, synchronize, reopened ]
 

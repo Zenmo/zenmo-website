@@ -2,6 +2,10 @@ site:
   title: "Zenmo Web"
 
 server:
+  cors:
+    hosts:
+      -   name: "preview.zenmo.com"
+      -   name: "preview.lux.energy"
   files:
     dev:
       contentRoot: "build/processedResources/js/main/public"
