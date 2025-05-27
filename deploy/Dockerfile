@@ -3,6 +3,7 @@
 # Use JDK to build the Kobweb project
 FROM eclipse-temurin:21 AS builder
 RUN apt-get update && apt-get install -y \
+    npm \
     libglib2.0-0t64 \
     libnss3 \
     libnspr4 \
@@ -25,6 +26,11 @@ WORKDIR /app
 COPY . ./
 
 RUN chmod +x ./gradlew
+# these arguments will be included in the javascript artifact
+# TODO: set per environment
+ARG BACKEND_URL=https://site-backend.zenmo.com
+ARG ZENMO_DOMAIN=nieuw.zenmo.com
+ARG LUX_DOMAIN=lux.energy
 RUN --mount=type=cache,target=/root/.gradle \
     --mount=type=cache,target=/root/.cache \
     --mount=type=cache,target=/app/.gradle \

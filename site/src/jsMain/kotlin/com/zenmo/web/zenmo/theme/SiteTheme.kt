@@ -23,7 +23,7 @@ data class SitePalette(
     companion object {
         private val zenmoColorPalette = SitePalette()
 
-        //just pilot colors till we have a proper palette
+        //just pilot colors till we have a proper palette for lux
         private val luxColorPalette = SitePalette(
             primary = Color.rgb(0x3C83EF),
             onPrimary = Color.rgb(0xFFFFFF),
@@ -35,8 +35,7 @@ data class SitePalette(
         )
         val light = when (window.location.host) {
             SiteGlobals.ZENMO_DOMAIN -> zenmoColorPalette
-            SiteGlobals.LUX_DOMAIN -> luxColorPalette
-            else -> zenmoColorPalette
+            else -> luxColorPalette
         }
     }
 }
