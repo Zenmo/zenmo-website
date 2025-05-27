@@ -8,6 +8,8 @@ import com.varabyte.kobweb.silk.theme.colors.palette.background
 import com.varabyte.kobweb.silk.theme.colors.palette.button
 import com.varabyte.kobweb.silk.theme.colors.palette.color
 import com.varabyte.kobweb.silk.theme.colors.palette.overlay
+import com.zenmo.web.zenmo.pages.SiteGlobals
+import kotlinx.browser.window
 
 data class SitePalette(
     val primary: Color = Color.rgb(0xb6084e),
@@ -19,7 +21,23 @@ data class SitePalette(
     val onBackground: Color = Color.rgb(0x26181A)
 ) {
     companion object {
-        val light = SitePalette()
+        private val zenmoColorPalette = SitePalette()
+
+        //just pilot colors till we have a proper palette
+        private val luxColorPalette = SitePalette(
+            primary = Color.rgb(0x3C83EF),
+            onPrimary = Color.rgb(0xFFFFFF),
+            primaryContainer = Color.rgb(0xd7e2ff),
+            secondary = Color.rgb(0x495e88),
+            surfaceContainerLow = Color.rgb(0xf2f3fd),
+            surface = Color.rgb(0xf9f9ff),
+            onBackground = Color.rgb(0x191c22)
+        )
+        val light = when (window.location.host) {
+            SiteGlobals.ZENMO_DOMAIN -> zenmoColorPalette
+            SiteGlobals.LUX_DOMAIN -> luxColorPalette
+            else -> zenmoColorPalette
+        }
     }
 }
 
