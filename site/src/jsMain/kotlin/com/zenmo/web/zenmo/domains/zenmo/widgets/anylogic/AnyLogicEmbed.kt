@@ -1,4 +1,4 @@
-package com.zenmo.web.zenmo.components.widgets.anylogic
+package com.zenmo.web.zenmo.domains.zenmo.widgets.anylogic
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect

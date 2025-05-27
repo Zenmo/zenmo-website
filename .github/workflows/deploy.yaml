@@ -12,7 +12,6 @@ jobs:
         runs-on: ubuntu-latest
         env:
             BACKEND_URL: "http://localhost:9000"
-            LOCAL_DEV_ENV: "localhost:8080"
             LUX_DOMAIN: "lux.energy"
             ZENMO_DOMAIN: "zenmo.com"
         steps:

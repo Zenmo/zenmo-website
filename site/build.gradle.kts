@@ -31,7 +31,6 @@ kobweb {
             mapOf(
                 "version" to project.version.toString(),
                 "BACKEND_URL" to System.getenv("BACKEND_URL"),
-                "LOCAL_DEV_ENV" to System.getenv("LOCAL_DEV_ENV"),
                 "LUX_DOMAIN" to System.getenv("LUX_DOMAIN"),
                 "ZENMO_DOMAIN" to System.getenv("ZENMO_DOMAIN"),
             )

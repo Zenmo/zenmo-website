@@ -9,7 +9,6 @@ import com.zenmo.web.zenmo.domains.zenmo.pages.ZenmoRoutingComponent
 import kotlinx.browser.window
 
 object SiteGlobals {
-    val LOCAL_DEV_ENV: String = AppGlobals.getValue("LOCAL_DEV_ENV")
     val LUX_DOMAIN: String = AppGlobals.getValue("LUX_DOMAIN")
     val ZENMO_DOMAIN: String = AppGlobals.getValue("ZENMO_DOMAIN")
 }
@@ -18,7 +17,6 @@ object SiteGlobals {
 @Composable
 fun DomainRoutes() {
     when (val domain = window.location.host) {
-        SiteGlobals.LOCAL_DEV_ENV -> ZenmoRoutingComponent()
         SiteGlobals.LUX_DOMAIN -> LuxRoutingComponent()
         SiteGlobals.ZENMO_DOMAIN -> ZenmoRoutingComponent()
         else -> UnknownDomain(domain)
