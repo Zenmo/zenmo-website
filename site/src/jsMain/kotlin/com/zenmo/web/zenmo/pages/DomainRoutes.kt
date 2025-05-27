@@ -5,6 +5,8 @@ import com.varabyte.kobweb.core.AppGlobals
 import com.varabyte.kobweb.core.Page
 import com.zenmo.web.zenmo.components.widgets.UnknownDomain
 import com.zenmo.web.zenmo.domains.lux.pages.LuxRoutingComponent
+import com.zenmo.web.zenmo.domains.lux.subdomains.LuxSubdomainRoutingComponent
+import com.zenmo.web.zenmo.domains.lux.subdomains.LuxSubdomains
 import com.zenmo.web.zenmo.domains.zenmo.pages.ZenmoRoutingComponent
 import kotlinx.browser.window
 
@@ -16,9 +18,23 @@ object SiteGlobals {
 @Page("{...catch-all}")
 @Composable
 fun DomainRoutes() {
-    when (val domain = window.location.host) {
-        SiteGlobals.LUX_DOMAIN -> LuxRoutingComponent()
-        SiteGlobals.ZENMO_DOMAIN -> ZenmoRoutingComponent()
+    val domain = window.location.host
+    val luxSubdomainSuffix = ".${SiteGlobals.LUX_DOMAIN}"
+
+    when {
+        domain == SiteGlobals.LUX_DOMAIN -> LuxRoutingComponent()
+        domain == SiteGlobals.ZENMO_DOMAIN -> ZenmoRoutingComponent()
+        domain.endsWith(luxSubdomainSuffix) -> {
+            val subdomain = domain.substringBefore(luxSubdomainSuffix)
+            if (LuxSubdomains.entries.any { it.domainName == subdomain }) {
+                LuxSubdomainRoutingComponent(
+                    LuxSubdomains.entries.first { it.domainName == subdomain }
+                )
+            } else {
+                UnknownDomain("LUX -> $subdomain")
+            }
+        }
+
         else -> UnknownDomain(domain)
     }
 }
