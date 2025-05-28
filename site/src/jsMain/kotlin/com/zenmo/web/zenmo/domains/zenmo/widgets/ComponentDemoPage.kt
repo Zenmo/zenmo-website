@@ -16,10 +16,7 @@ import com.varabyte.kobweb.silk.style.toModifier
 import com.zenmo.web.zenmo.components.widgets.LangText
 import com.zenmo.web.zenmo.components.widgets.SectionContainer
 import com.zenmo.web.zenmo.components.widgets.SectionContainerStyle
-import com.zenmo.web.zenmo.domains.zenmo.sections.component_demo.AnyLogicDemo
-import com.zenmo.web.zenmo.domains.zenmo.sections.component_demo.PageHeadingsDemo
-import com.zenmo.web.zenmo.domains.zenmo.sections.component_demo.SubHeadingsDemo
-import com.zenmo.web.zenmo.domains.zenmo.sections.component_demo.TextParagraphsDemo
+import com.zenmo.web.zenmo.domains.zenmo.sections.component_demo.*
 import com.zenmo.web.zenmo.theme.font.DisplayTextStyle
 import com.zenmo.web.zenmo.theme.font.TextStyle
 import org.jetbrains.compose.web.css.cssRem
@@ -78,7 +75,9 @@ fun ComponentDemoPage() {
         ) {
             PageHeadingsDemo()
             SubHeadingsDemo()
-            Column {
+            Column(
+                modifier = Modifier.fillMaxWidth()
+            ) {
                 CustomizationNotes(
                     enCustomizationNotes = """
                     You can add some styling to these text components, give it a color maybe. 
@@ -117,6 +116,7 @@ fun ComponentDemoPage() {
             }
             TextParagraphsDemo()
             AnyLogicDemo()
+            ImageWithCaptionDemo()
         }
     }
 }
