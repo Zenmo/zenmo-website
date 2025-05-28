@@ -17,6 +17,8 @@ plugins {
 group = "com.zenmo.web.zenmo"
 version = "1.0.0"
 
+val BACKEND_URL = System.getenv("BACKEND_URL")
+
 kobweb {
     app {
         index {
@@ -25,12 +27,13 @@ kobweb {
                 link(rel = "stylesheet", href = "/fonts/faces.css")
             }
             scriptAttributes.put("type", "module")
+            scriptAttributes.put("src", "$BACKEND_URL/zenmo-site.mjs")
         }
 
         globals.putAll(
             mapOf(
                 "version" to project.version.toString(),
-                "BACKEND_URL" to System.getenv("BACKEND_URL"),
+                "BACKEND_URL" to BACKEND_URL,
                 "LUX_DOMAIN" to System.getenv("LUX_DOMAIN"),
                 "ZENMO_DOMAIN" to System.getenv("ZENMO_DOMAIN"),
             )
@@ -99,6 +102,8 @@ tasks.register<NpmTask>("npmRollup") {
 tasks.named<DefaultTask>("assemble") {
     dependsOn("npmRollup")
 }
+
+// kobwebCopySupplementalResources is the one we want for production!!!
 
 val webpackTasksToRemove = setOf(
     "jsBrowserDevelopmentWebpack",
