@@ -119,14 +119,13 @@ tasks.register("replaceMainFunction") {
         val content = file.readText()
         file.writeText(content.replace(
             "public fun main()",
-            "@JsExport public fun $mainFunctionName()")
-        )
-        file.appendText("\n")
-        file.appendText("""
-            @JsExport
-            val accessPolicy = energy.lux.site.shared.AccessPolicy.Public()
-        """.trimIndent())
-        file.appendText("\n")
+            """
+                @JsExport
+                val accessPolicy = energy.lux.site.shared.AccessPolicy.Public()
+            
+                @JsExport public fun $mainFunctionName()
+                """.trimIndent()
+        ))
     }
 }
 

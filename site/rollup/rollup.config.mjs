@@ -1,3 +1,4 @@
+import dynamicImportVars from '@rollup/plugin-dynamic-import-vars';
 
 /**
  * @type {import('rollup').RollupOptions}
@@ -12,4 +13,11 @@ export default {
         sourcemap: "hidden",
     },
     preserveEntrySignatures: "allow-extension",
+    plugins: [
+        dynamicImportVars({
+            errorWhenNoFilesFound: true,
+        })
+    ]
 }
+
+
