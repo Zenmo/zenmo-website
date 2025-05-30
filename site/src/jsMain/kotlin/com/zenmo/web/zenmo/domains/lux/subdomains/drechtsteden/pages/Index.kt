@@ -6,6 +6,7 @@ import com.varabyte.kobweb.compose.foundation.layout.Column
 import com.varabyte.kobweb.compose.ui.Alignment
 import com.varabyte.kobweb.compose.ui.Modifier
 import com.varabyte.kobweb.compose.ui.modifiers.fillMaxSize
+import com.zenmo.web.zenmo.components.widgets.private.PrivateWrapper
 import com.zenmo.web.zenmo.domains.lux.subdomains.LuxSubdomains
 import org.jetbrains.compose.web.dom.H1
 import org.jetbrains.compose.web.dom.Text
@@ -23,5 +24,6 @@ fun SubdomainContent(subdomain: String) {
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         H1 { Text("${subdomain.uppercase()}😎") }
+        PrivateWrapper()
     }
 }

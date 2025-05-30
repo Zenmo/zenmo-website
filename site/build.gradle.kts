@@ -18,7 +18,7 @@ group = "com.zenmo.web.zenmo"
 version = "1.0.0"
 
 val BACKEND_URL = System.getenv("BACKEND_URL")
-val jsSrc = "$BACKEND_URL/zenmo-site.mjs"
+val jsSrc = "$BACKEND_URL/main.export.mjs"
 
 kobweb {
     app {
@@ -117,7 +117,16 @@ tasks.register("replaceMainFunction") {
     doLast {
         val file = project.layout.buildDirectory.file("generated/kobweb/app/src/jsMain/kotlin/main.kt").get().asFile
         val content = file.readText()
-        file.writeText(content.replace("fun main()", "@JsExport fun $mainFunctionName()"))
+        file.writeText(content.replace(
+            "public fun main()",
+            "@JsExport public fun $mainFunctionName()")
+        )
+        file.appendText("\n")
+        file.appendText("""
+            @JsExport
+            val accessPolicy = energy.lux.site.shared.AccessPolicy.Public()
+        """.trimIndent())
+        file.appendText("\n")
     }
 }
 
