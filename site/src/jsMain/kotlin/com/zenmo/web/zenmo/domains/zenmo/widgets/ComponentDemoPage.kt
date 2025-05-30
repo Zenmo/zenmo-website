@@ -113,8 +113,8 @@ fun ComponentDemoPage() {
             }
             TextParagraphsDemo()
             AnyLogicDemo()
+            MediaContentLayoutDemo()
             InlineLinkDemo()
-            OrderedListDemo()
         }
     }
 }
