@@ -48,16 +48,14 @@ fun TextParagraphsDemo() {
                     nl = "Dit resulteert in het volgende:",
                 )
             }
-            Span(
+            P(
                 DemoContentWrapperStyle.toModifier()
                     .toAttrs()
             ) {
-                P {
-                    LangText(
-                        en = "The quick brown fox jumps over the lazy dog. The quick brown fox jumps over the lazy dog.",
-                        nl = "De snelle bruine vos springt over de luie hond. De snelle bruine vos springt over de luie hond.",
-                    )
-                }
+                LangText(
+                    en = "The quick brown fox jumps over the lazy dog. The quick brown fox jumps over the lazy dog.",
+                    nl = "De snelle bruine vos springt over de luie hond. De snelle bruine vos springt over de luie hond.",
+                )
             }
         }
     }

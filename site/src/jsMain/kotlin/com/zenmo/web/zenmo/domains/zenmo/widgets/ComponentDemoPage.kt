@@ -74,7 +74,9 @@ fun ComponentDemoPage() {
         ) {
             PageHeadingsDemo()
             SubHeadingsDemo()
-            Column {
+            Column(
+                modifier = Modifier.fillMaxWidth()
+            ) {
                 CustomizationNotes(
                     enCustomizationNotes = """
                     You can add some styling to these text components, give it a color maybe. 
@@ -115,6 +117,7 @@ fun ComponentDemoPage() {
             AnyLogicDemo()
             InlineLinkDemo()
             OrderedListDemo()
+            ImageWithCaptionDemo()
         }
     }
 }

@@ -2,6 +2,7 @@ package com.zenmo.web.zenmo.domains.zenmo.widgets
 
 import androidx.compose.runtime.Composable
 import com.varabyte.kobweb.compose.css.FontWeight
+import com.varabyte.kobweb.compose.css.Overflow
 import com.varabyte.kobweb.compose.foundation.layout.Arrangement
 import com.varabyte.kobweb.compose.foundation.layout.Box
 import com.varabyte.kobweb.compose.foundation.layout.Column
@@ -36,6 +37,7 @@ val PreCodeStyle = CssStyle {
             .borderRadius(4.px)
             .backgroundColor(SitePalette.light.onBackground)
             .color(SitePalette.light.surface)
+            .overflow { x(Overflow.Auto) }
     }
 }
 
