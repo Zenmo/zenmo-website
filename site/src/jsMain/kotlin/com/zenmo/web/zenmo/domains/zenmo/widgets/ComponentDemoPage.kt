@@ -113,6 +113,7 @@ fun ComponentDemoPage() {
             }
             TextParagraphsDemo()
             AnyLogicDemo()
+            InlineLinkDemo()
             OrderedListDemo()
         }
     }
