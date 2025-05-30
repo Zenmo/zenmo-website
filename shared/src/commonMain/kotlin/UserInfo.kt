@@ -2,8 +2,10 @@ package energy.lux.site.shared
 
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.Json
+import kotlin.js.JsExport
 import kotlin.uuid.Uuid
 
+@JsExport
 @Serializable
 data class UserInfo(
     val sub: Uuid,
