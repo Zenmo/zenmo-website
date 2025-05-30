@@ -17,6 +17,9 @@ plugins {
 group = "com.zenmo.web.zenmo"
 version = "1.0.0"
 
+val BACKEND_URL = System.getenv("BACKEND_URL")
+val jsSrc = "$BACKEND_URL/main.export.mjs"
+
 kobweb {
     app {
         index {
@@ -25,12 +28,13 @@ kobweb {
                 link(rel = "stylesheet", href = "/fonts/faces.css")
             }
             scriptAttributes.put("type", "module")
+            scriptAttributes.put("src", jsSrc)
         }
 
         globals.putAll(
             mapOf(
                 "version" to project.version.toString(),
-                "BACKEND_URL" to System.getenv("BACKEND_URL"),
+                "BACKEND_URL" to BACKEND_URL,
                 "LUX_DOMAIN" to System.getenv("LUX_DOMAIN"),
                 "ZENMO_DOMAIN" to System.getenv("ZENMO_DOMAIN"),
             )
@@ -64,6 +68,7 @@ kotlin {
 
     sourceSets {
         all {
+            languageSettings.optIn("kotlin.js.ExperimentalJsExport")
             languageSettings.optIn("kotlin.uuid.ExperimentalUuidApi")
         }
 
@@ -94,11 +99,61 @@ node {
 tasks.register<NpmTask>("npmRollup") {
     args = listOf("run", "rollup")
     dependsOn("npmInstall", "jsBrowserProductionLibraryDistribution")
+    tasks.named<DefaultTask>("assemble").get().dependsOn(this)
 }
 
-tasks.named<DefaultTask>("assemble") {
-    dependsOn("npmRollup")
+val mainFunctionName = "kobwebMain"
+
+/**
+ * We need control over when to execute the main function
+ * so that it's not executed server-side when reading the AccessPolicy.
+ * To have that we need to rename it.
+ */
+tasks.register("replaceMainFunction") {
+    notCompatibleWithConfigurationCache("Looks like gradle can't serialize the callback")
+    dependsOn("kobwebGenSiteEntry")
+    tasks.named<DefaultTask>("compileKotlinJs").get().dependsOn(this)
+
+    doLast {
+        val file = project.layout.buildDirectory.file("generated/kobweb/app/src/jsMain/kotlin/main.kt").get().asFile
+        val content = file.readText()
+        file.writeText(content.replace(
+            "public fun main()",
+            """
+                @JsExport
+                val accessPolicy = energy.lux.site.shared.AccessPolicy.Public()
+            
+                @JsExport public fun $mainFunctionName()
+                """.trimIndent()
+        ))
+    }
 }
+
+tasks.register("replaceScriptTag") {
+    notCompatibleWithConfigurationCache("Looks like gradle can't serialize the callback")
+    dependsOn("kobwebGenSiteIndex")
+
+    tasks.named<DefaultTask>("kobwebCopySupplementalResources").get().dependsOn(this)
+    tasks.named<DefaultTask>("kobwebStart").get().dependsOn(this)
+
+    doLast {
+        val file = project.layout.buildDirectory.file("generated/kobweb/app/src/jsMain/resources/index.html").get().asFile
+        val content = file.readText()
+        val newContent = content
+            .replace(
+                Regex("<script.*src=\"${Regex.escape(jsSrc)}\".*></script>"),
+                """
+                    <script type="module">
+                    import {$mainFunctionName} from "$jsSrc"
+                    $mainFunctionName()
+                    </script>
+                """.trimIndent())
+
+        file.writeText(newContent)
+    }
+}
+
+// kobwebCopySupplementalResources is the one we want for production!!!
 
 val webpackTasksToRemove = setOf(
     "jsBrowserDevelopmentWebpack",

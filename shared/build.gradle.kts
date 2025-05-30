@@ -10,6 +10,7 @@ kotlin {
     jvm()
     sourceSets {
         all {
+            languageSettings.optIn("kotlin.js.ExperimentalJsExport")
             languageSettings.optIn("kotlin.uuid.ExperimentalUuidApi")
             languageSettings.optIn("kotlin.time.ExperimentalTime")
         }

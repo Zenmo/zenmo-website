@@ -52,7 +52,6 @@ val DemoPageContainerVariant = SectionContainerStyle.addVariant {
 /**
  * Page to demo the usage of components
  */
-@Page
 @Composable
 fun ComponentDemoPage() {
     SectionContainer {
@@ -116,6 +115,8 @@ fun ComponentDemoPage() {
             }
             TextParagraphsDemo()
             AnyLogicDemo()
+            InlineLinkDemo()
+            OrderedListDemo()
             ImageWithCaptionDemo()
         }
     }

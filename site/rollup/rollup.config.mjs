@@ -1,9 +1,10 @@
+import dynamicImportVars from '@rollup/plugin-dynamic-import-vars';
 
 /**
  * @type {import('rollup').RollupOptions}
  */
 export default {
-    input: "../../build/js/packages/zenmo-site/kotlin/zenmo-site.mjs",
+    input: "../../build/js/packages/zenmo-site/kotlin/zenmo-site/main.export.mjs",
     output: {
         dir: "../build/rollup",
         format: "module",
@@ -12,4 +13,11 @@ export default {
         sourcemap: "hidden",
     },
     preserveEntrySignatures: "allow-extension",
+    plugins: [
+        dynamicImportVars({
+            errorWhenNoFilesFound: true,
+        })
+    ]
 }
+
+

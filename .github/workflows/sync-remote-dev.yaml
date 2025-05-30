@@ -42,3 +42,6 @@ jobs:
             -
                 name: Run script
                 run: ssh -p 2222 root@preview.zenmo.com "cd /root/zenmo-website && java -jar /root/remotedev-all.jar"
+            -
+                name: Restart backend
+                run: ssh -p 2222 root@preview.zenmo.com "systemctl restart site-server"

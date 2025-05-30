@@ -12,7 +12,6 @@ import com.zenmo.web.zenmo.theme.font.TextStyle
 import org.jetbrains.compose.web.css.cssRem
 import org.jetbrains.compose.web.dom.Span
 
-@Page
 @Composable
 fun ComponentDemoPage() {
     SectionContainer {
