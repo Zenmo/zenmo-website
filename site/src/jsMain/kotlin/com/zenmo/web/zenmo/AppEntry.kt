@@ -17,9 +17,16 @@ import com.varabyte.kobweb.silk.theme.colors.ColorMode
 import com.varabyte.kobweb.silk.theme.colors.saveToLocalStorage
 import com.zenmo.web.zenmo.core.services.localization.LanguageManager
 import com.zenmo.web.zenmo.core.services.localization.LocalLanguage
+import energy.lux.site.shared.AccessPolicy
+import kotlinx.browser.window
 import org.jetbrains.compose.web.css.vh
+import org.w3c.dom.Window
 
 private const val COLOR_MODE_KEY = "zenmo:colorMode"
+
+@OptIn(ExperimentalJsExport::class)
+@JsExport
+val accessPolicy = AccessPolicy.Public()
 
 @InitSilk
 fun initColorMode(ctx: InitSilkContext) {
