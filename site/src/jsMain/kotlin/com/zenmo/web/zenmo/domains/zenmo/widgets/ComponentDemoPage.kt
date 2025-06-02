@@ -118,6 +118,7 @@ fun ComponentDemoPage() {
             OrderedListDemo()
             ImageWithCaptionDemo()
             EmbedVideoDemo()
+            CardLinkDemo()
         }
     }
 }
