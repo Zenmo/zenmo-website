@@ -117,6 +117,7 @@ fun ComponentDemoPage() {
             InlineLinkDemo()
             OrderedListDemo()
             ImageWithCaptionDemo()
+            EmbedVideoDemo()
             CardLinkDemo()
         }
     }
