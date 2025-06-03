@@ -45,3 +45,7 @@ jobs:
             -
                 name: Restart backend
                 run: ssh -p 2222 root@preview.zenmo.com "systemctl restart site-server"
+            -
+                # Restarting the frontend is necessary to pick up changes in the Gradle configuration
+                name: Restart frontend
+                run: ssh -p 2222 root@preview.zenmo.com "systemctl restart kobweb"
