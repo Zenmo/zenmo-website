@@ -10,13 +10,12 @@ import kotlinx.serialization.descriptors.PrimitiveSerialDescriptor
 import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
 import kotlinx.serialization.json.Json
-import kotlinx.serialization.json.jsonObject
 import kotlin.time.ExperimentalTime
 import kotlin.time.Instant
 import kotlin.uuid.Uuid
 
-fun decodeIdToken(idToken: IdToken): IdTokenPayload {
-    val payload = SignedJWT.parse(idToken.value).payload
+fun IdToken.decode(): IdTokenPayload {
+    val payload = SignedJWT.parse(this.value).payload
 
     // to inspect all fields:
     //val root = Json.parseToJsonElement(payload.toString()).jsonObject
@@ -35,6 +34,19 @@ data class IdTokenPayload @OptIn(ExperimentalTime::class) constructor(
     val iat: Instant,
     @Serializable(with = UnixTimeSerializer::class)
     val exp: Instant,
+    /**
+     * Map of client id to access attributes.
+     * Example:
+     *
+     * "resource_access": {
+     *     "zenmo-website": {
+     *         "roles": [
+     *             "Groote Lindt"
+     *         ]
+     *     },
+     * }
+     */
+    val resource_access: Map<String, ResourceAccess>
 ) {
     fun toUserInfo() = UserInfo(
         sub = sub,
@@ -44,7 +56,15 @@ data class IdTokenPayload @OptIn(ExperimentalTime::class) constructor(
         family_name = family_name,
         email = email,
     )
+
+    fun getRoles(clientId: String): List<String> =
+        resource_access[clientId]?.roles ?: emptyList()
 }
+
+@Serializable
+data class ResourceAccess(
+    val roles: List<String>,
+)
 
 private val jsonDecoder = Json {
     ignoreUnknownKeys = true
