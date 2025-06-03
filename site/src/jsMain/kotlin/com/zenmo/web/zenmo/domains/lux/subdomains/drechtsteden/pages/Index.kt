@@ -25,6 +25,6 @@ fun SubdomainContent(subdomain: String) {
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         H1 { Text("${subdomain.uppercase()}😎") }
-        ProtectedWrapper("SecretTextOne")
+        ProtectedWrapper("DrechtstedenSecretText")
     }
 }

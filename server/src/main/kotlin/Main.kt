@@ -12,11 +12,23 @@ fun main() {
 
 fun startServer() {
     val config = Config()
-    val routes = OAuthHandler(config.baseUrl, config.clientId, config.clientSecret)
+
+    val oAuthSessions = InMemorySessionOAuthPersistence()
+    val routes = OAuthHandler(
+        baseUrl = config.baseUrl,
+        clientId = config.clientId,
+        clientSecret = config.clientSecret,
+        oAuthSessions,
+    )
     
     val app: HttpHandler = DebuggingFilters.PrintRequestAndResponse()
         .then(corsFilter)
-        .then(JsServerFilter())
+        .then(JsServerFilter(
+            JsServer(
+                clientId =  config.clientId,
+                oAuthSessions = oAuthSessions,
+            )
+        ))
         .then(routes)
 
     val port = 9000

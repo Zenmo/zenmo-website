@@ -4,6 +4,8 @@ import androidx.compose.runtime.*
 import com.varabyte.kobweb.core.AppGlobals
 import com.zenmo.web.zenmo.components.widgets.ErrorWidget
 import js.import.importAsync
+import web.http.RequestCredentials
+import web.http.RequestInit
 import web.http.fetch
 
 external interface PrivateTextModule {
@@ -26,17 +28,14 @@ fun ProtectedWrapper(entryPoint: String) {
     var status by remember { mutableStateOf(LoadingState.PENDING) }
 
     LaunchedEffect(Unit) {
-        /**
-         * Can't use the simpler suspend variant
-         * because the KotlinJS compiler puts the argument in a temporary variable
-         * and Rollup can't resolve that.
-         *
-         * A workaround/improvement would be to put all private entrypoints in a dedicated folder.
-         */
         try {
             privateModule = importAsync<PrivateTextModule>("./entrypoints/$entryPoint.export.mjs").await()
             status = LoadingState.SUCCESS
         } catch (e: Throwable) {
+            /**
+             * We get no status code after import failure.
+             * To determine the status code, we do the same request again using AJAX.
+             */
             val fileName = e.message?.substringAfterLast('/')
             if (fileName == null) {
                 error = e
@@ -44,7 +43,9 @@ fun ProtectedWrapper(entryPoint: String) {
             }
 
             try {
-                val response = fetch(AppGlobals.getValue("BACKEND_URL") + "/" + fileName)
+                val response = fetch(AppGlobals.getValue("BACKEND_URL") + "/" + fileName, RequestInit(
+                    credentials = RequestCredentials.include
+                ))
                 status = when (response.status.toInt()) {
                     401 -> LoadingState.NOT_LOGGED_IN
                     403 -> LoadingState.NOT_ENOUGH_PRIVILEGES

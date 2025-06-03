@@ -19,10 +19,10 @@ fun OAuthHandler(
     baseUrl: String,
     clientId: String,
     clientSecret: String,
+    persistence: InMemorySessionOAuthPersistence,
 ): RoutingHttpHandler {
     // the callback uri which is configured in our OAuth provider
     val callbackUri = Uri.of("$baseUrl/oauth/callback")
-    val persistence = InMemorySessionOAuthPersistence()
 
     // custom OAuth2 provider configuration
     val oauthProvider = OAuthProvider(

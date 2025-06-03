@@ -143,7 +143,7 @@ tasks.register("replaceScriptTag") {
             .replace(
                 Regex("<script.*src=\"${Regex.escape(jsSrc)}\".*></script>"),
                 """
-                    <script type="module">
+                    <script type="module" crossorigin="use-credentials">
                     import {$mainFunctionName} from "$jsSrc"
                     $mainFunctionName()
                     </script>

@@ -4,7 +4,6 @@ import energy.lux.site.shared.AccessPolicy
 import org.graalvm.polyglot.Context
 import org.graalvm.polyglot.Source
 import org.graalvm.polyglot.io.IOAccess
-import org.http4k.core.ContentType
 import org.http4k.core.Filter
 import org.http4k.core.HttpHandler
 import org.http4k.core.Request
@@ -12,15 +11,15 @@ import org.http4k.core.Response
 import org.http4k.core.Status.Companion.FORBIDDEN
 import org.http4k.core.Status.Companion.NOT_FOUND
 import org.http4k.core.Status.Companion.OK
+import org.http4k.core.Status.Companion.UNAUTHORIZED
 import org.http4k.routing.ResourceLoader
-import org.http4k.routing.static
 import java.net.URL
 
 /**
  * Serve JS files or else pass to the next handler.
  */
 class JsServerFilter(
-    private val jsServer: JsServer = JsServer()
+    private val jsServer: JsServer,
 ): Filter {
     override fun invoke(next: HttpHandler): HttpHandler = { request ->
         val path = request.uri.path
@@ -38,36 +37,57 @@ class JsServerFilter(
  */
 class JsServer(
     val resourceLoader: ResourceLoader = ResourceLoader.Companion.Directory("../site/build/rollup"),
+    val oAuthSessions: InMemorySessionOAuthPersistence,
+    val clientId: String,
 ): HttpHandler {
     override fun invoke(request: Request): Response {
         val path = request.uri.path
         val jsPath = path.removeSuffix(".map")
         val jsResourceUri = resourceLoader.load(jsPath)
         if (jsResourceUri == null) {
-            return Response(NOT_FOUND)
+            return Response(NOT_FOUND).header("Content-Type", "text/javascript")
         }
+
         val accessPolicy = getScriptAccessPolicy(jsResourceUri)
-        if (accessPolicy !is AccessPolicy.Public) {
-            return Response(FORBIDDEN)
+        return when (accessPolicy) {
+            is AccessPolicy.Public -> serveAllowedFile(path)
+            is AccessPolicy.RoleBased -> serveProtectedFile(request, accessPolicy.requiredRole)
+        }
+    }
+
+    private fun serveProtectedFile(request: Request, requiredRole: String): Response {
+        val idToken = oAuthSessions.retrieveIdToken(request)
+        if (idToken == null) {
+            return Response(UNAUTHORIZED).header("Content-Type", "text/javascript")
+        }
+
+        val userRoles = idToken.decode().getRoles(clientId)
+        println("User roles: $userRoles")
+        return if (requiredRole in userRoles) {
+            serveAllowedFile(request.uri.path)
+        } else {
+            Response(FORBIDDEN).header("Content-Type", "text/javascript")
+        }
+    }
+
+    private fun serveAllowedFile(path: String): Response {
+        val resource = resourceLoader.load(path)
+        if (resource == null) {
+            return Response(NOT_FOUND)
         }
 
         val isSourceMap = path.endsWith(".map")
         return if (isSourceMap) {
-            serveSourceMap(path)
+            serveSourceMap(resource)
         } else {
-            serveJs(jsResourceUri)
+            serveJs(resource)
         }
     }
 
     /**
      * Serve the source map after determining the access is allowed.
      */
-    private fun serveSourceMap(path: String): Response {
-        val resource = resourceLoader.load(path)
-        if (resource == null) {
-            return Response(NOT_FOUND)
-        }
-
+    private fun serveSourceMap(resource: URL): Response {
         return Response(OK)
             .header("Content-Type", "application/json")
             .body(resource.openStream())

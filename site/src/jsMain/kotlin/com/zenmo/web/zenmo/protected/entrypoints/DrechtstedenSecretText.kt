@@ -6,7 +6,7 @@ import org.jetbrains.compose.web.dom.Span
 import org.jetbrains.compose.web.dom.Text
 
 @JsExport
-val accessPolicy = AccessPolicy.RoleBased("admin")
+val accessPolicy = AccessPolicy.RoleBased("Drechtsteden")
 
 @JsExport
 @Composable
