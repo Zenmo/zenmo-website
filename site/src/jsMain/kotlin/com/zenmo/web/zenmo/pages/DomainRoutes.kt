@@ -38,3 +38,10 @@ fun DomainRoutes() {
         else -> UnknownDomain(domain)
     }
 }
+
+
+fun isLocalOrPreviewEnvironment(): Boolean {
+    return listOf("preview", "local").any { envKeyword ->
+        SiteGlobals.LUX_DOMAIN.contains(envKeyword) || SiteGlobals.ZENMO_DOMAIN.contains(envKeyword)
+    }
+}

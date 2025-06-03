@@ -1,5 +1,7 @@
 package com.zenmo.web.zenmo.domains.zenmo.navigation
 
+import com.zenmo.web.zenmo.pages.isLocalOrPreviewEnvironment
+
 data class MenuLanguage(
     val en: String,
     val nl: String,
@@ -27,34 +29,49 @@ sealed class MenuItem {
     data class WithSubs(val path: String = "", val title: MenuLanguage, val subItems: List<MenuLanguage>) : MenuItem()
 
     companion object {
-        val menuItems = listOf(
-            Simple(path = "/", title = MenuLanguage(en = "Home", nl = "Thuis")),
-            Simple(
-                title = MenuLanguage(
-                    en = "What we do",
-                    nl = "Wat we doen"
+        val menuItems = buildList {
+            add(Simple(path = "/", title = MenuLanguage(en = "Home", nl = "Thuis")))
+            add(
+                Simple(
+                    title = MenuLanguage(
+                        en = "What we do",
+                        nl = "Wat we doen"
+                    )
                 )
-            ),
-            Simple(
-                title = MenuLanguage(
-                    en = "Customers",
-                    nl = "Klanten"
-                )
-            ),
-            WithSubs(
-                title = MenuLanguage(en = "About us", nl = "Over ons"),
-                subItems = listOf(
-                    MenuLanguage(en = "Our Team", nl = "Ons Team"),
-                    MenuLanguage(en = "Jobs", nl = "Banen"),
-                    MenuLanguage(en = "History", nl = "Geschiedenis"),
-                )
-            ),
-            Simple(
-                title = MenuLanguage(en = "Contact", nl = "Contact")
             )
-        )
-    }
+            add(
+                Simple(
+                    title = MenuLanguage(
+                        en = "Customers",
+                        nl = "Klanten"
+                    )
+                )
+            )
+            add(
+                WithSubs(
+                    title = MenuLanguage(en = "About us", nl = "Over ons"),
+                    subItems = listOf(
+                        MenuLanguage(en = "Our Team", nl = "Ons Team"),
+                        MenuLanguage(en = "Jobs", nl = "Banen"),
+                        MenuLanguage(en = "History", nl = "Geschiedenis"),
+                    )
+                )
+            )
+            add(
+                Simple(
+                    title = MenuLanguage(en = "Contact", nl = "Contact")
+                )
+            )
 
+            if (isLocalOrPreviewEnvironment()) {
+                add(
+                    Simple(
+                        title = MenuLanguage(en = "Component Demo", nl = "Component Demo")
+                    )
+                )
+            }
+        }
+    }
 }
 
 
