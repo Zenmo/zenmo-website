@@ -37,7 +37,7 @@ class JsServerFilter(
  * Does not check user roles yet.
  */
 class JsServer(
-    val resourceLoader: ResourceLoader = ResourceLoader.Companion.Directory("../site/build/rollup")
+    val resourceLoader: ResourceLoader = ResourceLoader.Companion.Directory("../site/build/rollup"),
 ): HttpHandler {
     override fun invoke(request: Request): Response {
         val path = request.uri.path

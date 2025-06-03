@@ -9,7 +9,6 @@ import com.varabyte.kobweb.compose.ui.modifiers.margin
 import com.varabyte.kobweb.compose.ui.modifiers.padding
 import com.varabyte.kobweb.compose.ui.modifiers.width
 import com.varabyte.kobweb.compose.ui.toAttrs
-import com.varabyte.kobweb.core.Page
 import com.varabyte.kobweb.silk.style.addVariant
 import com.varabyte.kobweb.silk.style.breakpoint.Breakpoint
 import com.varabyte.kobweb.silk.style.toModifier
@@ -74,7 +73,9 @@ fun ComponentDemoPage() {
         ) {
             PageHeadingsDemo()
             SubHeadingsDemo()
-            Column {
+            Column(
+                modifier = Modifier.fillMaxWidth()
+            ) {
                 CustomizationNotes(
                     enCustomizationNotes = """
                     You can add some styling to these text components, give it a color maybe. 
@@ -115,6 +116,10 @@ fun ComponentDemoPage() {
             AnyLogicDemo()
             MediaContentLayoutDemo()
             InlineLinkDemo()
+            OrderedListDemo()
+            ImageWithCaptionDemo()
+            EmbedVideoDemo()
+            CardLinkDemo()
         }
     }
 }
