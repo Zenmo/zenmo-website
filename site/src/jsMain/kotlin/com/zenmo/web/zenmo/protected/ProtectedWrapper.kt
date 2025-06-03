@@ -1,19 +1,14 @@
 package com.zenmo.web.zenmo.protected
 
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.setValue
+import androidx.compose.runtime.*
 import com.varabyte.kobweb.core.AppGlobals
-import com.zenmo.web.zenmo.components.widgets.LangText
+import com.zenmo.web.zenmo.components.widgets.ErrorWidget
 import js.import.importAsync
-import org.jetbrains.compose.web.dom.Text
 import web.http.fetch
 
 external interface PrivateTextModule {
-    @Composable fun ProtectedComponent()
+    @Composable
+    fun ProtectedComponent()
 }
 
 private enum class LoadingState {
@@ -63,15 +58,10 @@ fun ProtectedWrapper(entryPoint: String) {
     }
 
     when (status) {
-        LoadingState.PENDING -> LangText(en = "Pending...", nl = "Bezig...")
-        LoadingState.NOT_LOGGED_IN -> Text("NOT_LOGGED_IN")
-        LoadingState.NOT_ENOUGH_PRIVILEGES -> Text("NOT_ENOUGH_PRIVILEGES")
-        LoadingState.ERROR -> {
-            LangText(en = "Error", nl = "Error")
-            if (error != null) {
-                Text(error.toString())
-            }
-        }
+        LoadingState.PENDING -> Pending()
+        LoadingState.NOT_LOGGED_IN -> Login()
+        LoadingState.NOT_ENOUGH_PRIVILEGES -> NotEnoughPrivileges()
+        LoadingState.ERROR -> ErrorWidget(errorMessage = error?.toString() ?: "An unknown error occurred.")
         LoadingState.SUCCESS -> privateModule!!.ProtectedComponent()
     }
 }
