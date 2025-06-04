@@ -3,6 +3,7 @@ package com.zenmo.web.zenmo.components.widgets
 import androidx.compose.runtime.Composable
 import com.varabyte.kobweb.compose.css.Cursor
 import com.varabyte.kobweb.compose.css.ObjectFit
+import com.varabyte.kobweb.compose.css.TextDecorationLine
 import com.varabyte.kobweb.compose.css.Transition
 import com.varabyte.kobweb.compose.foundation.layout.Column
 import com.varabyte.kobweb.compose.ui.Modifier
@@ -10,7 +11,9 @@ import com.varabyte.kobweb.compose.ui.graphics.lightened
 import com.varabyte.kobweb.compose.ui.modifiers.*
 import com.varabyte.kobweb.compose.ui.toAttrs
 import com.varabyte.kobweb.core.rememberPageContext
+import com.varabyte.kobweb.silk.components.navigation.Link
 import com.varabyte.kobweb.silk.style.CssStyle
+import com.varabyte.kobweb.silk.style.StyleScope
 import com.varabyte.kobweb.silk.style.selectors.hover
 import com.varabyte.kobweb.silk.style.toModifier
 import com.zenmo.web.zenmo.domains.lux.widgets.headings.SubHeaderText
@@ -68,55 +71,61 @@ val CardLinkStyle = CssStyle {
     }
 }
 
+val LinkNoStyle = CssStyle {
+    base {
+        Modifier.color(Color.black)
+    }
+    hover {
+        Modifier.textDecorationLine(TextDecorationLine.None)
+    }
+}
 
 @Composable
 fun CardLink(
     modifier: Modifier = Modifier,
     url: String,
-    imageUrl: String,
-    imageAltText: String,
-    enTitle: String,
-    nlTitle: String,
-    enDescription: String,
-    nlDescription: String,
+    imageUrl: String = "",
+    imageAltText: String = "",
+    enTitle: String = "",
+    nlTitle: String = "",
+    enDescription: String = "",
+    nlDescription: String = "",
 ) {
-    val ctx = rememberPageContext()
-    Column(
-        CardLinkStyle.toModifier()
-            .onClick {
-                ctx.router.navigateTo(url)
-            }
-            .then(modifier),
-    ) {
-        Div(
-            Modifier.fillMaxWidth().toAttrs()
-        ) {
-            Img(
-                src = imageUrl,
-                alt = imageAltText,
-                attrs = Modifier
-                    .classNames("cardImage").toAttrs()
-            )
-        }
-
+    Link(path = url, modifier = LinkNoStyle.toModifier()) {
         Column(
-            Modifier.padding(1.cssRem).gap(1.cssRem)
+            CardLinkStyle.toModifier()
+                .then(modifier),
         ) {
-            SubHeaderText(
-                enText = enTitle,
-                nlText = nlTitle,
-                modifier = Modifier.margin(0.cssRem)
-            )
-            P(
-                Modifier
-                    .color(SitePalette.light.onBackground.lightened(0.5f))
-                    .margin(0.cssRem)
-                    .toAttrs()
+            Div(
+                Modifier.fillMaxWidth().toAttrs()
             ) {
-                LangText(
-                    en = enDescription,
-                    nl = nlDescription,
+                Img(
+                    src = imageUrl,
+                    alt = imageAltText,
+                    attrs = Modifier
+                        .classNames("cardImage").toAttrs()
                 )
+            }
+
+            Column(
+                Modifier.padding(1.cssRem).gap(1.cssRem)
+            ) {
+                SubHeaderText(
+                    enText = enTitle,
+                    nlText = nlTitle,
+                    modifier = Modifier.margin(0.cssRem)
+                )
+                P(
+                    Modifier
+                        .color(SitePalette.light.onBackground.lightened(0.5f))
+                        .margin(0.cssRem)
+                        .toAttrs()
+                ) {
+                    LangText(
+                        en = enDescription,
+                        nl = nlDescription,
+                    )
+                }
             }
         }
     }
