@@ -29,7 +29,7 @@ fun ProtectedWrapper(entryPoint: String) {
 
     LaunchedEffect(Unit) {
         try {
-            privateModule = importAsync<PrivateTextModule>("./entrypoints/$entryPoint.export.mjs").await()
+            privateModule = importAsync<PrivateTextModule>("./entrypoints/$entryPoint/ProtectedComponent.export.mjs").await()
             status = LoadingState.SUCCESS
         } catch (e: Throwable) {
             /**

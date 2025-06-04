@@ -7,6 +7,7 @@ import com.varabyte.kobweb.compose.ui.Alignment
 import com.varabyte.kobweb.compose.ui.Modifier
 import com.varabyte.kobweb.compose.ui.modifiers.fillMaxSize
 import com.varabyte.kobweb.silk.components.navigation.Link
+import com.zenmo.web.zenmo.components.widgets.CardLink
 import com.zenmo.web.zenmo.components.widgets.LangText
 import com.zenmo.web.zenmo.components.widgets.user.UserMenuWidget
 import org.jetbrains.compose.web.dom.H1
@@ -26,8 +27,8 @@ fun LuxHomePage() {
         }
         Link("/about") {
             LangText(
-                en = "Click here",
-                nl = "Klik hier",
+                en = "About Lux",
+                nl = "Over lux",
             )
         }
         UserMenuWidget()

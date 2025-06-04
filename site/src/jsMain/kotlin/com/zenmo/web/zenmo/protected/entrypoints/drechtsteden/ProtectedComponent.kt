@@ -1,9 +1,9 @@
-package com.zenmo.web.zenmo.protected.entrypoints
+package com.zenmo.web.zenmo.protected.entrypoints.drechtsteden
 
 import androidx.compose.runtime.Composable
+import com.zenmo.web.zenmo.components.widgets.LangText
 import energy.lux.site.shared.AccessPolicy
 import org.jetbrains.compose.web.dom.Span
-import org.jetbrains.compose.web.dom.Text
 
 @JsExport
 val accessPolicy = AccessPolicy.RoleBased("Drechtsteden")
@@ -12,6 +12,9 @@ val accessPolicy = AccessPolicy.RoleBased("Drechtsteden")
 @Composable
 fun ProtectedComponent() {
     Span {
-        Text("Very secret text one")
+        LangText(
+            en = "Very secret text just for Drechtsteden",
+            nl = "Geheime text alleen voor Drechtsteden",
+        )
     }
 }
