@@ -51,12 +51,14 @@ fun LuxHomePage() {
                 imageUrl = "/img/drechtsteden-rivier.jpg",
                 imageAltText = "Drechtsteden luchtfoto met rivier",
                 nlTitle = "Drechtsteden",
+                enTitle = "Drechtsteden"
             )
             CardLink(
                 url = "${protocol}://genius.$LUX_DOMAIN",
                 imageUrl = "/img/tue-luchtfoto.png",
                 imageAltText = "TU/e Luchtfoto",
                 nlTitle = "Genius",
+                enTitle = "Genius"
             )
         }
         UserMenuWidget()
