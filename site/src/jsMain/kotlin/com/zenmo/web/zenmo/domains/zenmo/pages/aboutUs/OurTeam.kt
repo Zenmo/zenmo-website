@@ -1,4 +1,4 @@
-package com.zenmo.web.zenmo.pages.AboutUs
+package com.zenmo.web.zenmo.domains.zenmo.pages.aboutUs
 
 import androidx.compose.runtime.Composable
 import com.varabyte.kobweb.compose.css.TextAlign

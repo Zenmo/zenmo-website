@@ -4,8 +4,8 @@ import androidx.compose.runtime.Composable
 import com.varabyte.kobweb.navigation.*
 import com.varabyte.kobweb.silk.defer.DeferringHost
 import com.zenmo.web.zenmo.components.widgets.CatchAllPage
+import com.zenmo.web.zenmo.domains.zenmo.pages.aboutUs.OurTeamPage
 import com.zenmo.web.zenmo.domains.zenmo.widgets.ComponentDemoPage
-import com.zenmo.web.zenmo.pages.AboutUs.OurTeamPage
 import kotlinx.browser.window
 
 @Composable
