@@ -40,6 +40,12 @@ val PreCodeStyle = CssStyle {
             .overflow { x(Overflow.Auto) }
     }
 }
+val CodeStyle = CssStyle {
+    base {
+        Modifier
+            .fontWeight(FontWeight.Bold)
+    }
+}
 
 val DemoContentWrapperStyle = CssStyle {
     base {
@@ -63,14 +69,7 @@ fun ComponentDemo(
     codeExample: String,
     enCustomizationNotes: String? = null,
     nlCustomizationNotes: String? = null,
-    customizationContent: @Composable (() -> Unit)? = {
-        if (!enCustomizationNotes.isNullOrBlank()) {
-            CustomizationNotes(
-                enCustomizationNotes = enCustomizationNotes,
-                nlCustomizationNotes = nlCustomizationNotes ?: enCustomizationNotes,
-            )
-        }
-    },
+    extraCustomizationContent: @Composable (() -> Unit)? = null,
     content: @Composable () -> Unit
 ) {
     Column(
@@ -110,7 +109,13 @@ fun ComponentDemo(
             content()
         }
 
-        customizationContent?.invoke()
+        if (!enCustomizationNotes.isNullOrBlank()) {
+            CustomizationNotes(
+                enCustomizationNotes = enCustomizationNotes,
+                nlCustomizationNotes = nlCustomizationNotes ?: enCustomizationNotes,
+                customContent = extraCustomizationContent,
+            )
+        }
     }
 }
 
@@ -119,6 +124,7 @@ fun ComponentDemo(
 fun CustomizationNotes(
     enCustomizationNotes: String,
     nlCustomizationNotes: String,
+    customContent: @Composable (() -> Unit)? = null,
 ) {
     Column(
         modifier = Modifier
@@ -164,6 +170,7 @@ fun CustomizationNotes(
                         nl = nlCustomizationNotes,
                     )
                 }
+                customContent?.invoke()
             }
         }
     }
