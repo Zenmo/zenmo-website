@@ -2,6 +2,7 @@ package com.zenmo.web.zenmo.components.widgets
 
 import androidx.compose.runtime.Composable
 import com.varabyte.kobweb.compose.css.ObjectFit
+import com.varabyte.kobweb.compose.css.functions.max
 import com.varabyte.kobweb.compose.foundation.layout.Arrangement
 import com.varabyte.kobweb.compose.foundation.layout.Column
 import com.varabyte.kobweb.compose.ui.Alignment
@@ -16,15 +17,20 @@ import com.varabyte.kobweb.silk.style.extendedBy
 import com.varabyte.kobweb.silk.theme.breakpoint.rememberBreakpoint
 import org.jetbrains.compose.web.css.cssRem
 import org.jetbrains.compose.web.css.px
+import org.jetbrains.compose.web.css.vh
 
 
 @Composable
 fun MediaContentLayout(
     imageUrl: String,
-    title: @Composable () -> Unit,
-    description: @Composable () -> Unit,
-    subtitle: @Composable () -> Unit,
-    actionText: @Composable () -> Unit,
+    imageModifier: Modifier = Modifier,
+    visualContent: @Composable () -> Unit = {
+        ImageContent(imageUrl, imageModifier)
+    },
+    title: @Composable () -> Unit = {},
+    description: @Composable () -> Unit = {},
+    subtitle: @Composable () -> Unit = {},
+    actionText: @Composable () -> Unit = {},
     reversed: Boolean = false,
 ) {
     val breakpoint = rememberBreakpoint()
@@ -41,11 +47,11 @@ fun MediaContentLayout(
                     subtitle = subtitle,
                     actionText = actionText,
                 )
-                ImageContent(imageUrl)
+                visualContent()
             }
 
             false -> {
-                ImageContent(imageUrl)
+                visualContent()
                 TextContent(
                     title = title,
                     description = description,
@@ -85,34 +91,23 @@ val ImageContentStyleVariant = FitWidthImageVariant.extendedBy {
         Modifier
             .borderRadius(30.px)
             .objectFit(ObjectFit.Cover)
-    }
-    Breakpoint.ZERO {
-        Modifier.height(425.px)
-    }
-    Breakpoint.SM {
-        Modifier
-            .height(425.px)
-    }
-    Breakpoint.MD {
-        Modifier
-            .height(425.px)
-    }
-    Breakpoint.LG {
-        Modifier
-            .height(540.px)
-    }
-    Breakpoint.XL {
-        Modifier
-            .height(540.px)
+            .height(
+                max(
+                    50.vh,
+                    425.px
+                )
+            ) // ensures the image is at least 425px tall, but can grow to fill 50% of the viewport height
     }
 }
 
 @Composable
 private fun ImageContent(
     imageUrl: String,
+    modifier: Modifier = Modifier,
 ) {
     Image(
         src = imageUrl,
         variant = ImageContentStyleVariant,
+        modifier = modifier
     )
 }
