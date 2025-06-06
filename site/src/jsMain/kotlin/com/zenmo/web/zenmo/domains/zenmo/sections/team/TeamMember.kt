@@ -10,7 +10,11 @@ data class TeamMember(
     val email: String,
     val linkedIn: String,
     val twitter: String? = null,
-)
+) {
+    companion object {
+        val ATE = ZenmoTeam[7]
+    }
+}
 
 // todo get socials and photos of team members
 // also i'd prefer to have a max of 2 sentences(what you do and interests/hobbies)
@@ -167,7 +171,7 @@ val ZenmoTeam = listOf(
         image = "avatars/blank.png",
         enShortBio = "",
         nlShortBio = "",
-        email = "",
+        email = "ate@zenmo.com",
         linkedIn = "",
         twitter = "",
     ),

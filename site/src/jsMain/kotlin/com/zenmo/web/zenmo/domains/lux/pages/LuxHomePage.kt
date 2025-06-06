@@ -7,13 +7,13 @@ import com.varabyte.kobweb.compose.ui.Alignment
 import com.varabyte.kobweb.compose.ui.Modifier
 import com.varabyte.kobweb.compose.ui.modifiers.fillMaxSize
 import com.varabyte.kobweb.compose.ui.modifiers.gap
-import com.varabyte.kobweb.core.AppGlobals
 import com.varabyte.kobweb.silk.components.layout.SimpleGrid
 import com.varabyte.kobweb.silk.components.layout.numColumns
 import com.varabyte.kobweb.silk.components.navigation.Link
 import com.zenmo.web.zenmo.components.widgets.CardLink
 import com.zenmo.web.zenmo.components.widgets.LangText
 import com.zenmo.web.zenmo.components.widgets.user.UserMenuWidget
+import com.zenmo.web.zenmo.pages.SiteGlobals
 import kotlinx.browser.window
 import org.jetbrains.compose.web.css.cssRem
 import org.jetbrains.compose.web.dom.H1
@@ -37,7 +37,7 @@ fun LuxHomePage() {
                 nl = "Over lux",
             )
         }
-        val LUX_DOMAIN = AppGlobals.getValue("LUX_DOMAIN")
+        val LUX_DOMAIN = SiteGlobals.LUX_DOMAIN
         // We should be able to use "//" to match the current protocol.
         // Kobweb doesn't understand this unfortunately.
         // TODO: fix in kobweb
